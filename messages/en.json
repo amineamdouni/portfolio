@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "siteTitle": "Amine Amdouni, full-stack developer",
+    "siteDescription": "Web and mobile apps built with TypeScript, NestJS, Next.js, React Native and Spring Boot. Live demos, case studies and client sites.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "Mobile apps, full-stack products, e-commerce projects and client sites, each with a live demo, screenshots or the live site.",
+    "aboutTitle": "About",
+    "aboutDescription": "Experience, education and skills of Amine Amdouni, full-stack developer in Tunis.",
+    "contactTitle": "Contact",
+    "contactDescription": "Email, LinkedIn or phone. I reply within two working days.",
+    "notFoundTitle": "Page not found"
+  },
+  "nav": {
+    "brand": "Amine Amdouni",
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "primary": "Primary",
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "theme": {
+    "toDark": "Switch to dark theme",
+    "toLight": "Switch to light theme",
+    "loading": "Theme"
+  },
+  "locale": {
+    "switchLabel": "Français",
+    "switchShort": "FR",
+    "switchLang": "fr"
+  },
+  "footer": {
+    "blurb": "Full-stack developer. NestJS, Next.js, React Native and Spring Boot.",
+    "pages": "Pages",
+    "elsewhere": "Elsewhere",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "downloadCv": "Download CV",
+    "source": "Source of this site",
+    "note": "© {year} Amine Amdouni · Tunis, Tunisia"
+  },
+  "home": {
+    "eyebrow": "Amine Amdouni · Tunis, Tunisia",
+    "title": "Full-stack developer",
+    "lead": "I build web and mobile apps with TypeScript, NestJS, Next.js and React Native, and Spring Boot services in Java. I'm a final-year software engineering student looking for a PFE internship (end-of-studies internship).",
+    "viewProjects": "View projects",
+    "downloadCv": "Download CV",
+    "selectedWork": "Selected work",
+    "allProjects": "All {count} projects",
+    "whatIWorkWith": "What I work with",
+    "getInTouch": "Get in touch",
+    "getInTouchText": "Email is the fastest way to reach me. I reply within two working days.",
+    "linkedin": "LinkedIn"
+  },
+  "skills": {
+    "languages": "Languages",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Databases",
+    "aiPayments": "AI and payments",
+    "tools": "Tools"
+  },
+  "projects": {
+    "title": "Projects",
+    "lead": "Mobile apps, full-stack products, e-commerce projects and client sites. Each card says how you can see the work: an interactive mobile demo, a live demo, screenshots or the live site.",
+    "filterLabel": "Filter projects",
+    "filters": {
+      "all": "All",
+      "mobile": "Mobile apps",
+      "fullstack": "Full-stack",
+      "ecommerce": "E-commerce",
+      "client": "Client sites"
+    },
+    "count": "{count, plural, one {# project} other {# projects}}",
+    "loading": "Loading projects",
+    "emptyTitle": "No projects in this category yet",
+    "emptyText": "Pick another category, or show everything.",
+    "showAll": "Show all projects"
+  },
+  "badges": {
+    "mobile": "Interactive mobile demo",
+    "fullstack": "Live demo",
+    "ecommerce": "Screenshots",
+    "client": "Live site",
+    "demoCopy": "Demo copy",
+    "draft": "Draft"
+  },
+  "project": {
+    "breadcrumb": "Breadcrumb",
+    "projects": "Projects",
+    "role": "Role",
+    "timeline": "Timeline",
+    "team": "Team",
+    "stack": "Stack",
+    "code": "Code",
+    "solo": "Solo",
+    "teamOf": "Team of {size}",
+    "teamUnknown": "Team",
+    "present": "present",
+    "privateRepo": "Private repository",
+    "publicRepo": "Public repository",
+    "todo": "TODO",
+    "todoValue": "TODO",
+    "todoSummary": "TODO: one-line summary.",
+    "tryDemo": "Try the demo",
+    "tryThis": "Try this",
+    "tryThisTodo": "TODO: three short steps that show the main flow.",
+    "liveDemo": "Live demo",
+    "visitSite": "Visit live site",
+    "opensInNewTab": "Opens {host} in a new tab.",
+    "opensNewTab": "Opens in a new tab.",
+    "siteNotOnline": "The link to the live site is added once it is checked.",
+    "demoLogin": "Demo login",
+    "demoLoginTodo": "TODO: public demo-only login, once the demo is deployed.",
+    "screensIntro": "Select a screenshot to enlarge it.",
+    "noLiveDemo": "There is no live demo for this project. Select a screenshot to enlarge it.",
+    "homePage": "Home page of the live site.",
+    "screens": "Screens"
+  },
+  "demo": {
+    "sampleData": "Sample data",
+    "notice": "This is a demo with sample data. Anything you add is visible to other visitors and is deleted every night. Please don't enter real personal information.",
+    "noticeTitle": "Demo with sample data",
+    "mobileNotice": "Every person, address and order in the demo is generated. Your changes stay in this browser only.",
+    "openFullScreen": "Open demo full screen",
+    "fullScreenNote": "The demo is built for a phone, so it opens full screen in its own tab.",
+    "loading": "Loading demo…",
+    "failedTitle": "The demo didn't load",
+    "failedBody": "The embed is blocked or offline. The screenshots below show the same screens.",
+    "notDeployed": "The interactive demo is not online yet. The screenshots show the app in the meantime.",
+    "reload": "Reload demo",
+    "frameTitle": "{title} demo, running in a phone-sized frame",
+    "openLive": "Open live demo",
+    "waking": "Waking the demo server (up to 1 min)",
+    "wakingCaption": "The demo runs on a free host that sleeps when idle. The button is available once the server answers.",
+    "readyCaption": "Opens in a new tab.",
+    "wakeFailedTitle": "The demo server didn't answer",
+    "wakeFailedBody": "It may be restarting. Try again in a minute.",
+    "tryAgain": "Try again",
+    "notOnline": "The live demo is not online yet.",
+    "notOnlineCaption": "TODO: demo URL and health URL arrive in Wave 4."
+  },
+  "gallery": {
+    "enlarge": "Enlarge screenshot: {alt}",
+    "viewer": "Screenshot viewer",
+    "close": "Close",
+    "previous": "Previous screenshot",
+    "next": "Next screenshot",
+    "counter": "{index} / {total} · {kind}",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "pendingAlt": "Placeholder: the {kind} screenshot is not taken yet",
+    "pendingLabel": "Screenshot pending"
+  },
+  "diagram": {
+    "label": "Architecture diagram, scrolls horizontally",
+    "legendAccent": "path discussed in the text",
+    "legendPlain": "other traffic",
+    "legendExternal": "third party I don't own",
+    "caption": "How the parts connect. The highlighted arrow is the request path the write-up discusses."
+  },
+  "about": {
+    "title": "About",
+    "p1": "I'm a full-stack developer with 2+ years of experience building web and mobile apps for clients in many fields. I currently build AI-powered online store products, and I previously led a team of 6 developers as an Agile team lead.",
+    "p2": "I'm a final-year software engineering student, looking for a PFE internship (end-of-studies internship).",
+    "downloadCv": "Download CV",
+    "cvMeta": "PDF",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "remote": "Remote",
+    "jobs": {
+      "freelance": {
+        "period": "July 2026 — present",
+        "role": "Freelance full-stack developer",
+        "meta": "Remote",
+        "points": [
+          "Develop features for several client products at the same time, across backend, web and mobile.",
+          "Built online payments, live voice rooms for multiplayer games and player leaderboards for a membership app on web and mobile.",
+          "Built a store builder that lets members open their own online shop, with supplier stock updates, discount codes, refunds and payout approval.",
+          "Developed an AI assistant that edits a seller's online store from a chat, checking every change before saving it and allowing undo.",
+          "Built most of the backend for a creator selling platform, including seller balances, payouts and automated tests that run on every code change."
+        ]
+      },
+      "billcom": {
+        "period": "August 2025",
+        "role": "Full-stack developer intern",
+        "meta": "Billcom Consulting",
+        "points": [
+          "Built a Trello-style project management app (Java / Spring Boot backend) with boards, tasks, labels and custom workflow stages.",
+          "Added team invitations, role-based permissions and task assignment."
+        ]
+      },
+      "swiver": {
+        "period": "July 2025",
+        "role": "Software developer intern",
+        "meta": "Swiver",
+        "points": [
+          "Built the company landing page and connected it to live activity data from the platform.",
+          "Created a Python tool that reads tables from images and turns them into structured data, in French and Arabic."
+        ]
+      },
+      "innothinkLead": {
+        "period": "January 2024 — October 2024",
+        "role": "Agile team lead",
+        "meta": "InnoThink · team of 6",
+        "points": [
+          "Led a team of 6 developers using Scrum, with sprint planning, reviews and code reviews.",
+          "Delivered DepoGro, a B2B ordering and delivery app released on the App Store and Google Play, along with its admin dashboard and server.",
+          "Built the phone login with SMS codes, user roles and order management, plus most of the mobile app screens in Arabic and French."
+        ]
+      },
+      "innothinkDev": {
+        "period": "February 2023 — December 2023",
+        "role": "Full-stack developer",
+        "meta": "InnoThink",
+        "points": [
+          "Delivered 10+ websites and apps for clients in car rental, device repair, healthcare and interior design.",
+          "Built a device repair booking app and its server from Figma designs, and helped deploy client projects on AWS."
+        ]
+      }
+    },
+    "schools": {
+      "licence": {
+        "period": "2024 — 2027 (expected)",
+        "title": "Licence nationale en génie logiciel et système d'information",
+        "meta": "TED University, Tunisia · software engineering and information systems"
+      },
+      "bac": {
+        "period": "2023",
+        "title": "Baccalauréat, mathematics",
+        "meta": "Tunisia"
+      },
+      "training": {
+        "period": "Training",
+        "title": "Clevory",
+        "meta": "CKA, LPI DevOps Tools Engineer, AWS Cloud Practitioner, PCAP"
+      }
+    },
+    "langs": {
+      "arabic": "Arabic",
+      "arabicLevel": "native",
+      "english": "English",
+      "englishLevel": "fluent",
+      "french": "French",
+      "frenchLevel": "intermediate"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Email is the best way to reach me. I read everything and reply within two working days.",
+    "direct": "Direct",
+    "linkedin": "LinkedIn profile",
+    "phone": "Call {phone}",
+    "note": "Based in Tunis, Tunisia (UTC+1). Open to a PFE internship and client projects.",
+    "formTitle": "Or write a message",
+    "formNote": "This form opens your email app with the message filled in. Nothing is sent from this site.",
+    "name": "Name",
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "topic": "What is this about?",
+    "topics": {
+      "internship": "PFE internship",
+      "project": "Project enquiry",
+      "job": "Job opportunity",
+      "other": "Something else"
+    },
+    "message": "Message",
+    "required": "(required)",
+    "optional": "(optional)",
+    "submit": "Open in my email app",
+    "errorTitle": "Some fields need a fix",
+    "errorBody": "Check the fields marked below, or email {email} directly.",
+    "nameError": "Enter your name.",
+    "emailError": "Enter a valid email address, like name@example.com.",
+    "messageError": "Write a message.",
+    "successTitle": "Your email app should now be open",
+    "successBody": "Thanks, {name}. If nothing opened, email {email} directly.",
+    "again": "Write another message",
+    "subject": "Message from {name}"
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "This page doesn't exist",
+    "text": "The link may be old or mistyped. These pages are a good place to start.",
+    "home": "Go to the home page"
+  },
+  "error": {
+    "title": "This page couldn't load",
+    "text": "Something failed while building the page. Try again, or go to the home page.",
+    "retry": "Try again",
+    "home": "Go to the home page"
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "siteTitle": "Amine Amdouni, développeur full-stack",
+    "siteDescription": "Applications web et mobiles en TypeScript, NestJS, Next.js, React Native et Spring Boot. Démos en ligne, études de cas et sites clients.",
+    "projectsTitle": "Projets",
+    "projectsDescription": "Applications mobiles, produits full-stack, projets e-commerce et sites clients, chacun avec une démo, des captures d'écran ou le site en ligne.",
+    "aboutTitle": "À propos",
+    "aboutDescription": "Expérience, formation et compétences d'Amine Amdouni, développeur full-stack à Tunis.",
+    "contactTitle": "Contact",
+    "contactDescription": "E-mail, LinkedIn ou téléphone. Je réponds sous deux jours ouvrés.",
+    "notFoundTitle": "Page introuvable"
+  },
+  "nav": {
+    "brand": "Amine Amdouni",
+    "home": "Accueil",
+    "projects": "Projets",
+    "about": "À propos",
+    "contact": "Contact",
+    "primary": "Navigation principale",
+    "skipToContent": "Aller au contenu",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "theme": {
+    "toDark": "Passer au thème sombre",
+    "toLight": "Passer au thème clair",
+    "loading": "Thème"
+  },
+  "locale": {
+    "switchLabel": "English",
+    "switchShort": "EN",
+    "switchLang": "en"
+  },
+  "footer": {
+    "blurb": "Développeur full-stack. NestJS, Next.js, React Native et Spring Boot.",
+    "pages": "Pages",
+    "elsewhere": "Ailleurs",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "downloadCv": "Télécharger le CV",
+    "source": "Code source de ce site",
+    "note": "© {year} Amine Amdouni · Tunis, Tunisie"
+  },
+  "home": {
+    "eyebrow": "Amine Amdouni · Tunis, Tunisie",
+    "title": "Développeur full-stack",
+    "lead": "Je développe des applications web et mobiles avec TypeScript, NestJS, Next.js et React Native, ainsi que des services Spring Boot en Java. Étudiant en dernière année de génie logiciel, je cherche un stage de fin d'études (PFE).",
+    "viewProjects": "Voir les projets",
+    "downloadCv": "Télécharger le CV",
+    "selectedWork": "Projets choisis",
+    "allProjects": "Les {count} projets",
+    "whatIWorkWith": "Mes outils",
+    "getInTouch": "Me contacter",
+    "getInTouchText": "Le plus rapide, c'est l'e-mail. Je réponds sous deux jours ouvrés.",
+    "linkedin": "LinkedIn"
+  },
+  "skills": {
+    "languages": "Langages",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "databases": "Bases de données",
+    "aiPayments": "IA et paiement",
+    "tools": "Outils"
+  },
+  "projects": {
+    "title": "Projets",
+    "lead": "Applications mobiles, produits full-stack, projets e-commerce et sites clients. Chaque carte indique comment voir le travail : démo mobile interactive, démo en ligne, captures d'écran ou site en ligne.",
+    "filterLabel": "Filtrer les projets",
+    "filters": {
+      "all": "Tous",
+      "mobile": "Applications mobiles",
+      "fullstack": "Full-stack",
+      "ecommerce": "E-commerce",
+      "client": "Sites clients"
+    },
+    "count": "{count, plural, one {# projet} other {# projets}}",
+    "loading": "Chargement des projets",
+    "emptyTitle": "Aucun projet dans cette catégorie pour l'instant",
+    "emptyText": "Choisissez une autre catégorie, ou affichez tout.",
+    "showAll": "Afficher tous les projets"
+  },
+  "badges": {
+    "mobile": "Démo mobile interactive",
+    "fullstack": "Démo en ligne",
+    "ecommerce": "Captures d'écran",
+    "client": "Site en ligne",
+    "demoCopy": "Copie de démo",
+    "draft": "Brouillon"
+  },
+  "project": {
+    "breadcrumb": "Fil d'Ariane",
+    "projects": "Projets",
+    "role": "Rôle",
+    "timeline": "Période",
+    "team": "Équipe",
+    "stack": "Stack",
+    "code": "Code",
+    "solo": "Solo",
+    "teamOf": "Équipe de {size}",
+    "teamUnknown": "Équipe",
+    "present": "aujourd'hui",
+    "privateRepo": "Dépôt privé",
+    "publicRepo": "Dépôt public",
+    "todo": "TODO",
+    "todoValue": "TODO",
+    "todoSummary": "TODO : résumé en une ligne.",
+    "tryDemo": "Essayer la démo",
+    "tryThis": "À essayer",
+    "tryThisTodo": "TODO : trois étapes courtes qui montrent le parcours principal.",
+    "liveDemo": "Démo en ligne",
+    "visitSite": "Voir le site",
+    "opensInNewTab": "Ouvre {host} dans un nouvel onglet.",
+    "opensNewTab": "S'ouvre dans un nouvel onglet.",
+    "siteNotOnline": "Le lien vers le site est ajouté une fois vérifié.",
+    "demoLogin": "Connexion de démo",
+    "demoLoginTodo": "TODO : identifiants publics de démo, une fois la démo déployée.",
+    "screensIntro": "Sélectionnez une capture pour l'agrandir.",
+    "noLiveDemo": "Ce projet n'a pas de démo en ligne. Sélectionnez une capture pour l'agrandir.",
+    "homePage": "Page d'accueil du site en ligne.",
+    "screens": "Écrans"
+  },
+  "demo": {
+    "sampleData": "Données fictives",
+    "notice": "Ceci est une démo avec des données fictives. Tout ce que vous ajoutez est visible par les autres visiteurs et supprimé chaque nuit. Merci de ne pas saisir de vraies informations personnelles.",
+    "noticeTitle": "Démo avec des données fictives",
+    "mobileNotice": "Toutes les personnes, adresses et commandes de la démo sont générées. Vos modifications restent dans ce navigateur.",
+    "openFullScreen": "Ouvrir la démo en plein écran",
+    "fullScreenNote": "La démo est conçue pour un téléphone : elle s'ouvre en plein écran dans un nouvel onglet.",
+    "loading": "Chargement de la démo…",
+    "failedTitle": "La démo ne s'est pas chargée",
+    "failedBody": "L'intégration est bloquée ou hors ligne. Les captures ci-dessous montrent les mêmes écrans.",
+    "notDeployed": "La démo interactive n'est pas encore en ligne. En attendant, les captures montrent l'application.",
+    "reload": "Recharger la démo",
+    "frameTitle": "Démo de {title}, dans un cadre de la taille d'un téléphone",
+    "openLive": "Ouvrir la démo",
+    "waking": "Réveil du serveur de démo (jusqu'à 1 min)",
+    "wakingCaption": "La démo tourne sur un hébergement gratuit qui se met en veille. Le bouton devient actif dès que le serveur répond.",
+    "readyCaption": "S'ouvre dans un nouvel onglet.",
+    "wakeFailedTitle": "Le serveur de démo n'a pas répondu",
+    "wakeFailedBody": "Il redémarre peut-être. Réessayez dans une minute.",
+    "tryAgain": "Réessayer",
+    "notOnline": "La démo n'est pas encore en ligne.",
+    "notOnlineCaption": "TODO : l'URL de la démo et l'URL de santé arrivent à la vague 4."
+  },
+  "gallery": {
+    "enlarge": "Agrandir la capture : {alt}",
+    "viewer": "Visionneuse de captures",
+    "close": "Fermer",
+    "previous": "Capture précédente",
+    "next": "Capture suivante",
+    "counter": "{index} / {total} · {kind}",
+    "desktop": "Ordinateur",
+    "mobile": "Mobile",
+    "pendingAlt": "Emplacement réservé : la capture {kind} n'est pas encore prise",
+    "pendingLabel": "Capture à venir"
+  },
+  "diagram": {
+    "label": "Schéma d'architecture, défilement horizontal",
+    "legendAccent": "chemin décrit dans le texte",
+    "legendPlain": "autre trafic",
+    "legendExternal": "service tiers",
+    "caption": "Comment les éléments sont reliés. La flèche en couleur est le chemin de requête décrit dans le texte."
+  },
+  "about": {
+    "title": "À propos",
+    "p1": "Je suis développeur full-stack, avec plus de 2 ans d'expérience dans la création d'applications web et mobiles pour des clients de nombreux secteurs. Je développe aujourd'hui des produits de boutique en ligne avec de l'IA, et j'ai dirigé une équipe de 6 développeurs en tant que chef d'équipe Agile.",
+    "p2": "Étudiant en dernière année de génie logiciel, je cherche un stage de fin d'études (PFE).",
+    "downloadCv": "Télécharger le CV",
+    "cvMeta": "PDF",
+    "experience": "Expérience",
+    "education": "Formation",
+    "skills": "Compétences",
+    "languages": "Langues",
+    "remote": "À distance",
+    "jobs": {
+      "freelance": {
+        "period": "Juillet 2026 — aujourd'hui",
+        "role": "Développeur full-stack freelance",
+        "meta": "À distance",
+        "points": [
+          "Je développe des fonctionnalités pour plusieurs produits clients en parallèle, côté backend, web et mobile.",
+          "J'ai développé le paiement en ligne, des salons vocaux en direct pour des jeux multijoueurs et des classements de joueurs pour une application de membres, sur web et mobile.",
+          "J'ai développé un créateur de boutiques qui permet aux membres d'ouvrir leur propre boutique en ligne, avec mise à jour des stocks fournisseurs, codes de réduction, remboursements et validation des paiements.",
+          "J'ai développé un assistant IA qui modifie la boutique d'un vendeur depuis un chat, en vérifiant chaque changement avant de l'enregistrer et en permettant de l'annuler.",
+          "J'ai développé l'essentiel du backend d'une plateforme de vente pour créateurs, dont les soldes vendeurs, les versements et des tests automatisés lancés à chaque modification du code."
+        ]
+      },
+      "billcom": {
+        "period": "Août 2025",
+        "role": "Stagiaire développeur full-stack",
+        "meta": "Billcom Consulting",
+        "points": [
+          "J'ai développé une application de gestion de projet de type Trello (backend Java / Spring Boot) avec tableaux, tâches, étiquettes et étapes de workflow personnalisées.",
+          "J'ai ajouté les invitations d'équipe, les permissions par rôle et l'attribution des tâches."
+        ]
+      },
+      "swiver": {
+        "period": "Juillet 2025",
+        "role": "Stagiaire développeur",
+        "meta": "Swiver",
+        "points": [
+          "J'ai développé la page d'accueil de l'entreprise et l'ai reliée aux données d'activité de la plateforme en temps réel.",
+          "J'ai créé un outil Python qui lit des tableaux dans des images et les transforme en données structurées, en français et en arabe."
+        ]
+      },
+      "innothinkLead": {
+        "period": "Janvier 2024 — octobre 2024",
+        "role": "Chef d'équipe Agile",
+        "meta": "InnoThink · équipe de 6",
+        "points": [
+          "J'ai dirigé une équipe de 6 développeurs en Scrum : planification de sprint, revues et revues de code.",
+          "J'ai livré DepoGro, une application B2B de commande et de livraison publiée sur l'App Store et Google Play, avec son tableau de bord d'administration et son serveur.",
+          "J'ai développé la connexion par téléphone avec codes SMS, les rôles utilisateurs et la gestion des commandes, ainsi que la plupart des écrans de l'application mobile en arabe et en français."
+        ]
+      },
+      "innothinkDev": {
+        "period": "Février 2023 — décembre 2023",
+        "role": "Développeur full-stack",
+        "meta": "InnoThink",
+        "points": [
+          "J'ai livré plus de 10 sites et applications pour des clients de la location de voitures, de la réparation d'appareils, de la santé et de la décoration d'intérieur.",
+          "J'ai développé une application de réservation de réparations et son serveur à partir de maquettes Figma, et participé au déploiement de projets clients sur AWS."
+        ]
+      }
+    },
+    "schools": {
+      "licence": {
+        "period": "2024 — 2027 (prévu)",
+        "title": "Licence nationale en génie logiciel et système d'information",
+        "meta": "TED University, Tunisie"
+      },
+      "bac": {
+        "period": "2023",
+        "title": "Baccalauréat mathématiques",
+        "meta": "Tunisie"
+      },
+      "training": {
+        "period": "Formations",
+        "title": "Clevory",
+        "meta": "CKA, LPI DevOps Tools Engineer, AWS Cloud Practitioner, PCAP"
+      }
+    },
+    "langs": {
+      "arabic": "Arabe",
+      "arabicLevel": "langue maternelle",
+      "english": "Anglais",
+      "englishLevel": "courant",
+      "french": "Français",
+      "frenchLevel": "intermédiaire"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Le plus simple est de m'écrire un e-mail. Je lis tout et je réponds sous deux jours ouvrés.",
+    "direct": "Direct",
+    "linkedin": "Profil LinkedIn",
+    "phone": "Appeler le {phone}",
+    "note": "Basé à Tunis, Tunisie (UTC+1). Disponible pour un stage de fin d'études (PFE) et des projets clients.",
+    "formTitle": "Ou écrivez un message",
+    "formNote": "Ce formulaire ouvre votre messagerie avec le message déjà rempli. Rien n'est envoyé depuis ce site.",
+    "name": "Nom",
+    "email": "E-mail",
+    "emailPlaceholder": "nom@exemple.com",
+    "topic": "De quoi s'agit-il ?",
+    "topics": {
+      "internship": "Stage PFE",
+      "project": "Demande de projet",
+      "job": "Offre d'emploi",
+      "other": "Autre chose"
+    },
+    "message": "Message",
+    "required": "(obligatoire)",
+    "optional": "(facultatif)",
+    "submit": "Ouvrir dans ma messagerie",
+    "errorTitle": "Certains champs sont à corriger",
+    "errorBody": "Vérifiez les champs signalés ci-dessous, ou écrivez directement à {email}.",
+    "nameError": "Indiquez votre nom.",
+    "emailError": "Saisissez une adresse e-mail valide, par exemple nom@exemple.com.",
+    "messageError": "Écrivez un message.",
+    "successTitle": "Votre messagerie devrait maintenant être ouverte",
+    "successBody": "Merci, {name}. Si rien ne s'est ouvert, écrivez directement à {email}.",
+    "again": "Écrire un autre message",
+    "subject": "Message de {name}"
+  },
+  "notFound": {
+    "eyebrow": "Erreur 404",
+    "title": "Cette page n'existe pas",
+    "text": "Le lien est peut-être ancien ou mal saisi. Ces pages sont un bon point de départ.",
+    "home": "Aller à l'accueil"
+  },
+  "error": {
+    "title": "Cette page n'a pas pu se charger",
+    "text": "Une erreur s'est produite pendant la création de la page. Réessayez, ou retournez à l'accueil.",
+    "retry": "Réessayer",
+    "home": "Aller à l'accueil"
+  }
+}
