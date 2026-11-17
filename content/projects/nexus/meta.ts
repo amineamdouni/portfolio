@@ -38,8 +38,20 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: null,
-  // TODO (shots batch 2/3): add screenshots with shotsFor("nexus", [...]).
-  shots: shotsFor("nexus", []),
+  shots: shotsFor("nexus", [
+    ["admin-dashboard-desktop", "Admin dashboard with statistics on projects, students and supervisors.", "Tableau de bord administrateur avec les statistiques des projets, étudiants et encadrants."],
+    ["pfes-desktop", "List of final-year projects with status, student and supervisor.", "Liste des projets de fin d'études avec statut, étudiant et encadrant."],
+    ["pfe-detail-desktop", "A project page: status, progress, people and deliverables.", "Page d'un projet : statut, progression, personnes et livrables."],
+    ["archive-search-desktop", "Archive search across past years, filtered by a keyword.", "Recherche dans les archives des années passées, filtrée par mot-clé."],
+    ["supervisor-dashboard-desktop", "Supervisor dashboard with the projects they follow.", "Tableau de bord de l'encadrant avec les projets qu'il suit."],
+    ["student-my-pfe-desktop", "Student view of their own project and its progress.", "Vue étudiant de son projet et de sa progression."],
+    ["admin-dashboard-fr-desktop", "The admin dashboard in French.", "Le tableau de bord administrateur en français."],
+    ["login-desktop", "Login page with the demo notice and the three demo-login buttons.", "Page de connexion avec l'avis de démo et les trois boutons de connexion de démo."],
+    ["student-my-pfe-mobile", "Student project view on a phone.", "Vue du projet étudiant sur téléphone."],
+    ["login-mobile", "Login page on a phone.", "Page de connexion sur téléphone."],
+    // More screenshots in public/shots/nexus/, not shown in the gallery (uncomment to show):
+    // ["archive-fr-desktop", "The archive in French.", "Les archives en français."],
+  ]),
   architecture: [
     {
       title: "Client",

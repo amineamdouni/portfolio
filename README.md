@@ -2,7 +2,7 @@
 
 The portfolio site of Amine Amdouni, full-stack developer: mobile apps, full-stack products, e-commerce projects and client sites, each with an interactive demo, a live demo, screenshots or a link to the live site. English and French, light and dark.
 
-Status: content in place. All 18 write-ups (EN/FR), demo and live URLs are set. Projects still waiting for screenshots (see `shots: shotsFor("<slug>", [])` in their `meta.ts`) show marked placeholder images.
+Status: content in place. All 18 write-ups (EN/FR), demo and live URLs and screenshots are set, except Sift's screenshots (`shots: shotsFor("sift", [])`), whose gallery shows marked placeholder images until they exist.
 
 ## Stack
 

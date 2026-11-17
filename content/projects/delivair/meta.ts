@@ -38,7 +38,6 @@ const meta: ProjectMeta = {
   liveUrl: null,
   shots: shotsFor("delivair", [
     ["home-mobile", "Home screen: a plane over a pink and green sky, with From and To fields to search for travellers.", "Écran d'accueil : un avion sur un ciel rose et vert, avec les champs Départ et Arrivée pour chercher des voyageurs."],
-    ["intro-mobile", "Opening screen with the sample-data notice and a Continue button.", "Écran d'ouverture avec l'avis sur les données d'exemple et un bouton Continuer."],
     ["login-mobile", "Login screen with the \"Continue as demo user\" button.", "Écran de connexion avec le bouton pour continuer en utilisateur de démo."],
     ["search-rules-mobile", "Search from Tunis to Paris, with stacked cards on luggage rules before confirming.", "Recherche de Tunis à Paris, avec des cartes empilées sur les règles des bagages avant de confirmer."],
     ["search-flight-mobile", "Search animation: the plane flies while the app looks for travellers.", "Animation de recherche : l'avion vole pendant que l'application cherche des voyageurs."],
@@ -49,6 +48,8 @@ const meta: ProjectMeta = {
     ["admin-dashboard", "Admin dashboard with monthly charts of users and trips.", "Tableau de bord d'administration avec les graphiques mensuels des utilisateurs et des trajets."],
     ["admin-users", "Admin list of users with city, phone, email and rating.", "Liste d'administration des utilisateurs avec ville, téléphone, e-mail et note."],
     ["admin-trips", "Admin list of posted trips with route, dates, contents and weight.", "Liste d'administration des trajets publiés avec trajet, dates, contenu et poids."],
+    // More screenshots in public/shots/delivair/, not shown in the gallery (uncomment to show):
+    // ["intro-mobile", "Opening screen with the sample-data notice and a Continue button.", "Écran d'ouverture avec l'avis sur les données d'exemple et un bouton Continuer."],
   ]),
   tryThis: {
     en: [
