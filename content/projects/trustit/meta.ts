@@ -1,13 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
-// TODO (Wave 4): demoLogin with the public demo-only credentials, if the app has them.
 const meta: ProjectMeta = {
   slug: "trustit",
   category: "fullstack",
   title: "Trust IT",
-  summary: null,
+  summary: {
+    en: "Repair booking site: pick a device, describe the problem, then track the repair.",
+    fr: "Site de réservation de réparations : choisir l'appareil, décrire le problème, suivre la réparation."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -15,21 +16,34 @@ const meta: ProjectMeta = {
   team: {
     kind: "solo"
   },
-  dates: null,
+  dates: {
+    start: "2023",
+    end: "2023"
+  },
   stack: [
     "Next.js",
+    "React",
+    "Tailwind CSS",
     "NestJS",
     "Prisma",
-    "PostgreSQL"
+    "PostgreSQL",
+    "TypeScript",
+    "Jest",
+    "Playwright"
   ],
-  demoUrl: null,
-  healthUrl: null,
+  demoUrl: "https://trustit-demo.vercel.app",
+  healthUrl: "https://trustit-api.onrender.com/health",
   repo: {
     visibility: "private",
     url: null
   },
   liveUrl: null,
-  shots: [],
+  shots: shotsFor("trustit", [
+    ["home-desktop", "Home page with the booking entry point and \"Why Trust iT?\".", "Page d'accueil avec l'entrée de réservation et « Why Trust iT? »."],
+    ["tracking-desktop", "Tracking the sample code DEMO42: device, repair centre and the timeline of stages.", "Suivi du code d'exemple DEMO42 : appareil, centre de réparation et chronologie des étapes."],
+    ["login-desktop", "Login page with the demo-user button and the sample tracking code.", "Page de connexion avec le bouton utilisateur de démo et le code de suivi d'exemple."],
+    ["home-mobile", "Home page on a phone.", "Page d'accueil sur téléphone."],
+  ]),
   architecture: [
     {
       title: "Client",
@@ -73,9 +87,13 @@ const meta: ProjectMeta = {
       ]
     }
   ],
+  demoHint: {
+    en: "No password needed: use \"Log in as demo user\" on the site. To track a repair without logging in, enter the sample code DEMO42.",
+    fr: "Pas de mot de passe : utilisez « Se connecter en utilisateur de démo » sur le site. Pour suivre une réparation sans connexion, saisissez le code d'exemple DEMO42."
+  },
   featured: true,
   order: 1,
-  draft: true
+  draft: false,
 };
 
 export default meta;

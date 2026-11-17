@@ -1,14 +1,20 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. English. */}
-
 <Section number="01" title="The problem">
 
-<Todo>Who had the problem and why it mattered, in one or two short paragraphs. Facts from the build report only.</Todo>
+A distributor that supplies small shops needs one place where shops order, sales reps take orders on their clients' behalf, and deliverers see what to bring and where. DepoGro is that B2B ordering and delivery app, for three roles: the shop (client), the sales rep and the deliverer.
 
 </Section>
 
 <Section number="02" title="What I built">
 
-<Todo>What I built, in the first person and past tense. One decision someone could disagree with, and why I made it.</Todo>
+DepoGro is the team project I led. From January to October 2024 I was the Agile team lead for a team of 6 developers: Scrum, sprint planning, reviews and code reviews. We shipped the app on the App Store and Google Play, together with an admin dashboard and the server.
+
+My own code covers the phone login with SMS codes, user roles, order management and most of the mobile screens, in Arabic and French (right to left and left to right).
+
+**What this demo shows.** A web rebuild of the mobile app on the latest Expo SDK with 17 of its screens, in Arabic and French, for all three roles. Pick Client, Sales rep or Deliverer on the login screen and walk through the flow: browse the catalogue, add to the cart, check out, track an order, take an order as a rep, or accept and deliver one. Everything runs in your browser on sample data (invented shops, brands and products, with fake phone numbers). Your changes stay in this browser, and "Reset demo" restores the start.
+
+**What is simulated.** There is no server. Maps are a static image, calls show a "Calls are simulated" note, and account deletion and the shop's patent photo are simulated. SMS login, sign-up and push notifications are not in the demo. The deliverer's earnings tile uses a flat 5 percent demo commission, not the real calculation.
+
+The admin dashboard (orders, order detail, ambassadors, products, ads) is shown as screenshots only, taken from the real dashboard against a local fixture server.
 
 </Section>
 
@@ -20,12 +26,22 @@
 
 <Section number="04" title="Under the hood">
 
-<Todo>Stack and structure: the parts that matter and one trade-off.</Todo>
+The original app is Expo and React Native with Redux, in front of a NestJS and PostgreSQL server. For the demo I replaced the API with a zustand store whose actions mirror the old calls (add to cart, create order, change order status), saved in the browser under a versioned key. If the saved data cannot be read, the app falls back to the seed.
+
+Choices that mattered:
+
+- I kept Arabic and French exactly as in the app, including right-to-left layout, rather than adding English.
+- A double tap on "Confirm" must not create two orders. The demo creates the order in one synchronous action and locks the button, and a Playwright test taps twice and checks that exactly one order appears.
+- The deliverer dashboard had to be rebuilt for the demo: it now shows the name, availability and four tiles filled from the store.
+
+The Playwright suite has 9 tests across the three roles. Every test fails on a console error or on any request that leaves the app.
 
 </Section>
 
 <Section number="05" title="Result">
 
-<Todo>Outcomes. Every number needs a baseline and a source; a number without one is cut.</Todo>
+The demo is live and covers the three roles end to end without any backend.
+
+**What I would improve.** Add a proper order-history search and offline caching for the deliverer, who works on the road, and replace the generated product images with real photography.
 
 </Section>

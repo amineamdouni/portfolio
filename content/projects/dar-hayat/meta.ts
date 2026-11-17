@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "dar-hayat",
   category: "client",
   title: "Dar Hayat",
-  summary: null,
+  summary: {
+    en: "Site for a custom wooden construction business.",
+    fr: "Site d'une entreprise de constructions en bois sur mesure."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -23,10 +25,14 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: "https://dar-hayat.vercel.app/",
-  shots: [],
+  shots: shotsFor("dar-hayat", [
+    ["home-desktop", "Home page with the logo.", "Page d'accueil avec le logo."],
+    ["constructions-desktop", "Section on custom wooden constructions, with photos.", "Section sur les constructions en bois sur mesure, avec photos."],
+    ["home-mobile", "Home page on a phone, opening on a hero image.", "Page d'accueil sur téléphone, qui s'ouvre sur une image."],
+  ]),
   featured: false,
   order: 6,
-  draft: true
+  draft: false,
 };
 
 export default meta;

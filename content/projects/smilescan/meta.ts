@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "smilescan",
   category: "client",
   title: "SmileScan",
-  summary: null,
+  summary: {
+    en: "Service site with a price list.",
+    fr: "Site de service avec une liste de tarifs."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -23,10 +25,14 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: "https://www.smilescansolution.site/",
-  shots: [],
+  shots: shotsFor("smilescan", [
+    ["home-desktop", "Home page hero.", "Bannière de la page d'accueil."],
+    ["pricing-desktop", "Price list and about section.", "Liste des tarifs et section à propos."],
+    ["home-mobile", "Home page on a phone.", "Page d'accueil sur téléphone."],
+  ]),
   featured: false,
   order: 9,
-  draft: true
+  draft: false,
 };
 
 export default meta;

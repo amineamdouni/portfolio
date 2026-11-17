@@ -1,14 +1,23 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. English. */}
-
 <Section number="01" title="The problem">
 
-<Todo>Who had the problem and why it mattered, in one or two short paragraphs. Facts from the build report only.</Todo>
+At the faculty this project was designed for, final-year projects (PFE, projet de fin d'études) were managed through emails, Excel files and informal exchanges, so students lacked visibility on deadlines, progress and supervisor feedback. Nexus brings the whole process into one platform: an admin assigns subjects, supervisors follow progress, students report it, and past years stay searchable. Each role has its own access.
 
 </Section>
 
 <Section number="02" title="What I built">
 
-<Todo>What I built, in the first person and past tense. One decision someone could disagree with, and why I made it.</Todo>
+I built Nexus as a solo project between 2025 and 2026, from a project deck that defined the actors, the use cases and three sprints. For this portfolio I rebuilt it on a new stack, using the first version as a reference for the product.
+
+**What this demo shows.** Everything in the first three sprints works, and every visible button does something:
+
+- Admin: create and delete students and supervisors, create, edit and delete PFE subjects, assign a PFE to a student and a supervisor, see all PFEs, and see the students of each supervisor.
+- Supervisor: see the PFEs they supervise, follow their progress and move them forward.
+- Student: see their own PFE, update its status and progress, and upload a PDF deliverable.
+- Everyone: a dashboard with statistics for their role, a searchable archive and history (by year, supervisor and theme), a profile page, and an English and French interface with a toggle.
+
+A PFE moves through six statuses: Proposed, Assigned, In progress, Submitted, Finished, Archived. Two rules are enforced on the server and shown in the interface: a student can have only one active PFE, and a person assigned to an active PFE cannot be deleted.
+
+**What is simulated.** Log in with one of three demo buttons (Admin, Supervisor, Student). The data is generated: 1 admin, 10 supervisors, 40 students and 35 PFEs over three academic years, in every status, with fake ID numbers that start with 00. Anything you change is visible to other visitors and deleted every night. Demo accounts cannot be deleted or change their password. Uploaded PDFs, limited to 2 MB, are kept in the database and cleared at the reset. The free server sleeps when idle, so the first load can take up to a minute.
 
 </Section>
 
@@ -20,7 +29,11 @@
 
 <Section number="04" title="Under the hood">
 
-<Todo>Stack and structure: the parts that matter and one trade-off.</Todo>
+A pnpm monorepo with `apps/api` (NestJS 11, Prisma 6, PostgreSQL) and `apps/web` (Next.js 16, React 19, Tailwind CSS 4, next-intl). The interface is built from a design system I followed token by token, with a light and a dark theme.
+
+The choice I would defend: the one-active-PFE rule lives in the database as well as in the code. A partial unique index stops a student from holding two active PFEs even if two requests arrive at once. The delete rule locks the user row, so deleting someone and assigning them at the same moment cannot leave a PFE active without its person. Both have race tests.
+
+Sign-in sets an httpOnly cookie from Next route handlers, and a proxy adds the bearer token on the way to the API, so the browser never holds it. The web proxy blocks sign-in and password paths in any letter case.
 
 <Architecture />
 
@@ -28,12 +41,16 @@
 
 <Section number="05" title="API and backend">
 
-<Todo>How the API is organised: auth, validation, tests. Link to nothing private.</Todo>
+Modules cover health, auth (login, demo login, logout), the current user (profile, password), users (students, supervisors), PFEs (CRUD, assignment, status, progress, archive and restore, deliverables), and stats per role. Global guards handle rate limiting per client IP, JWT (the user is loaded on every request, with a token version and a forced password change for new accounts) and roles. Errors have stable codes. The migration adds raw SQL for the partial unique index and for checks on progress (0 to 100), deliverable size (2 MB at most), ID number format and lower-case email.
+
+Tests: 6 unit tests for the status transition table, 45 end-to-end API tests (both rules including a concurrent race, assignment, every role and transition returning the right 403 or 409, ownership, deliverables, revoked tokens, the temporary-password flow, and the 429 and 413 limits) and 3 Playwright smoke tests, one per role. CI runs lint, typecheck, unit, end-to-end, build and the smoke tests on every push.
 
 </Section>
 
 <Section number="06" title="Result">
 
-<Todo>Outcomes. Every number needs a baseline and a source; a number without one is cut.</Todo>
+The demo is live in English and French, with a working version of every sprint 1 to 3 use case.
+
+**What I would improve.** Add the mobile filter sheet that the design had and the demo leaves out (filters wrap on small screens for now), and build the features the deck lists as future evolutions, such as a coaching module and a company partnership space.
 
 </Section>

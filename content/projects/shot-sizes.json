@@ -1,0 +1,406 @@
+{
+  "aka/home-desktop": [
+    1440,
+    900
+  ],
+  "aka/product-desktop": [
+    1440,
+    900
+  ],
+  "aka/shop-desktop": [
+    1440,
+    900
+  ],
+  "aka/shop-mobile": [
+    780,
+    1688
+  ],
+  "ams-cars/admin-cars-desktop": [
+    1440,
+    900
+  ],
+  "ams-cars/car-detail-desktop": [
+    1440,
+    900
+  ],
+  "ams-cars/home-desktop": [
+    1440,
+    900
+  ],
+  "ams-cars/home-mobile": [
+    780,
+    1688
+  ],
+  "amsdynamic/home-desktop": [
+    1440,
+    900
+  ],
+  "amsdynamic/home-mobile": [
+    780,
+    1688
+  ],
+  "amsdynamic/vehicles-desktop": [
+    1440,
+    900
+  ],
+  "dar-hayat/constructions-desktop": [
+    1440,
+    900
+  ],
+  "dar-hayat/home-desktop": [
+    1440,
+    900
+  ],
+  "dar-hayat/home-mobile": [
+    780,
+    1688
+  ],
+  "delivair/admin-dashboard": [
+    2880,
+    940
+  ],
+  "delivair/admin-trips": [
+    2880,
+    1800
+  ],
+  "delivair/admin-users": [
+    2880,
+    1800
+  ],
+  "delivair/all-requests-mobile": [
+    780,
+    1688
+  ],
+  "delivair/conversation-mobile": [
+    780,
+    1688
+  ],
+  "delivair/home-desktop": [
+    1440,
+    900
+  ],
+  "delivair/home-mobile": [
+    780,
+    1688
+  ],
+  "delivair/intro-mobile": [
+    780,
+    1688
+  ],
+  "delivair/login-mobile": [
+    780,
+    1688
+  ],
+  "delivair/profile-mobile": [
+    780,
+    1688
+  ],
+  "delivair/search-flight-mobile": [
+    780,
+    1688
+  ],
+  "delivair/search-results-mobile": [
+    780,
+    1688
+  ],
+  "delivair/search-rules-mobile": [
+    780,
+    1688
+  ],
+  "depogro/admin-ads": [
+    1440,
+    900
+  ],
+  "depogro/admin-ambassadors": [
+    1440,
+    900
+  ],
+  "depogro/admin-order-detail": [
+    1440,
+    900
+  ],
+  "depogro/admin-order-shipped": [
+    1440,
+    900
+  ],
+  "depogro/admin-orders": [
+    1440,
+    900
+  ],
+  "depogro/admin-products": [
+    1440,
+    900
+  ],
+  "depogro/client-cart-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-category-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-home-ar-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-home-desktop": [
+    1440,
+    900
+  ],
+  "depogro/client-home-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-orders-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-product-mobile": [
+    780,
+    1688
+  ],
+  "depogro/client-tracking-mobile": [
+    780,
+    1688
+  ],
+  "depogro/deliverer-dashboard-mobile": [
+    780,
+    1688
+  ],
+  "depogro/deliverer-deliveries-mobile": [
+    780,
+    1688
+  ],
+  "depogro/intro-mobile": [
+    780,
+    1688
+  ],
+  "depogro/onboarding-mobile": [
+    780,
+    1688
+  ],
+  "depogro/rep-cart-mobile": [
+    780,
+    1688
+  ],
+  "depogro/rep-clients-mobile": [
+    780,
+    1688
+  ],
+  "depogro/rep-profile-mobile": [
+    780,
+    1688
+  ],
+  "depogro/role-picker-mobile": [
+    780,
+    1688
+  ],
+  "depogro-site/home-desktop": [
+    1440,
+    900
+  ],
+  "depogro-site/home-mobile": [
+    780,
+    1688
+  ],
+  "depogro-site/services-desktop": [
+    1440,
+    900
+  ],
+  "digitalynx/home-desktop": [
+    1440,
+    900
+  ],
+  "digitalynx/home-mobile": [
+    780,
+    1688
+  ],
+  "digitalynx/services-desktop": [
+    1440,
+    900
+  ],
+  "elegante-design/home-desktop": [
+    1440,
+    900
+  ],
+  "elegante-design/home-mobile": [
+    780,
+    1688
+  ],
+  "elegante-design/projects-desktop": [
+    1440,
+    900
+  ],
+  "fk-km/home-desktop": [
+    1440,
+    900
+  ],
+  "fk-km/home-mobile": [
+    780,
+    1688
+  ],
+  "fk-km/products-desktop": [
+    1440,
+    900
+  ],
+  "mangadana/mangadana-cart-desktop": [
+    1440,
+    900
+  ],
+  "mangadana/mangadana-product-desktop": [
+    1440,
+    900
+  ],
+  "mangadana/mangadana-shop-desktop": [
+    1440,
+    900
+  ],
+  "mangadana/mangadana-shop-mobile": [
+    390,
+    844
+  ],
+  "membership-app/coach-clients-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/coach-dashboard-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/coach-intake-review-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/founder-reports-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/founder-team-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/intro-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-academy-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-chapter-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-fitness-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-home-ar-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-home-desktop": [
+    1440,
+    900
+  ],
+  "membership-app/member-home-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-majlis-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/member-profile-mobile": [
+    780,
+    1688
+  ],
+  "membership-app/role-picker-mobile": [
+    780,
+    1688
+  ],
+  "nexus/admin-dashboard-desktop": [
+    1440,
+    900
+  ],
+  "nexus/archive-search-desktop": [
+    1440,
+    900
+  ],
+  "nexus/login-desktop": [
+    1440,
+    900
+  ],
+  "nexus/login-mobile": [
+    780,
+    1688
+  ],
+  "nexus/pfe-detail-desktop": [
+    1440,
+    900
+  ],
+  "nexus/pfes-desktop": [
+    1440,
+    900
+  ],
+  "nexus/student-my-pfe-desktop": [
+    1440,
+    900
+  ],
+  "nexus/supervisor-dashboard-desktop": [
+    1440,
+    900
+  ],
+  "real-estate/home-desktop": [
+    1440,
+    900
+  ],
+  "real-estate/home-mobile": [
+    780,
+    1688
+  ],
+  "real-estate/properties-desktop": [
+    1440,
+    900
+  ],
+  "smilescan/home-desktop": [
+    1440,
+    900
+  ],
+  "smilescan/home-mobile": [
+    780,
+    1688
+  ],
+  "smilescan/pricing-desktop": [
+    1440,
+    900
+  ],
+  "smiling-ortho/home-desktop": [
+    1440,
+    900
+  ],
+  "smiling-ortho/home-mobile": [
+    780,
+    1688
+  ],
+  "smiling-ortho/products-desktop": [
+    1440,
+    900
+  ],
+  "trustit/home-desktop": [
+    1440,
+    900
+  ],
+  "trustit/home-mobile": [
+    780,
+    1688
+  ],
+  "trustit/login-desktop": [
+    1440,
+    900
+  ],
+  "trustit/tracking-desktop": [
+    1440,
+    900
+  ]
+}

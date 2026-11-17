@@ -55,6 +55,7 @@ export async function ProjectMobile({ project }: { project: ProjectMeta }) {
   const locale = (await getLocale()) as Locale;
   const shots = await galleryShots(project, locale);
   const fallback = shots.find((s) => s.kind === "mobile")?.src ?? "/shots/_placeholder/mobile.svg";
+  const steps = project.tryThis?.[locale] ?? [];
 
   return (
     <Page>
@@ -65,11 +66,19 @@ export async function ProjectMobile({ project }: { project: ProjectMeta }) {
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[390px_minmax(0,1fr)] lg:gap-20">
           <PhoneFrame title={project.title} demoUrl={project.demoUrl} fallbackSrc={fallback} />
           <div>
-            <h3 className="mb-4 text-h3">{t("project.tryThis")}</h3>
-            <Callout label="TODO" icon={false}>
-              {t("project.tryThisTodo")}
-            </Callout>
-            <Callout label={t("demo.sampleData")} className="mt-6">
+            {steps.length > 0 && (
+              <>
+                <h3 className="mb-4 text-h3">{t("project.tryThis")}</h3>
+                <ol className="mb-6 flex max-w-(--measure) list-decimal flex-col gap-3 ps-5 text-[17px] text-text-secondary marker:font-mono marker:text-sm marker:text-text-muted">
+                  {steps.map((step) => (
+                    <li key={step} className="ps-1">
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )}
+            <Callout label={t("demo.sampleData")}>
               {t("demo.mobileNotice")}
             </Callout>
             {project.demoUrl && (
@@ -128,24 +137,48 @@ export async function ProjectFullstack({ project }: { project: ProjectMeta }) {
             </BrowserFrame>
           </div>
           <div className="order-1 flex flex-col gap-5 lg:order-2">
-            <LiveDemoButton demoUrl={project.demoUrl} healthUrl={project.healthUrl} />
-            <div className="rounded-md border bg-surface p-5">
-              <p className="eyebrow mb-3">{t("project.demoLogin")}</p>
-              {project.demoLogin?.length ? (
-                <dl className="grid grid-cols-[90px_1fr] gap-x-3 gap-y-2.5 text-[15px]">
-                  {project.demoLogin.map((row) => (
-                    <div key={row.value} className="contents">
-                      <dt className="text-text-muted">{row.label[locale]}</dt>
-                      <dd className="font-mono text-sm [overflow-wrap:anywhere]">{row.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              ) : (
-                <p className="text-[15px] text-text-secondary">
-                  <TodoMark>{t("project.demoLoginTodo")}</TodoMark>
-                </p>
-              )}
-            </div>
+            {project.demoUrl ? (
+              <LiveDemoButton demoUrl={project.demoUrl} healthUrl={project.healthUrl} wakeMinutes={project.wakeMinutes} />
+            ) : (
+              // No live demo yet (e.g. Sift before its deploy): no button, screenshots only.
+              <p className="text-[15px] text-text-secondary" data-testid="demo-not-online">
+                {t("demo.notOnline")}
+              </p>
+            )}
+            {(project.demoLogin?.length || project.demoHint) && (
+              <div className="rounded-md border bg-surface p-5">
+                <p className="eyebrow mb-3">{t("project.demoLogin")}</p>
+                {project.demoLogin?.length ? (
+                  <dl className="grid grid-cols-[90px_1fr] gap-x-3 gap-y-2.5 text-[15px]">
+                    {project.demoLogin.map((row) => (
+                      <div key={row.value} className="contents">
+                        <dt className="text-text-muted">{row.label[locale]}</dt>
+                        <dd className="font-mono text-sm [overflow-wrap:anywhere]">{row.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : null}
+                {project.demoHint && <p className="text-[15px] text-text-secondary">{project.demoHint[locale]}</p>}
+              </div>
+            )}
+            {project.links?.length ? (
+              <ul className="flex flex-col gap-1" data-testid="project-links">
+                {project.links.map((link) => (
+                  <li key={link.url}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold no-underline"
+                    >
+                      {link.label[locale]}
+                      <ExternalLink {...iconProps} className="rtl:-scale-x-100" />
+                      <span className="font-mono text-[11px] font-normal text-text-muted">{hostOf(link.url)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
       </section>

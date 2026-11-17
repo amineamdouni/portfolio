@@ -1,14 +1,19 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. Français. */}
-
 <Section number="01" title="Le problème">
 
-<Todo>Qui avait le problème et pourquoi c'était important, en un ou deux paragraphes courts. Uniquement des faits tirés du rapport de build.</Todo>
+Une entreprise qui loue et vend des voitures a besoin de deux choses : un site public où les clients voient les véhicules, vérifient qu'un véhicule est libre à leurs dates et envoient une demande, et un back-office où l'équipe gère les voitures, les photos et les réservations. AMS Cars est ce système, réalisé pour un client, AMS Dynamic, dont le site en ligne est [amsdynamic.fr](https://amsdynamic.fr).
 
 </Section>
 
 <Section number="02" title="Ce que j'ai construit">
 
-<Todo>Ce que j'ai construit, à la première personne et au passé. Une décision discutable, et pourquoi je l'ai prise.</Todo>
+J'ai construit le système seul pour le client : une API NestJS, un site client et un tableau de bord d'administration. Pour ce portfolio, j'ai reconstruit les trois parties avec des versions actuelles et je les ai mises en ligne avec des données d'exemple.
+
+**Ce que montre cette démo.**
+
+- Le site client, en français comme l'original : voitures à louer et à vendre, filtres par catégorie, texte et dates, une page par voiture avec les prix, une galerie de photos et une vérification de disponibilité qui renvoie le prix calculé par l'API, puis une demande de location qui donne une référence. Les voitures à vendre ont un bouton de contact.
+- Le tableau de bord, en français : connexion en administrateur de démo en un clic, compteurs, création, modification et suppression de voitures, gestion des photos (envoi, choix de la principale, suppression), et traitement des réservations avec uniquement les changements de statut valides.
+
+**Ce qui est simulé.** Les données viennent d'un seed de 12 voitures (7 à louer, 4 à vendre, 1 archivée), 24 photos, 20 réservations et 6 demandes de contact, avec des personnes inventées et des e-mails en `example.test`. Les visiteurs peuvent ajouter et supprimer : les changements sont visibles par les autres et effacés chaque nuit, et les photos envoyées sont supprimées à la réinitialisation. Les e-mails sont seulement écrits dans le journal du serveur. Six voitures utilisent des photos du site d'origine, les six autres des illustrations générées. Les coordonnées sont fictives, la carte est un emplacement réservé et les vidéos de l'accueil sont des images d'affiche. Le serveur gratuit s'endort quand il est inactif : la première requête peut prendre jusqu'à une minute.
 
 </Section>
 
@@ -20,7 +25,14 @@
 
 <Section number="04" title="Sous le capot">
 
-<Todo>Stack et structure : les éléments qui comptent et un compromis.</Todo>
+Un monorepo pnpm avec `apps/api` (NestJS 11, Prisma 6, PostgreSQL), `apps/site` et `apps/admin` (tous deux en Next.js 16, le site avec Tailwind 4). L'original tournait sur NestJS 10 et Next.js 14.
+
+Deux décisions à regarder :
+
+- **Des tarifs par paliers.** Une location est facturée d'abord en blocs de 30 jours, puis en blocs de 7 jours, puis au jour, et chaque palier est plafonné par le suivant : un séjour plus long ne coûte jamais plus cher qu'un séjour plus court. Les jours sont comptés de façon exclusive, avec un minimum de 1. J'ai testé les paliers à 1, 5, 6, 7, 8, 13, 14, 29, 30, 31 et 45 jours.
+- **Réserver sans double réservation.** La création d'une location pose un verrou de ligne et vérifie les chevauchements dans la même transaction. Un test envoie 8 requêtes simultanées et attend qu'une seule réussisse.
+
+Les sessions d'administration utilisent un cookie httpOnly via un proxy de même origine. Chaque administrateur a une version de jeton qui est incrémentée à chaque réinitialisation : les jetons émis avant une réinitialisation cessent de fonctionner.
 
 <Architecture />
 
@@ -28,12 +40,16 @@
 
 <Section number="05" title="API et backend">
 
-<Todo>Organisation de l'API : authentification, validation, tests. Aucun lien vers du code privé.</Todo>
+Les routes couvrent les voitures (liste et détail publics, voitures archivées masquées), la disponibilité, les locations (création publique, recherche par référence et e-mail, liste et changements de statut pour l'administrateur), les demandes de contact, les statistiques et le CRUD des voitures, et l'envoi de photos. Les envois sont limités à 2 Mo, JPEG, PNG ou WebP vérifiés par leur signature, 6 par voiture et 40 au total, et stockés en base. La limitation est de 60 requêtes par minute et par IP sur toute l'API, avec 10 par minute sur la connexion, la réservation et le contact.
+
+Tests : 17 tests unitaires pour les tarifs, 57 tests de bout en bout de l'API (disponibilité, réservations parallèles, authentification et faux jetons, CRUD des voitures, limites d'envoi, un 413 sur les gros corps de requête, CORS, limitation de débit), et des tests Playwright sur le site et l'administration (3 chacun). J'ai aussi retiré volontairement certaines protections pour vérifier que les tests échouent sans elles : retirer le plafond mensuel, le verrou de ligne ou la vérification de l'usage du jeton casse chacun un test. La CI exécute tout sur un service Postgres, et une tâche GitHub Actions réinitialise les données à 03:00 UTC.
 
 </Section>
 
 <Section number="06" title="Résultat">
 
-<Todo>Résultats. Chaque chiffre a une base de comparaison et une source ; sinon, il est retiré.</Todo>
+La reconstruction a ajouté l'authentification sur l'administration et les routes de location, des tests, une limitation de débit et des valeurs par défaut plus sûres, avec un flux de réinitialisation qu'on peut relancer à tout moment.
+
+**Ce que j'améliorerais.** Ajouter des titres de page par voiture et une vraie page introuvable rendue côté serveur, que j'ai laissées de côté, et remplacer les six voitures illustrées par de vraies photos dès que j'aurai des images sous licence.
 
 </Section>

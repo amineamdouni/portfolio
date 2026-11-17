@@ -1,14 +1,20 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. Français. */}
-
 <Section number="01" title="Le problème">
 
-<Todo>Qui avait le problème et pourquoi c'était important, en un ou deux paragraphes courts. Uniquement des faits tirés du rapport de build.</Todo>
+Les gens qui voyagent ont souvent de la place dans leurs bagages. Ceux qui doivent envoyer un colis à l'étranger paient cher ou attendent longtemps. DelivAir les met en relation : un voyageur publie son trajet, un expéditeur le trouve, ils se mettent d'accord par messagerie et suivent la livraison ensemble.
 
 </Section>
 
 <Section number="02" title="Ce que j'ai construit">
 
-<Todo>Ce que j'ai construit, à la première personne et au passé. Une décision discutable, et pourquoi je l'ai prise.</Todo>
+J'ai construit DelivAir seul, entre novembre 2022 et janvier 2023. C'est une application React Native (Expo) avec un serveur Node et PostgreSQL, un serveur de chat en temps réel et un petit tableau de bord d'administration.
+
+L'écran phare est l'accueil : un avion traverse des nuages pendant que l'application cherche des voyageurs entre deux villes, puis les résultats défilent sous forme de cartes. Autour, il y a l'onboarding, l'inscription, la publication d'un trajet avec recherche de vol, la liste des demandes, le chat, le suivi de livraison, les profils avec notes et avis, et les réglages.
+
+**Ce que montre cette démo.** J'ai reconstruit l'application pour le web avec la dernière version d'Expo, en gardant l'apparence d'origine et les 13 écrans qui valent la peine d'être montrés. Tout tourne dans votre navigateur avec des données d'exemple : les personnes, les vols et les messages sont inventés. Vos modifications restent dans ce navigateur, et « Reset demo » rétablit les données de départ.
+
+**Ce qui est simulé.** Aucun serveur ne tourne derrière la démo. Les réponses du chat sont scénarisées et signalées comme simulées. La recherche de vol interroge une courte liste de vols et d'aéroports d'exemple, pas un vrai service. Les appels, l'envoi de photo et la connexion sociale affichent une note à la place.
+
+Un choix discutable : j'ai raccourci la séquence d'animation de l'accueil (l'avion part à 0,8 seconde au lieu de 3, les résultats arrivent à 4,3 secondes au lieu de 7). Le visiteur arrive plus vite aux résultats, et toutes les étapes de la séquence restent présentes.
 
 </Section>
 
@@ -20,12 +26,18 @@
 
 <Section number="04" title="Sous le capot">
 
-<Todo>Stack et structure : les éléments qui comptent et un compromis.</Todo>
+La démo est une application Expo Router sur React Native Web, avec Reanimated pour les animations de l'accueil et un petit kit d'interface local qui reprend l'apparence de la bibliothèque d'origine. L'état vit dans un store zustand enregistré dans le navigateur sous une clé versionnée : changer les données d'exemple ne casse donc pas une session déjà enregistrée.
+
+Pendant le portage, j'ai corrigé les bogues visibles à l'écran : le plantage de « mot de passe oublié », le bouton « Unfriend » qui déconnectait, un plantage à l'ouverture d'une publication depuis les réglages, et les champs de départ et d'arrivée qui ne filtraient pas les résultats. Chaque animation est vérifiée en comparant des captures avant et après, et la suite Playwright échoue à la moindre erreur de console ou à toute requête qui sort de l'application. Le tableau de bord d'administration (utilisateurs, trajets, graphiques) n'est montré qu'en captures, avec des données simulées.
+
+Le compromis : l'animation de l'accueil a demandé le plus de travail pour tourner correctement dans un navigateur (flou, cartes en 3D, ombre mobile). J'ai gardé l'effet plutôt que de le remplacer par quelque chose de plus simple.
 
 </Section>
 
 <Section number="05" title="Résultat">
 
-<Todo>Résultats. Chaque chiffre a une base de comparaison et une source ; sinon, il est retiré.</Todo>
+La démo est en ligne et déroule tout le parcours sans serveur. Ses 9 tests Playwright passent : parcours principal, persistance, réinitialisation, animations et absence de requêtes réseau.
+
+**Ce que j'améliorerais.** Remplacer le chat scénarisé par le vrai serveur de sockets pour que deux visiteurs puissent se parler, et ajouter une carte pour le suivi, que la démo laisse de côté.
 
 </Section>

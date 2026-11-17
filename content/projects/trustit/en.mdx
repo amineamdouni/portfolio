@@ -1,14 +1,16 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. English. */}
-
 <Section number="01" title="The problem">
 
-<Todo>Who had the problem and why it mattered, in one or two short paragraphs. Facts from the build report only.</Todo>
+Fixing a phone or a laptop usually means finding a repair shop, explaining the fault, waiting without news and wondering what it will cost. Trust IT is a repair booking site for customers: pick your device, describe the problem, choose a repair centre, then follow the repair with a tracking code.
 
 </Section>
 
 <Section number="02" title="What I built">
 
-<Todo>What I built, in the first person and past tense. One decision someone could disagree with, and why I made it.</Todo>
+I built Trust IT as a solo project, from Figma designs: a Next.js site and a NestJS server. For this portfolio I rebuilt it on current versions, keeping the original design and the customer side only.
+
+**What this demo shows.** A booking wizard that walks from device type to brand, range, model and problem, with a fixed demo price in TND for each repair. Log in as the demo customer to see eight repairs, one at every stage, each with a timeline of events. Without logging in, you can track the sample code DEMO42 from the home page or the login page. Customers can also read offers, packages, the loyalty page, blogs and expert profiles, and post a short plain-text review.
+
+**What is simulated.** This is a demo with sample data. The demo customer is shared, so anything you add is visible to other visitors and is deleted every night. There is no sign-up: the sign-up screen explains that demo accounts are used and collects no email. Emails are written to a server log, not sent. The map is a static drawing, the contact details are fake, partner logos are generic and customer photos are initials. The first request after a quiet period can take up to a minute while the free server wakes up, and the site says so.
 
 </Section>
 
@@ -20,7 +22,11 @@
 
 <Section number="04" title="Under the hood">
 
-<Todo>Stack and structure: the parts that matter and one trade-off.</Todo>
+A pnpm monorepo with two apps: `apps/web` (Next.js 16, React 19, Tailwind) and `apps/api` (NestJS 11, Prisma 6, PostgreSQL). The original ran on Next.js 13 and NestJS 9.
+
+The decision I would defend: the browser never holds the API token. Sign-in goes through Next route handlers that set an httpOnly cookie, and a same-origin proxy adds the bearer token on the way to the API. The proxy forwards only an allowlist of path prefixes, and the API rejects paths that do not match its routes exactly.
+
+Other choices: database CHECK constraints for the rating (1 to 5), the comment length (500 characters), the IMEI (15 digits) and the tracking code (6 characters), so bad data fails at the lowest layer; a global limit of 60 requests a minute per visitor IP, with stricter limits on login, tracking and reviews; and a seed that empties and refills the tables, which doubles as the nightly reset (a GitHub Actions job at 03:00 UTC). The seed holds 28 catalogue devices, 5 repair centres, 6 experts and 18 repairs with 56 events.
 
 <Architecture />
 
@@ -28,12 +34,16 @@
 
 <Section number="05" title="API and backend">
 
-<Todo>How the API is organised: auth, validation, tests. Link to nothing private.</Todo>
+The API exposes health checks (with and without the database), login and a demo login that only works when demo mode is on, the customer's profile, the device catalogue, repair centres and experts, tracking by code, repair CRUD limited to the customer's own repairs, reviews and blogs. Blog content is sanitised when it is read. A global JWT guard protects everything except routes marked public, input is validated with a whitelist, and every error has the same shape: status, code and message.
+
+The API has 31 end-to-end tests (Jest and supertest, against a separate schema) covering login, repair creation, tracking, ownership, limits and the rate limit itself. Four Playwright tests run the site: the demo notice, tracking DEMO42, demo login, booking through the wizard, tracking the new code, and the mobile layout. CI runs lint, typecheck, tests, build and the browser tests on every push.
 
 </Section>
 
 <Section number="06" title="Result">
 
-<Todo>Outcomes. Every number needs a baseline and a source; a number without one is cut.</Todo>
+Both apps are deployed: the site on Vercel, the API on Render and the data on Neon. Lint, typecheck, build and all tests pass.
+
+**What I would improve.** Give the demo customer a private sandbox per visitor instead of one shared account, and add the repair-centre and expert side, which the original never had and the demo leaves out.
 
 </Section>

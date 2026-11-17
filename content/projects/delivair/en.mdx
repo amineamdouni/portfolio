@@ -1,14 +1,20 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. English. */}
-
 <Section number="01" title="The problem">
 
-<Todo>Who had the problem and why it mattered, in one or two short paragraphs. Facts from the build report only.</Todo>
+People who travel often have spare room in their luggage. People who need a package delivered to another country often pay a lot or wait a long time. DelivAir puts the two in touch: a traveller posts a trip, a sender finds them, they agree in chat and follow the delivery together.
 
 </Section>
 
 <Section number="02" title="What I built">
 
-<Todo>What I built, in the first person and past tense. One decision someone could disagree with, and why I made it.</Todo>
+I built DelivAir as a solo project between November 2022 and January 2023. It is a React Native (Expo) app with a Node and PostgreSQL server, a real-time chat server and a small admin dashboard.
+
+The signature screen is Home: an animated plane flies over clouds while the app searches for travellers between two cities, then shows the results as swipeable cards. Around it sit onboarding, sign-up, trip posting with a flight lookup, a list of requests, chat, delivery tracking, profiles with ratings and reviews, and settings.
+
+**What this demo shows.** I rebuilt the app for the web on the latest Expo SDK, keeping the original look and the 13 screens worth showing. It runs entirely in your browser on sample data: the people, flights and messages are made up. Your changes are saved in this browser only, and "Reset demo" restores the starting data.
+
+**What is simulated.** There is no server behind the demo. Chat replies are scripted and marked as simulated. The flight lookup searches a small list of sample flights and airports instead of a live flight service. Calls, photo upload and social login show a short note instead of working.
+
+One decision someone could disagree with: I cut the Home animation timeline (the plane starts at 0.8 seconds instead of 3, the results appear at 4.3 seconds instead of 7). A demo visitor reaches the results sooner, and every step of the sequence is still there.
 
 </Section>
 
@@ -20,12 +26,18 @@
 
 <Section number="04" title="Under the hood">
 
-<Todo>Stack and structure: the parts that matter and one trade-off.</Todo>
+The demo is an Expo Router app on React Native Web, with Reanimated for the Home animations and a small local UI kit that copies the look of the original component library. State lives in a zustand store saved to the browser under a versioned key, so a change to the sample data never breaks someone's saved session.
+
+While porting I fixed the bugs that showed on screen: the forgot-password crash, "Unfriend" signing you out, a crash when opening a post from Settings, and the From and To fields not filtering the results. Each animation is checked by comparing screenshots before and after, and the Playwright suite fails on any console error or any request that leaves the app. The admin dashboard (users, trips and charts) is shown as screenshots only, run against mocked data.
+
+The trade-off: the Home animation took the most work to make run smoothly in a browser, including the blur, the 3D rule cards and the moving shadow. I kept the effect rather than replacing it with a simpler one.
 
 </Section>
 
 <Section number="05" title="Result">
 
-<Todo>Outcomes. Every number needs a baseline and a source; a number without one is cut.</Todo>
+The demo is live and runs the full flow without a backend. Its 9 Playwright tests pass: main flow, persistence, reset, animations and the no-network check.
+
+**What I would improve.** Replace the scripted chat with the real socket server so two visitors can talk to each other, and add a map for tracking, which the demo leaves out.
 
 </Section>

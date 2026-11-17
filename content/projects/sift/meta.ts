@@ -1,13 +1,15 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
-// TODO (Wave 4): demoLogin with the public demo-only credentials, if the app has them.
+// Java API on a free host: a cold start can take 1 to 3 minutes, hence wakeMinutes: 3.
 const meta: ProjectMeta = {
   slug: "sift",
   category: "fullstack",
   title: "Sift",
-  summary: null,
+  summary: {
+    en: "Trello-style board app with roles, drag and drop and a Spring Boot API.",
+    fr: "Application de tableaux à la Trello avec rôles, glisser-déposer et API Spring Boot."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -15,22 +17,33 @@ const meta: ProjectMeta = {
   team: {
     kind: "solo"
   },
-  dates: null,
+  dates: {
+    start: "2025-08",
+    end: "2025-08"
+  },
   stack: [
     "Java",
     "Spring Boot",
     "PostgreSQL",
     "Flyway",
-    "React"
+    "React",
+    "TypeScript",
+    "Vite",
+    "TanStack Query",
+    "Tailwind CSS",
+    "dnd-kit",
+    "Testcontainers",
+    "Playwright"
   ],
-  demoUrl: null,
-  healthUrl: null,
+  demoUrl: "https://sift-demo-beta.vercel.app",
+  healthUrl: "https://sift-api-fglc.onrender.com/health",
   repo: {
     visibility: "private",
     url: null
   },
   liveUrl: null,
-  shots: [],
+  // TODO (shots batch 2/3): add screenshots with shotsFor("sift", [...]).
+  shots: shotsFor("sift", []),
   architecture: [
     {
       title: "Client",
@@ -65,9 +78,14 @@ const meta: ProjectMeta = {
       ]
     }
   ],
+  wakeMinutes: 3,
+  demoHint: {
+    en: "No password needed: use \"Log in as demo user\" in the app.",
+    fr: "Pas de mot de passe : utilisez « Se connecter en utilisateur de démo » dans l'application."
+  },
   featured: false,
   order: 3,
-  draft: true
+  draft: false,
 };
 
 export default meta;

@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "aka",
   category: "ecommerce",
   title: "AKA",
-  summary: null,
+  summary: {
+    en: "Early fashion online shop. Screenshots only.",
+    fr: "Première boutique de mode en ligne. Captures d'écran uniquement."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -14,9 +16,16 @@ const meta: ProjectMeta = {
   team: {
     kind: "solo"
   },
-  dates: null,
+  dates: {
+    start: "2022",
+    end: "2022"
+  },
   stack: [
-    "Express"
+    "Next.js",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "Bootstrap"
   ],
   demoUrl: null,
   healthUrl: null,
@@ -25,10 +34,15 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: null,
-  shots: [],
+  shots: shotsFor("aka", [
+    ["shop-desktop", "Shop page with the filter sidebar and the product grid.", "Page boutique avec la barre de filtres et la grille de produits."],
+    ["product-desktop", "Product page for a wool blend coat.", "Fiche produit d'un manteau en laine mélangée."],
+    ["home-desktop", "Home page hero.", "Bannière de la page d'accueil."],
+    ["shop-mobile", "Product grid on a phone.", "Grille de produits sur téléphone."],
+  ]),
   featured: false,
   order: 2,
-  draft: true
+  draft: false,
 };
 
 export default meta;

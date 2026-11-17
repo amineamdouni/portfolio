@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "elegante-design",
   category: "client",
   title: "Elegante Design",
-  summary: null,
+  summary: {
+    en: "Showcase site with a project gallery.",
+    fr: "Site vitrine avec une galerie de projets."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -23,10 +25,14 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: "https://elegante-design.vercel.app/",
-  shots: [],
+  shots: shotsFor("elegante-design", [
+    ["home-desktop", "Home page hero.", "Bannière de la page d'accueil."],
+    ["projects-desktop", "\"Découvrez nos projets\" gallery section.", "Section galerie « Découvrez nos projets »."],
+    ["home-mobile", "Home page on a phone.", "Page d'accueil sur téléphone."],
+  ]),
   featured: false,
   order: 8,
-  draft: true
+  draft: false,
 };
 
 export default meta;

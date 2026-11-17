@@ -1,4 +1,7 @@
+import { projects } from "../content/projects";
 import { expect, test } from "./fixtures";
+
+const backends = projects.map((p) => p.healthUrl).filter((u): u is string => !!u);
 
 const filters = [
   { key: "all", count: 18 },
@@ -24,6 +27,16 @@ test.describe("home", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "fr");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Développeur full-stack");
   });
+
+  for (const path of ["/en", "/fr", "/en/projects", "/fr/projects"]) {
+    test(`wakes no backend: ${path}`, async ({ page, external }) => {
+      await page.goto(path);
+      await page.waitForLoadState("networkidle");
+      // Any request to another origin already fails the test; check the backends by name too.
+      expect(external.requests.filter((u) => backends.some((b) => u.startsWith(new URL(b).origin)))).toEqual([]);
+      expect(external.requests).toEqual([]);
+    });
+  }
 
   test("redirects / to a locale", async ({ page }) => {
     await page.goto("/");
@@ -56,16 +69,77 @@ test.describe("projects", () => {
   });
 });
 
+test.describe("every project page", () => {
+  for (const project of projects) {
+    for (const locale of ["en", "fr"] as const) {
+      test(`${locale}: ${project.slug}`, async ({ page, external }) => {
+        // Only this project's own demo and backend may be contacted.
+        if (project.category === "mobile" && project.demoUrl) external.allow.push(project.demoUrl);
+        if (project.healthUrl) external.allow.push(project.healthUrl);
+        await page.goto(`/${locale}/projects/${project.slug}`);
+        await expect(page.locator("html")).toHaveAttribute("lang", locale);
+        await expect(page.getByRole("heading", { level: 1 })).toHaveText(project.title);
+        await expect(page.locator(`[data-template="${project.category}"]`)).toBeVisible();
+        await expect(page.getByText("TODO", { exact: true })).toHaveCount(0);
+        await page.waitForLoadState("networkidle");
+        for (const url of external.requests) {
+          expect([project.healthUrl, project.demoUrl].some((own) => own && url.startsWith(own)), url).toBe(true);
+        }
+      });
+    }
+  }
+});
+
 test.describe("project templates", () => {
-  test("mobile: phone frame with sample data badge", async ({ page }) => {
+  for (const project of projects.filter((p) => p.category === "mobile")) {
+    test(`mobile: phone frame loads the ${project.slug} demo`, async ({ page, external }) => {
+      external.allow.push(project.demoUrl!);
+      const request = page.waitForRequest((r) => r.url().startsWith(project.demoUrl!));
+      await page.goto(`/en/projects/${project.slug}`);
+      await expect(page.locator("figure").getByText("Sample data", { exact: true })).toBeVisible();
+      const iframe = page.locator("figure iframe");
+      await expect(iframe).toHaveAttribute("src", project.demoUrl!);
+      await request;
+      // Loaded: the spinner and the fallback are gone, the iframe stays.
+      await expect(page.locator("figure").getByRole("status")).toHaveCount(0);
+      await expect(iframe).toBeVisible();
+      expect(external.requests.every((u) => u.startsWith(project.demoUrl!))).toBe(true);
+    });
+  }
+
+  test("mobile: try-this steps", async ({ page, external }) => {
+    external.allow.push("https://delivair-demo.vercel.app");
     await page.goto("/en/projects/delivair");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("DelivAir");
-    await expect(page.locator('[data-template="mobile"]')).toBeVisible();
-    await expect(page.locator("figure").getByText("Sample data", { exact: true })).toBeVisible();
-    await expect(page.getByText("TODO").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Try this" })).toBeVisible();
+    await expect(page.locator('[data-template="mobile"] ol li')).toHaveCount(3);
   });
 
-  test("full-stack: demo notice, live demo button, diagram", async ({ page }) => {
+  for (const project of projects.filter((p) => p.category === "fullstack")) {
+    test(`full-stack: ${project.slug} wakes only its own backend`, async ({ page, external }) => {
+      external.allow.push(project.healthUrl!);
+      // Hold the answer so the waking state is visible.
+      let release!: () => void;
+      const held = new Promise<void>((r) => (release = r));
+      await page.route(project.healthUrl!, async (route) => {
+        await held;
+        await route.fallback();
+      });
+      const ping = page.waitForRequest(project.healthUrl!);
+      await page.goto(`/en/projects/${project.slug}`);
+      await ping;
+      const minutes = project.wakeMinutes ?? 1;
+      await expect(page.getByText(`Waking the demo server (up to ${minutes} min)`)).toBeVisible();
+      release();
+      const open = page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" });
+      await expect(open).toHaveAttribute("href", project.demoUrl!);
+      await open.hover();
+      await page.waitForLoadState("networkidle");
+      expect(new Set(external.requests)).toEqual(new Set([project.healthUrl!]));
+    });
+  }
+
+  test("full-stack: demo notice, live demo button, diagram", async ({ page, external }) => {
+    external.allow.push("https://trustit-api.onrender.com/health");
     await page.goto("/en/projects/trustit");
     await expect(page.locator('[data-template="fullstack"]')).toBeVisible();
     await expect(page.getByTestId("demo-notice")).toContainText("deleted every night");

@@ -133,7 +133,7 @@
     "reload": "Recharger la démo",
     "frameTitle": "Démo de {title}, dans un cadre de la taille d'un téléphone",
     "openLive": "Ouvrir la démo",
-    "waking": "Réveil du serveur de démo (jusqu'à 1 min)",
+    "waking": "Réveil du serveur de démo (jusqu'à {minutes} min)",
     "wakingCaption": "La démo tourne sur un hébergement gratuit qui se met en veille. Le bouton devient actif dès que le serveur répond.",
     "readyCaption": "S'ouvre dans un nouvel onglet.",
     "wakeFailedTitle": "Le serveur de démo n'a pas répondu",

@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ExternalLink, RotateCw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Alert, Spinner, TodoMark, buttonClass, iconProps } from "./ui";
+import { Alert, Spinner, buttonClass, iconProps } from "./ui";
 
-const DEADLINE_MS = 90_000;
 const RETRY_MS = 3_000;
 const REQUEST_TIMEOUT_MS = 65_000;
+/** Keep retrying a minute past the announced wake time before showing the error. */
+const deadlineFor = (minutes: number) => Math.max(90_000, (minutes + 1) * 60_000);
 /** Re-ping on hover/focus when the last answer is older than this (keeps the host awake). */
 const STALE_MS = 5 * 60_000;
 
@@ -19,7 +20,16 @@ type State = "waking" | "ready" | "failed";
  * request while the server starts, so one answered request means it is up.
  * `no-cors`: an opaque answer is enough, no CORS setup needed on /health.
  */
-export function LiveDemoButton({ demoUrl, healthUrl }: { demoUrl: string | null; healthUrl: string | null }) {
+export function LiveDemoButton({
+  demoUrl,
+  healthUrl,
+  wakeMinutes = 1,
+}: {
+  demoUrl: string;
+  healthUrl: string | null;
+  /** Announced wake-up time ("up to N min"); a slow (e.g. JVM) backend sets more. */
+  wakeMinutes?: number;
+}) {
   const t = useTranslations("demo");
   const [state, setState] = useState<State>(healthUrl ? "waking" : "ready");
   const lastOk = useRef(0);
@@ -29,7 +39,7 @@ export function LiveDemoButton({ demoUrl, healthUrl }: { demoUrl: string | null;
     if (!healthUrl || running.current) return;
     if (Date.now() - lastOk.current < STALE_MS) return;
     running.current = true;
-    const deadline = Date.now() + DEADLINE_MS;
+    const deadline = Date.now() + deadlineFor(wakeMinutes);
     while (Date.now() < deadline) {
       try {
         await fetch(healthUrl, {
@@ -47,26 +57,13 @@ export function LiveDemoButton({ demoUrl, healthUrl }: { demoUrl: string | null;
     }
     running.current = false;
     setState((s) => (s === "ready" ? s : "failed"));
-  }, [healthUrl]);
+  }, [healthUrl, wakeMinutes]);
 
   useEffect(() => {
     // Async on purpose: the wake loop updates state only after the network answers.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     void wake();
   }, [wake]);
-
-  if (!demoUrl) {
-    return (
-      <div data-testid="live-demo">
-        <button type="button" disabled className={buttonClass("secondary", "md", true)}>
-          {t("notOnline")}
-        </button>
-        <p className="mt-2 text-sm text-text-muted">
-          <TodoMark>{t("notOnlineCaption")}</TodoMark>
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div data-testid="live-demo" onPointerEnter={() => void wake()} onFocusCapture={() => void wake()}>
@@ -83,7 +80,7 @@ export function LiveDemoButton({ demoUrl, healthUrl }: { demoUrl: string | null;
         <>
           <button type="button" disabled aria-busy="true" className={`${buttonClass("primary", "md", true)} cursor-progress`}>
             <Spinner />
-            {t("waking")}
+            {t("waking", { minutes: wakeMinutes })}
           </button>
           <p className="mt-2 text-sm text-text-muted" role="status">
             {t("wakingCaption")}

@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "digitalynx",
   category: "client",
   title: "Digitalynx",
-  summary: null,
+  summary: {
+    en: "Single-page site for a digital marketing agency. Live demo copy.",
+    fr: "Site d'une page pour une agence de marketing digital. Copie de démonstration en ligne."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -16,19 +18,28 @@ const meta: ProjectMeta = {
   },
   dates: null,
   stack: [
-    "Next.js"
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Radix UI",
+    "Playwright"
   ],
-  demoUrl: null,
+  demoUrl: "https://digitalynx-ten.vercel.app",
   healthUrl: null,
   repo: {
     visibility: "private",
     url: null
   },
   liveUrl: null,
-  shots: [],
+  shots: shotsFor("digitalynx", [
+    ["home-desktop", "Home page hero with the video poster.", "Bannière de la page d'accueil avec l'image de la vidéo."],
+    ["services-desktop", "\"Nos services\" section with the service cards.", "Section « Nos services » avec les cartes de services."],
+    ["home-mobile", "Home page on a phone.", "Page d'accueil sur téléphone."],
+  ]),
   featured: false,
   order: 1,
-  draft: true
+  draft: false,
 };
 
 export default meta;

@@ -1,12 +1,14 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
 const meta: ProjectMeta = {
   slug: "real-estate",
   category: "client",
   title: "Real estate site",
-  summary: null,
+  summary: {
+    en: "Property listings site built on a template.",
+    fr: "Site d'annonces immobilières construit sur un modèle."
+  },
   role: {
     en: "Solo project",
     fr: "Projet solo"
@@ -23,10 +25,14 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: "https://real-estate-black-zeta.vercel.app/",
-  shots: [],
+  shots: shotsFor("real-estate", [
+    ["home-desktop", "Home page hero.", "Bannière de la page d'accueil."],
+    ["properties-desktop", "Properties page with filters and listing cards.", "Page des biens avec filtres et fiches."],
+    ["home-mobile", "Home page on a phone.", "Page d'accueil sur téléphone."],
+  ]),
   featured: false,
   order: 7,
-  draft: true
+  draft: false,
 };
 
 export default meta;

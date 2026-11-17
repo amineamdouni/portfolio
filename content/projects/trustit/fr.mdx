@@ -1,14 +1,16 @@
-{/* TODO (Wave 4): replace every <Todo> with the real write-up. Français. */}
-
 <Section number="01" title="Le problème">
 
-<Todo>Qui avait le problème et pourquoi c'était important, en un ou deux paragraphes courts. Uniquement des faits tirés du rapport de build.</Todo>
+Faire réparer un téléphone ou un ordinateur, c'est souvent chercher un atelier, expliquer la panne, attendre sans nouvelles et se demander combien ça va coûter. Trust IT est un site de réservation de réparations pour les clients : on choisit son appareil, on décrit le problème, on choisit un centre de réparation, puis on suit la réparation avec un code.
 
 </Section>
 
 <Section number="02" title="Ce que j'ai construit">
 
-<Todo>Ce que j'ai construit, à la première personne et au passé. Une décision discutable, et pourquoi je l'ai prise.</Todo>
+J'ai construit Trust IT seul, à partir de maquettes Figma : un site Next.js et un serveur NestJS. Pour ce portfolio, je l'ai reconstruit avec des versions actuelles, en gardant le design d'origine et uniquement le côté client.
+
+**Ce que montre cette démo.** Un assistant de réservation qui va du type d'appareil à la marque, à la gamme, au modèle puis au problème, avec un prix de démo fixe en TND pour chaque réparation. Connectez-vous en tant que client de démo pour voir huit réparations, une à chaque étape, chacune avec sa chronologie. Sans vous connecter, vous pouvez suivre le code d'exemple DEMO42 depuis l'accueil ou la page de connexion. Les clients peuvent aussi consulter les offres, les forfaits, la page de fidélité, les articles et les profils d'experts, et publier un court avis en texte brut.
+
+**Ce qui est simulé.** C'est une démo avec des données d'exemple. Le client de démo est partagé : tout ce que vous ajoutez est visible par les autres visiteurs et supprimé chaque nuit. Il n'y a pas d'inscription : l'écran d'inscription explique que des comptes de démo sont utilisés et ne collecte aucun e-mail. Les e-mails sont écrits dans un journal du serveur, pas envoyés. La carte est un dessin statique, les coordonnées sont fictives, les logos de partenaires sont génériques et les photos de clients sont des initiales. La première requête après une période d'inactivité peut prendre jusqu'à une minute, le temps que le serveur gratuit se réveille, et le site l'indique.
 
 </Section>
 
@@ -20,7 +22,11 @@
 
 <Section number="04" title="Sous le capot">
 
-<Todo>Stack et structure : les éléments qui comptent et un compromis.</Todo>
+Un monorepo pnpm avec deux applications : `apps/web` (Next.js 16, React 19, Tailwind) et `apps/api` (NestJS 11, Prisma 6, PostgreSQL). L'original tournait sur Next.js 13 et NestJS 9.
+
+Le choix que je défendrais : le navigateur ne détient jamais le jeton de l'API. La connexion passe par des route handlers Next qui posent un cookie httpOnly, et un proxy de même origine ajoute le jeton bearer en route vers l'API. Le proxy ne transmet qu'une liste blanche de préfixes de chemins, et l'API rejette les chemins qui ne correspondent pas exactement à ses routes.
+
+Autres choix : des contraintes CHECK en base pour la note (1 à 5), la longueur du commentaire (500 caractères), l'IMEI (15 chiffres) et le code de suivi (6 caractères), pour que les mauvaises données échouent au plus bas niveau ; une limite globale de 60 requêtes par minute et par IP de visiteur, avec des limites plus strictes sur la connexion, le suivi et les avis ; et un seed qui vide et remplit les tables, qui sert aussi de réinitialisation nocturne (une tâche GitHub Actions à 03:00 UTC). Le seed contient 28 appareils au catalogue, 5 centres de réparation, 6 experts et 18 réparations avec 56 événements.
 
 <Architecture />
 
@@ -28,12 +34,16 @@
 
 <Section number="05" title="API et backend">
 
-<Todo>Organisation de l'API : authentification, validation, tests. Aucun lien vers du code privé.</Todo>
+L'API expose des vérifications de santé (avec et sans base de données), la connexion et une connexion de démo qui ne fonctionne que si le mode démo est activé, le profil du client, le catalogue d'appareils, les centres et les experts, le suivi par code, le CRUD des réparations limité aux réparations du client, les avis et les articles. Le contenu des articles est assaini à la lecture. Un garde JWT global protège tout sauf les routes marquées publiques, les entrées sont validées par liste blanche, et toutes les erreurs ont la même forme : statut, code et message.
+
+L'API compte 31 tests de bout en bout (Jest et supertest, sur un schéma séparé) qui couvrent la connexion, la création de réparation, le suivi, la propriété des données, les limites et la limitation de débit elle-même. Quatre tests Playwright pilotent le site : l'avis de démo, le suivi de DEMO42, la connexion de démo, la réservation via l'assistant, le suivi du nouveau code et la mise en page mobile. La CI lance lint, typecheck, tests, build et tests navigateur à chaque push.
 
 </Section>
 
 <Section number="06" title="Résultat">
 
-<Todo>Résultats. Chaque chiffre a une base de comparaison et une source ; sinon, il est retiré.</Todo>
+Les deux applications sont déployées : le site sur Vercel, l'API sur Render et les données sur Neon. Lint, typecheck, build et tous les tests passent.
+
+**Ce que j'améliorerais.** Donner à chaque visiteur un bac à sable privé plutôt qu'un compte de démo partagé, et ajouter le côté centre de réparation et expert, que l'original n'avait pas et que la démo laisse de côté.
 
 </Section>

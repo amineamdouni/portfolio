@@ -2,7 +2,7 @@
 
 The portfolio site of Amine Amdouni, full-stack developer: mobile apps, full-stack products, e-commerce projects and client sites, each with an interactive demo, a live demo, screenshots or a link to the live site. English and French, light and dark.
 
-Status: skeleton. Every page, component and translation is in place; project write-ups, screenshots and demo URLs are placeholders marked **TODO**.
+Status: content in place. All 18 write-ups (EN/FR), demo and live URLs are set. Projects still waiting for screenshots (see `shots: shotsFor("<slug>", [])` in their `meta.ts`) show marked placeholder images.
 
 ## Stack
 
@@ -78,9 +78,13 @@ Each project has a `meta.ts`:
 | `healthUrl` | the backend's `/health`, woken on that project's page only |
 | `repo` | `{ visibility, url }`, visibility is `public` or `private` |
 | `liveUrl` | client sites: the live site |
-| `shots` | screenshots: `src`, `kind` (desktop/mobile), `width`, `height`, `alt` and optional `caption` in both languages |
+| `shots` | `shotsFor("<slug>", [[name, altEn, altFr], ...])`: files in `public/shots/<slug>/`, sizes from `shot-sizes.json`, portrait = mobile; the first one is the card cover |
 | `architecture` | full-stack only: columns for the SVG diagram |
 | `demoLogin` | full-stack only: public demo-only credentials to show |
+| `demoHint` | full-stack: how to get in without a password (demo-login buttons) |
+| `links` | full-stack: extra links next to the live demo (admin app, client's live site) |
+| `wakeMinutes` | full-stack: announced backend wake time, default 1 (Sift: 3, JVM cold start) |
+| `tryThis` | mobile: three short steps shown next to the phone frame |
 | `featured`, `order`, `draft` | home page selection, order in the category, draft badge |
 
 The MDX write-up uses these components: `<Section number="01" title="…">`, `<Todo>` (visible placeholder), `<Screens />` (gallery from `shots`) and `<Architecture />` (diagram from `architecture`). Until a project has shots, its gallery shows marked placeholder images.
@@ -94,10 +98,10 @@ pnpm screenshots                  # every target
 pnpm screenshots smilescan sift   # some slugs
 ```
 
-Targets and routes live in `scripts/screenshots.config.ts`. For each route and viewport it writes `public/shots/<slug>/<route>-<viewport>.png` and `.webp`. Desktop is 1440 × 900; mobile is 390 × 844 at 2x. Cookie banners are declined, never accepted (`declineCookieBanner`); if no decline button exists the run warns so the shot can be checked. Then reference the files in that project's `meta.ts` `shots`.
+Targets and routes live in `scripts/screenshots.config.ts`. For each route and viewport it writes `public/shots/<slug>/<route>-<viewport>.png` and `.webp`. Desktop is 1440 × 900; mobile is 390 × 844 at 2x. Cookie banners are declined, never accepted (`declineCookieBanner`); if no decline button exists the run warns so the shot can be checked. Then run `pnpm shots:manifest` (writes `content/projects/shot-sizes.json`) and add `[name, altEn, altFr]` lines to that project's `shotsFor(...)` in `meta.ts`. A listed name without a file fails the build.
 
 ## Demo behaviour
 
 - **PhoneFrame**: from 768px wide, the demo runs in an iframe at 390 × 844 scaled into a fixed-ratio box (no layout shift). Under 768px there is no iframe, only an "Open demo full screen" button. If the embed does not load within 20 s it falls back to a screenshot and the gallery.
-- **LiveDemoButton**: fetches the project's `/health` (no-cors) on page load and on hover or focus, shows "Waking the demo server (up to 1 min)" until it answers, then becomes the link. It never wakes other projects' backends.
+- **LiveDemoButton**: fetches the project's `/health` (no-cors) on page load and on hover or focus, shows "Waking the demo server (up to N min)" (`wakeMinutes`, default 1) until it answers, then becomes the link; it keeps retrying for one minute past N. With no `demoUrl` the button is hidden. It never wakes other projects' backends.
 - **DemoNotice**: "This is a demo with sample data. Anything you add is visible to other visitors and is deleted every night. Please don't enter real personal information." (French version in `messages/fr.json`.)

@@ -67,6 +67,14 @@ export type ProjectMeta = {
   architecture?: DiagramColumn[];
   /** Demo login shown next to a full-stack demo (public demo-only credentials). */
   demoLogin?: { label: Localized; value: string }[];
+  /** Full-stack: how long the backend can take to wake, in minutes (default 1). */
+  wakeMinutes?: number;
+  /** Full-stack: how to get in when there is no password (e.g. a "Log in as demo user" button). */
+  demoHint?: Localized;
+  /** Full-stack: more links next to the live demo (admin app, the client's live site). */
+  links?: { label: Localized; url: string }[];
+  /** Mobile: short steps that show the main flow, in order. */
+  tryThis?: { en: string[]; fr: string[] };
   /** Shown on Home under "Selected work". */
   featured?: boolean;
   /** Sort order inside a category (lower first). */

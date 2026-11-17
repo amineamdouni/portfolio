@@ -1,8 +1,6 @@
+import { shotsFor } from "../shots";
 import type { ProjectMeta } from "../types";
 
-// TODO (Wave 4): fill summary/role/dates where null, demoUrl, healthUrl, liveUrl, shots.
-// No invented facts: leave a field null until a build report confirms it.
-// TODO (Wave 4): demoLogin with the public demo-only credentials, if the app has them.
 const meta: ProjectMeta = {
   slug: "nexus",
   category: "fullstack",
@@ -24,19 +22,24 @@ const meta: ProjectMeta = {
   },
   stack: [
     "Next.js",
+    "React",
+    "Tailwind CSS",
     "NestJS",
     "Prisma",
     "PostgreSQL",
-    "next-intl"
+    "next-intl",
+    "TypeScript",
+    "Playwright"
   ],
-  demoUrl: null,
-  healthUrl: null,
+  demoUrl: "https://nexus-demo-henna.vercel.app",
+  healthUrl: "https://nexus-api-ev6o.onrender.com/health",
   repo: {
     visibility: "private",
     url: null
   },
   liveUrl: null,
-  shots: [],
+  // TODO (shots batch 2/3): add screenshots with shotsFor("nexus", [...]).
+  shots: shotsFor("nexus", []),
   architecture: [
     {
       title: "Client",
@@ -88,9 +91,13 @@ const meta: ProjectMeta = {
       ]
     }
   ],
+  demoHint: {
+    en: "No password needed: the login page has three buttons, Log in as Admin, Supervisor or Student.",
+    fr: "Pas de mot de passe : la page de connexion propose trois boutons, Admin, Encadrant ou Étudiant."
+  },
   featured: true,
   order: 4,
-  draft: true
+  draft: false,
 };
 
 export default meta;

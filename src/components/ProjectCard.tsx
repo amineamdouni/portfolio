@@ -11,7 +11,8 @@ export async function ProjectCard({ project, headingLevel = 3 }: { project: Proj
   const badge = badgeFor(project);
   const summary = pick(project.summary, locale);
   const role = pick(project.role, locale);
-  const cover = project.shots.find((s) => s.kind === "desktop") ?? project.shots[0];
+  // The first screenshot in meta.ts is the cover; phone screens are shown whole.
+  const cover = project.shots[0];
   const Heading = headingLevel === 2 ? "h2" : "h3";
   const shown = project.stack.slice(0, 4);
   const more = project.stack.length - shown.length;
@@ -30,13 +31,13 @@ export async function ProjectCard({ project, headingLevel = 3 }: { project: Proj
             alt=""
             fill
             sizes="(min-width: 1200px) 380px, (min-width: 768px) 50vw, 100vw"
-            className="object-cover object-top"
+            className={cover.kind === "mobile" ? "bg-surface-sunken object-contain" : "object-cover object-top"}
             unoptimized={cover.src.endsWith(".svg")}
           />
         ) : (
           <div className="hatch flex size-full items-center justify-center">
             <span className="rounded-xs bg-surface px-2 py-[3px] font-mono text-xs text-text-muted">
-              {t("project.todo")} · {project.title}
+              {project.title}
             </span>
           </div>
         )}

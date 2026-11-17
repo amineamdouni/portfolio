@@ -55,26 +55,27 @@ export async function ProjectHeader({ project }: { project: ProjectMeta }) {
         {summary ?? <TodoMark>{t("project.todoSummary")}</TodoMark>}
       </p>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-5 border-t pt-5 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:gap-6 md:pt-7">
-        {facts.map((f) => (
-          <div key={f.label}>
-            <dt className="eyebrow mb-1 md:mb-1.5">{f.label}</dt>
-            <dd className="text-base font-medium">{f.value ?? <TodoMark>{t("project.todoValue")}</TodoMark>}</dd>
-          </div>
-        ))}
-        <div className="col-span-full md:col-span-2">
-          <dt className="eyebrow mb-2">{t("project.stack")}</dt>
-          <dd className="flex flex-wrap gap-1.5">
-            {project.stack.length > 0 ? (
-              project.stack.map((s) => (
+        {/* Unknown facts are left out rather than guessed. */}
+        {facts
+          .filter((f) => f.value)
+          .map((f) => (
+            <div key={f.label}>
+              <dt className="eyebrow mb-1 md:mb-1.5">{f.label}</dt>
+              <dd className="text-base font-medium">{f.value}</dd>
+            </div>
+          ))}
+        {project.stack.length > 0 && (
+          <div className="col-span-full md:col-span-2">
+            <dt className="eyebrow mb-2">{t("project.stack")}</dt>
+            <dd className="flex flex-wrap gap-1.5">
+              {project.stack.map((s) => (
                 <Tag key={s} size="md">
                   {s}
                 </Tag>
-              ))
-            ) : (
-              <TodoMark>{t("project.todoValue")}</TodoMark>
-            )}
-          </dd>
-        </div>
+              ))}
+            </dd>
+          </div>
+        )}
       </dl>
     </header>
   );
