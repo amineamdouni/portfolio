@@ -6,14 +6,12 @@ A car business that rents and sells vehicles needs two things: a public site whe
 
 <Section number="02" title="What I built">
 
-I built the system as a solo project for the client: a NestJS API, a customer site and an admin dashboard. For this portfolio I rebuilt all three parts on current versions and put them online with sample data.
+I built the system as a solo project for the client: a NestJS API, a customer site and an admin dashboard.
 
-**What this demo shows.**
+**What it covers.**
 
-- The customer site, in French as the original: cars to rent and for sale, filters by category, text and dates, a car page with prices, a photo gallery and an availability check that returns the price from the API, then a rental request that gives you a reference. Cars for sale have a contact button.
-- The admin dashboard, in French: log in as the demo admin with one button, see counters, create, edit and delete cars, manage photos (upload, choose the main one, remove), and work through reservations with only the valid status changes allowed.
-
-**What is simulated.** The data is a seed of 12 cars (7 to rent, 4 for sale, 1 archived), 24 photos, 20 bookings and 6 contact requests, with invented people and `example.test` emails. Visitors can add and delete, so changes are visible to others and wiped every night, and uploaded photos are removed at the reset. Emails are only written to the server log. Six of the cars use photos from the original site, and the other six use generated illustrations. Contact details are fake, the map is a placeholder and the hero videos are poster images. The free server sleeps when idle, so the first request can take up to a minute.
+- The customer site, in French: cars to rent and for sale, filters by category, text and dates, a car page with prices, a photo gallery and an availability check that returns the price from the API, then a rental request that gives you a reference. Cars for sale have a contact button.
+- The admin dashboard, in French: log in, see counters, create, edit and delete cars, manage photos (upload, choose the main one, remove), and work through reservations with only the valid status changes allowed.
 
 </Section>
 
@@ -25,7 +23,7 @@ I built the system as a solo project for the client: a NestJS API, a customer si
 
 <Section number="04" title="Under the hood">
 
-A pnpm monorepo with `apps/api` (NestJS 11, Prisma 6, PostgreSQL), `apps/site` and `apps/admin` (both Next.js 16, the site with Tailwind 4). The original ran on NestJS 10 and Next.js 14.
+A pnpm monorepo with `apps/api` (NestJS 11, Prisma 6, PostgreSQL), `apps/site` and `apps/admin` (both Next.js 16, the site with Tailwind 4).
 
 Two decisions worth a look:
 
@@ -42,14 +40,12 @@ Admin sessions use an httpOnly cookie through a same-origin proxy. Each admin ha
 
 Routes cover cars (public list and detail, archived cars hidden), availability, rentals (public create, lookup by reference and email, admin list and status changes), contact requests, admin stats and car CRUD, and photo upload. Uploads are limited to 2 MB, JPEG, PNG or WebP checked by file signature, 6 per car and 40 in total, and stored in the database. Throttling is 60 requests a minute per IP across the API, with a stricter 10 a minute on login, booking and contact.
 
-Tests: 17 unit tests for pricing, 57 end-to-end API tests (availability, parallel bookings, auth and forged tokens, car CRUD, upload limits, a 413 on large bodies, CORS, the rate limit), and Playwright tests on the site and the admin (3 each). I also removed a guard on purpose to check the tests fail without it: dropping the month cap, the row lock and the token-purpose check each broke a test. CI runs everything on a Postgres service, and a GitHub Actions job resets the data at 03:00 UTC.
+Tests: 17 unit tests for pricing, 57 end-to-end API tests (availability, parallel bookings, auth and forged tokens, car CRUD, upload limits, a 413 on large bodies, CORS, the rate limit), and Playwright tests on the site and the admin (3 each). I also removed a guard on purpose to check the tests fail without it: dropping the month cap, the row lock and the token-purpose check each broke a test. CI runs everything on a Postgres service.
 
 </Section>
 
 <Section number="06" title="Result">
 
-The rebuild added authentication on the admin and rental routes, tests, rate limits and safer defaults, with a reset flow that can be run again at any time.
-
-**What I would improve.** Add per-car page titles and a proper not-found page rendered on the server, which I left out, and replace the six illustrated cars with real photos once I have licensed ones.
+**What I would improve.** Add per-car page titles and a proper not-found page rendered on the server, which I left out.
 
 </Section>

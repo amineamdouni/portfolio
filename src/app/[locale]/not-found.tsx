@@ -8,7 +8,6 @@ export default function NotFound() {
   const links = [
     { href: "/projects", label: t("nav.projects") },
     { href: "/about", label: t("nav.about") },
-    { href: "/contact", label: t("nav.contact") },
   ] as const;
 
   return (

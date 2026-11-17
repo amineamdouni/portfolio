@@ -6,14 +6,12 @@ Une entreprise qui loue et vend des voitures a besoin de deux choses : un site p
 
 <Section number="02" title="Ce que j'ai construit">
 
-J'ai construit le système seul pour le client : une API NestJS, un site client et un tableau de bord d'administration. Pour ce portfolio, j'ai reconstruit les trois parties avec des versions actuelles et je les ai mises en ligne avec des données d'exemple.
+J'ai construit le système seul pour le client : une API NestJS, un site client et un tableau de bord d'administration.
 
-**Ce que montre cette démo.**
+**Ce qu'il couvre.**
 
-- Le site client, en français comme l'original : voitures à louer et à vendre, filtres par catégorie, texte et dates, une page par voiture avec les prix, une galerie de photos et une vérification de disponibilité qui renvoie le prix calculé par l'API, puis une demande de location qui donne une référence. Les voitures à vendre ont un bouton de contact.
-- Le tableau de bord, en français : connexion en administrateur de démo en un clic, compteurs, création, modification et suppression de voitures, gestion des photos (envoi, choix de la principale, suppression), et traitement des réservations avec uniquement les changements de statut valides.
-
-**Ce qui est simulé.** Les données viennent d'un seed de 12 voitures (7 à louer, 4 à vendre, 1 archivée), 24 photos, 20 réservations et 6 demandes de contact, avec des personnes inventées et des e-mails en `example.test`. Les visiteurs peuvent ajouter et supprimer : les changements sont visibles par les autres et effacés chaque nuit, et les photos envoyées sont supprimées à la réinitialisation. Les e-mails sont seulement écrits dans le journal du serveur. Six voitures utilisent des photos du site d'origine, les six autres des illustrations générées. Les coordonnées sont fictives, la carte est un emplacement réservé et les vidéos de l'accueil sont des images d'affiche. Le serveur gratuit s'endort quand il est inactif : la première requête peut prendre jusqu'à une minute.
+- Le site client, en français : voitures à louer et à vendre, filtres par catégorie, texte et dates, une page par voiture avec les prix, une galerie de photos et une vérification de disponibilité qui renvoie le prix calculé par l'API, puis une demande de location qui donne une référence. Les voitures à vendre ont un bouton de contact.
+- Le tableau de bord, en français : connexion, compteurs, création, modification et suppression de voitures, gestion des photos (envoi, choix de la principale, suppression), et traitement des réservations avec uniquement les changements de statut valides.
 
 </Section>
 
@@ -25,7 +23,7 @@ J'ai construit le système seul pour le client : une API NestJS, un site client 
 
 <Section number="04" title="Sous le capot">
 
-Un monorepo pnpm avec `apps/api` (NestJS 11, Prisma 6, PostgreSQL), `apps/site` et `apps/admin` (tous deux en Next.js 16, le site avec Tailwind 4). L'original tournait sur NestJS 10 et Next.js 14.
+Un monorepo pnpm avec `apps/api` (NestJS 11, Prisma 6, PostgreSQL), `apps/site` et `apps/admin` (tous deux en Next.js 16, le site avec Tailwind 4).
 
 Deux décisions à regarder :
 
@@ -42,14 +40,12 @@ Les sessions d'administration utilisent un cookie httpOnly via un proxy de même
 
 Les routes couvrent les voitures (liste et détail publics, voitures archivées masquées), la disponibilité, les locations (création publique, recherche par référence et e-mail, liste et changements de statut pour l'administrateur), les demandes de contact, les statistiques et le CRUD des voitures, et l'envoi de photos. Les envois sont limités à 2 Mo, JPEG, PNG ou WebP vérifiés par leur signature, 6 par voiture et 40 au total, et stockés en base. La limitation est de 60 requêtes par minute et par IP sur toute l'API, avec 10 par minute sur la connexion, la réservation et le contact.
 
-Tests : 17 tests unitaires pour les tarifs, 57 tests de bout en bout de l'API (disponibilité, réservations parallèles, authentification et faux jetons, CRUD des voitures, limites d'envoi, un 413 sur les gros corps de requête, CORS, limitation de débit), et des tests Playwright sur le site et l'administration (3 chacun). J'ai aussi retiré volontairement certaines protections pour vérifier que les tests échouent sans elles : retirer le plafond mensuel, le verrou de ligne ou la vérification de l'usage du jeton casse chacun un test. La CI exécute tout sur un service Postgres, et une tâche GitHub Actions réinitialise les données à 03:00 UTC.
+Tests : 17 tests unitaires pour les tarifs, 57 tests de bout en bout de l'API (disponibilité, réservations parallèles, authentification et faux jetons, CRUD des voitures, limites d'envoi, un 413 sur les gros corps de requête, CORS, limitation de débit), et des tests Playwright sur le site et l'administration (3 chacun). J'ai aussi retiré volontairement certaines protections pour vérifier que les tests échouent sans elles : retirer le plafond mensuel, le verrou de ligne ou la vérification de l'usage du jeton casse chacun un test. La CI exécute tout sur un service Postgres.
 
 </Section>
 
 <Section number="06" title="Résultat">
 
-La reconstruction a ajouté l'authentification sur l'administration et les routes de location, des tests, une limitation de débit et des valeurs par défaut plus sûres, avec un flux de réinitialisation qu'on peut relancer à tout moment.
-
-**Ce que j'améliorerais.** Ajouter des titres de page par voiture et une vraie page introuvable rendue côté serveur, que j'ai laissées de côté, et remplacer les six voitures illustrées par de vraies photos dès que j'aurai des images sous licence.
+**Ce que j'améliorerais.** Ajouter des titres de page par voiture et une vraie page introuvable rendue côté serveur, que j'ai laissées de côté.
 
 </Section>

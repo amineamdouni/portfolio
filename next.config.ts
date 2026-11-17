@@ -5,6 +5,10 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   poweredByHeader: false,
+  // The contact page was removed; contact details live on Home and in the footer.
+  async redirects() {
+    return [{ source: "/:locale(en|fr)/contact", destination: "/:locale#contact", permanent: true }];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
   },

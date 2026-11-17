@@ -9,7 +9,6 @@ const pageTypes = [
   "/en",
   "/fr/projects",
   "/en/about",
-  "/fr/contact",
   "/en/projects/delivair",
   "/fr/projects/depogro",
   "/en/projects/mangadana",
@@ -64,48 +63,15 @@ test.describe("axe: no serious or critical violations", () => {
   }
 });
 
-test.describe("live demo button: /health answers", () => {
-  test("with CORS headers, even if CORP is same-origin", async ({ page, external }) => {
-    external.allow.push(trustit.healthUrl!);
-    let calls = 0;
-    await page.route(trustit.healthUrl!, (route) => {
-      calls++;
-      return route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        headers: {
-          "access-control-allow-origin": new URL(page.url()).origin,
-          "cross-origin-resource-policy": "same-origin",
-        },
-        body: '{"ok":true}',
-      });
-    });
-    await page.goto("/en/projects/trustit");
-    await expect(page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" })).toBeVisible();
-    expect(calls).toBe(1); // the CORS request was enough, no fallback
-  });
+test.describe("live demo button", () => {
+  const status = (page: import("@playwright/test").Page) => page.getByTestId("live-demo");
+  const health = (url: string) => (u: URL) => u.href.startsWith(url);
 
-  test("without CORS headers: an opaque answer counts as awake", async ({ page, external, consoleErrors }) => {
-    external.allow.push(trustit.healthUrl!);
-    // Playwright's stub can't make Chrome reject CORS, so the first (CORS) request fails
-    // the way a CORS rejection does (a network error); the no-cors retry gets the answer.
-    let calls = 0;
-    await page.route(trustit.healthUrl!, (route) => {
-      calls++;
-      if (calls === 1) return route.abort("failed");
-      return route.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' });
-    });
-    await page.goto("/en/projects/trustit");
-    await expect(page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" })).toBeVisible();
-    expect(calls).toBe(2);
-    expect(consoleErrors.filter((e) => !/Failed to load resource|ERR_FAILED/.test(e))).toEqual([]);
-    consoleErrors.length = 0;
-  });
-
-  test("a 503 while the host starts keeps waking, then turns ready", async ({ page, external, consoleErrors }) => {
+  test("the link is usable while the server wakes, and the status turns ready", async ({ page, external, consoleErrors }) => {
     external.allow.push(trustit.healthUrl!);
     let calls = 0;
-    await page.route(trustit.healthUrl!, (route) => {
+    await page.route(health(trustit.healthUrl!), (route) => {
+      if (route.request().resourceType() === "image") return route.fulfill({ status: 200, body: "" });
       calls++;
       return route.fulfill({
         status: calls === 1 ? 503 : 200,
@@ -115,12 +81,31 @@ test.describe("live demo button: /health answers", () => {
       });
     });
     await page.goto("/en/projects/trustit");
-    await expect(page.getByText("Waking the demo server (up to 1 min)")).toBeVisible();
-    await expect(page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" })).toBeVisible({
-      timeout: 10_000,
-    });
-    expect(calls).toBe(2);
+    await expect(status(page).getByRole("link", { name: "Open live demo" })).toBeVisible();
+    await expect(status(page)).toHaveAttribute("data-state", "waking");
+    await expect(status(page)).toHaveAttribute("data-state", "ready", { timeout: 10_000 });
+    await expect(page.getByText("Server is up.")).toBeVisible();
     expect(consoleErrors.filter((e) => !/status of 503/.test(e))).toEqual([]);
+    consoleErrors.length = 0;
+  });
+
+  test("a probe that never answers does not stall the check", async ({ page, external, consoleErrors }) => {
+    external.allow.push(trustit.healthUrl!);
+    let calls = 0;
+    await page.route(health(trustit.healthUrl!), async (route) => {
+      if (route.request().resourceType() === "image") return route.fulfill({ status: 200, body: "" });
+      calls++;
+      if (calls === 1) return; // hangs until the per-attempt timeout
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        headers: { "access-control-allow-origin": new URL(page.url()).origin },
+        body: '{"ok":true}',
+      });
+    });
+    await page.goto("/en/projects/trustit");
+    await expect(status(page).getByRole("link", { name: "Open live demo" })).toBeVisible();
+    await expect(status(page)).toHaveAttribute("data-state", "ready", { timeout: 25_000 });
     consoleErrors.length = 0;
   });
 });
@@ -132,15 +117,17 @@ test.describe("live demo button: /health answers", () => {
 test.describe("live /health (opt-in)", () => {
   test.skip(!process.env.LIVE_HEALTH, "set LIVE_HEALTH=1 to run against the real backends");
   for (const project of projects.filter((p) => p.healthUrl)) {
-    test(project.slug, async ({ page, external }) => {
+    test(project.slug, async ({ page, external, consoleErrors }) => {
       const minutes = project.wakeMinutes ?? 1;
       test.setTimeout((minutes + 2) * 60_000);
       external.live = true;
       external.allow.push(project.healthUrl!);
       await page.goto(`/en/projects/${project.slug}`);
-      await expect(page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" })).toBeVisible({
+      await expect(page.getByTestId("live-demo")).toHaveAttribute("data-state", "ready", {
         timeout: (minutes + 1) * 60_000,
       });
+      // localhost is not an allowed origin, so the CORS probe is rejected and the fallback answers.
+      consoleErrors.length = 0;
     });
   }
 });

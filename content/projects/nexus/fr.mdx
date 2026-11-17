@@ -6,9 +6,9 @@
 
 <Section number="02" title="Ce que j'ai construit">
 
-J'ai construit Nexus seul entre 2025 et 2026, à partir d'un dossier de présentation qui définissait les acteurs, les cas d'usage et trois sprints. Pour ce portfolio, je l'ai reconstruit sur une nouvelle pile technique, en prenant la première version comme référence pour le produit.
+J'ai construit Nexus seul entre 2025 et 2026, à partir d'un dossier de présentation qui définissait les acteurs, les cas d'usage et trois sprints.
 
-**Ce que montre cette démo.** Tout ce qui relève des trois premiers sprints fonctionne, et chaque bouton visible fait quelque chose :
+L'application couvre chaque cas d'usage des trois premiers sprints :
 
 - Administrateur : créer et supprimer des étudiants et des encadrants, créer, modifier et supprimer des sujets de PFE, affecter un PFE à un étudiant et à un encadrant, voir tous les PFE et les étudiants de chaque encadrant.
 - Encadrant : voir les PFE qu'il encadre, suivre leur avancement et les faire avancer.
@@ -16,8 +16,6 @@ J'ai construit Nexus seul entre 2025 et 2026, à partir d'un dossier de présent
 - Tous : un tableau de bord avec des statistiques adaptées au rôle, des archives et un historique consultables (par année, encadrant et thème), une page de profil, et une interface en français et en anglais avec un sélecteur de langue.
 
 Un PFE passe par six statuts : Proposé, Affecté, En cours, Déposé, Terminé, Archivé. Deux règles sont appliquées côté serveur et affichées dans l'interface : un étudiant ne peut avoir qu'un seul PFE actif, et une personne affectée à un PFE actif ne peut pas être supprimée.
-
-**Ce qui est simulé.** Connectez-vous avec l'un des trois boutons de démo (Admin, Encadrant, Étudiant). Les données sont générées : 1 administrateur, 10 encadrants, 40 étudiants et 35 PFE sur trois années universitaires, dans tous les statuts, avec de faux numéros de CIN commençant par 00. Tout ce que vous modifiez est visible par les autres visiteurs et supprimé chaque nuit. Les comptes de démo ne peuvent pas être supprimés ni changer de mot de passe. Les PDF déposés, limités à 2 Mo, sont conservés en base et effacés à la réinitialisation. Le serveur gratuit s'endort quand il est inactif : le premier chargement peut prendre jusqu'à une minute.
 
 </Section>
 
@@ -49,8 +47,6 @@ Tests : 6 tests unitaires pour la table des transitions de statut, 45 tests de b
 
 <Section number="06" title="Résultat">
 
-La démo est en ligne en français et en anglais, avec une version fonctionnelle de chaque cas d'usage des sprints 1 à 3.
-
-**Ce que j'améliorerais.** Ajouter la feuille de filtres mobile prévue par la maquette, que la démo laisse de côté (les filtres passent à la ligne sur petit écran pour l'instant), et construire les évolutions futures listées dans le dossier, comme un module de coaching et un espace partenariat avec les entreprises.
+**Ce que j'améliorerais.** Ajouter la feuille de filtres mobile prévue par la maquette (les filtres passent à la ligne sur petit écran pour l'instant), et construire les évolutions futures listées dans le dossier, comme un module de coaching et un espace partenariat avec les entreprises.
 
 </Section>

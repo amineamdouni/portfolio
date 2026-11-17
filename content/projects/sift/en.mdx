@@ -8,11 +8,9 @@ Small teams need a place to see what is being worked on, who owns it and what is
 
 The first version, built in August 2025 during a Full Stack Developer internship, was a Trello-style project management app with a Java and Spring Boot backend: boards, tasks, labels and custom workflow stages, then team invitations, role-based permissions and task assignment.
 
-Sift is the version I rebuilt for this portfolio, as a solo project. The API keeps the original design and the call shapes, with the same `/api/dashboards` paths, and the interface is new, built from a design system I followed screen by screen.
+Sift is the version I rebuilt as a solo project. The API keeps the original design and the call shapes, with the same `/api/dashboards` paths, and the interface is new, built from a design system I followed screen by screen.
 
-**What this demo shows.** A boards home, a board with columns and tickets, drag and drop that is saved (mouse, touch and keyboard), and a ticket panel with its own URL: description, labels, assignees, dates, checklists and comments. Admins of a board manage members, labels and categories; Members work on tickets and do not see the controls they cannot use. There is a light and a dark theme, loading and error states, and an account page.
-
-**What is simulated.** Use "Log in as demo user". Everyone shares that one account, which can work on two sample boards, and changes are visible to other visitors and cleared every night. The account cannot change its name, email or password, leave boards or delete itself. There is no public sign-up and no password reset, because nothing here sends email, and there are no live updates between visitors: the board refreshes after your own changes. The free API server sleeps when idle, so the first load can take up to three minutes.
+The app has a boards home, a board with columns and tickets, drag and drop that is saved (mouse, touch and keyboard), and a ticket panel with its own URL: description, labels, assignees, dates, checklists and comments. Admins of a board manage members, labels and categories; Members work on tickets and do not see the controls they cannot use. There is a light and a dark theme, loading and error states, and an account page.
 
 </Section>
 
@@ -28,7 +26,7 @@ The API is Java 21 and Spring Boot 3.5 with stateless JWT security, Spring JDBC 
 
 The decision I would defend is how ordering works. Categories and tickets have integer positions, and one endpoint takes the new layout of a board, locks the board row, checks every id and rewrites only the changed positions in a single transaction. The unique position constraints are deferrable, so the rewrite can pass through states that would otherwise collide. The board updates optimistically in the browser and rolls back if the save fails.
 
-The trade-off: the original ran on MySQL, and I moved to PostgreSQL with Flyway migrations instead of keeping the old schema. That was more work up front, but it made the nightly reset and the deferrable ordering constraints possible.
+The trade-off: the original ran on MySQL, and I moved to PostgreSQL with Flyway migrations instead of keeping the old schema. That was more work up front, but it made the deferrable ordering constraints possible.
 
 <Architecture />
 
@@ -38,14 +36,12 @@ The trade-off: the original ran on MySQL, and I moved to PostgreSQL with Flyway 
 
 Every endpoint needs a token except login, the demo login and the health checks. The token holds the user id and the user is loaded on every request, so a deleted account stops working at once. Board roles live on the membership rather than the user, and each request resolves its resource to a board and checks the caller's role. People outside a board get a 404, so the API does not reveal that the board exists. Comment authors come from the token. Errors share one shape. Limits are 60 requests a minute per IP and 100 kB per request, plus caps per board on tickets, comments, labels and categories.
 
-Tests are JUnit with Testcontainers on a real PostgreSQL: authentication (including a sweep that checks every mapped endpoint returns 401 without a token), board CRUD and scoping, and reordering (moves within and across columns, rollback on a foreign id, and concurrent reorders). Playwright covers login, creating a ticket, dragging between columns with the mouse and the keyboard and reloading, commenting, and Member versus Admin controls, and fails on any console error. The API runs in Docker with JVM flags set for a 512 MB host, and a nightly GitHub Actions job resets the demo data.
+Tests are JUnit with Testcontainers on a real PostgreSQL: authentication (including a sweep that checks every mapped endpoint returns 401 without a token), board CRUD and scoping, and reordering (moves within and across columns, rollback on a foreign id, and concurrent reorders). Playwright covers login, creating a ticket, dragging between columns with the mouse and the keyboard and reloading, commenting, and Member versus Admin controls, and fails on any console error. The API runs in Docker with JVM flags set for a 512 MB host.
 
 </Section>
 
 <Section number="06" title="Result">
 
-The rebuild added migrations, a seed, authentication on every endpoint and tests to the API, and a UI that follows a design system. The demo is a working board you can drag around.
-
-**What I would improve.** Live updates, so two visitors see each other's moves, and an activity feed. Both were left out on purpose to keep the demo small.
+**What I would improve.** Live updates, so two users see each other's moves, and an activity feed.
 
 </Section>

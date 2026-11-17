@@ -26,12 +26,9 @@ export async function PageFooter() {
             <Link href="/about" className={plainLink}>
               {nav("about")}
             </Link>
-            <Link href="/contact" className={plainLink}>
-              {nav("contact")}
-            </Link>
           </div>
-          <div className="flex flex-col gap-2.5">
-            <p className="font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">{t("elsewhere")}</p>
+          <div className="flex flex-col gap-2.5" id="contact" data-testid="footer-contact">
+            <p className="font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">{t("contact")}</p>
             <a href={`mailto:${site.email}`} className="w-fit text-[15px] [overflow-wrap:anywhere]">
               {site.email}
             </a>
@@ -41,9 +38,10 @@ export async function PageFooter() {
             <a href={site.linkedinUrl} className={plainLink} rel="noreferrer noopener" target="_blank">
               {t("linkedin")}
             </a>
-            <a href={`${site.githubUrl}/portfolio`} className={plainLink} rel="noreferrer noopener" target="_blank">
-              {t("source")}
+            <a href={site.githubUrl} className={plainLink} rel="noreferrer noopener" target="_blank">
+              {t("github")}
             </a>
+            <p className="text-[15px] text-text-muted">{t("address")}</p>
             {site.showCvDownload && (
               <a href={site.cvPath} className={plainLink} download>
                 {t("downloadCv")}

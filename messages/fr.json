@@ -6,8 +6,6 @@
     "projectsDescription": "Applications mobiles, produits full-stack, projets e-commerce et sites clients, chacun avec une démo, des captures d'écran ou le site en ligne.",
     "aboutTitle": "À propos",
     "aboutDescription": "Expérience, formation et compétences d'Amine Amdouni, développeur full-stack à Tunis.",
-    "contactTitle": "Contact",
-    "contactDescription": "E-mail, LinkedIn ou téléphone. Je réponds sous deux jours ouvrés.",
     "notFoundTitle": "Page introuvable"
   },
   "nav": {
@@ -15,7 +13,6 @@
     "home": "Accueil",
     "projects": "Projets",
     "about": "À propos",
-    "contact": "Contact",
     "primary": "Navigation principale",
     "skipToContent": "Aller au contenu",
     "openMenu": "Ouvrir le menu",
@@ -34,12 +31,12 @@
   "footer": {
     "blurb": "Développeur full-stack. NestJS, Next.js, React Native et Spring Boot.",
     "pages": "Pages",
-    "elsewhere": "Ailleurs",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "downloadCv": "Télécharger le CV",
-    "source": "Code source de ce site",
-    "note": "© {year} Amine Amdouni · Tunis, Tunisie"
+    "note": "© {year} Amine Amdouni · Tunis, Tunisie",
+    "contact": "Contact",
+    "address": "Tunis, Tunisie"
   },
   "home": {
     "eyebrow": "Amine Amdouni · Tunis, Tunisie",
@@ -133,14 +130,11 @@
     "reload": "Recharger la démo",
     "frameTitle": "Démo de {title}, dans un cadre de la taille d'un téléphone",
     "openLive": "Ouvrir la démo",
-    "waking": "Réveil du serveur de démo (jusqu'à {minutes} min)",
-    "wakingCaption": "La démo tourne sur un hébergement gratuit qui se met en veille. Le bouton devient actif dès que le serveur répond.",
-    "readyCaption": "S'ouvre dans un nouvel onglet.",
-    "wakeFailedTitle": "Le serveur de démo n'a pas répondu",
-    "wakeFailedBody": "Il redémarre peut-être. Réessayez dans une minute.",
-    "tryAgain": "Réessayer",
+    "waking": "Le serveur démarre, le premier chargement peut prendre jusqu'à {minutes} min.",
     "notOnline": "La démo n'est pas encore en ligne.",
-    "notOnlineCaption": "TODO : l'URL de la démo et l'URL de santé arrivent à la vague 4."
+    "notOnlineCaption": "TODO : l'URL de la démo et l'URL de santé arrivent à la vague 4.",
+    "ready": "Le serveur est prêt.",
+    "unknown": "Impossible de vérifier le serveur depuis ce navigateur. La démo peut mettre une minute à charger."
   },
   "gallery": {
     "enlarge": "Agrandir la capture : {alt}",
@@ -248,39 +242,6 @@
       "french": "Français",
       "frenchLevel": "intermédiaire"
     }
-  },
-  "contact": {
-    "title": "Contact",
-    "lead": "Le plus simple est de m'écrire un e-mail. Je lis tout et je réponds sous deux jours ouvrés.",
-    "direct": "Direct",
-    "linkedin": "Profil LinkedIn",
-    "phone": "Appeler le {phone}",
-    "note": "Basé à Tunis, Tunisie (UTC+1). Disponible pour un stage de fin d'études (PFE) et des projets clients.",
-    "formTitle": "Ou écrivez un message",
-    "formNote": "Ce formulaire ouvre votre messagerie avec le message déjà rempli. Rien n'est envoyé depuis ce site.",
-    "name": "Nom",
-    "email": "E-mail",
-    "emailPlaceholder": "nom@exemple.com",
-    "topic": "De quoi s'agit-il ?",
-    "topics": {
-      "internship": "Stage PFE",
-      "project": "Demande de projet",
-      "job": "Offre d'emploi",
-      "other": "Autre chose"
-    },
-    "message": "Message",
-    "required": "(obligatoire)",
-    "optional": "(facultatif)",
-    "submit": "Ouvrir dans ma messagerie",
-    "errorTitle": "Certains champs sont à corriger",
-    "errorBody": "Vérifiez les champs signalés ci-dessous, ou écrivez directement à {email}.",
-    "nameError": "Indiquez votre nom.",
-    "emailError": "Saisissez une adresse e-mail valide, par exemple nom@exemple.com.",
-    "messageError": "Écrivez un message.",
-    "successTitle": "Votre messagerie devrait maintenant être ouverte",
-    "successBody": "Merci, {name}. Si rien ne s'est ouvert, écrivez directement à {email}.",
-    "again": "Écrire un autre message",
-    "subject": "Message de {name}"
   },
   "notFound": {
     "eyebrow": "Erreur 404",

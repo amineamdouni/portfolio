@@ -8,18 +8,14 @@
 
 MangaDana is an online shop for manga-inspired clothing, cosplay and accessories. I built it as a solo project in December 2022: shoppers sign up, browse a catalogue with filters, open a product page, add items to a cart and keep a profile, and an admin page lets the owner add, edit and delete products and manage users.
 
-This is an early project and there is no live demo, only screenshots. They show the shop, a product page, the cart and the shop on a phone. All the products you see are made up for the screenshots: invented series, flat illustrations and example accounts.
-
-When I came back to it for this portfolio I made design-only changes: a type scale and brand colour taken from the logo, a responsive grid, consistent product images at 4:5, skeleton and empty states, and a cart drawer. I also made the user, product and cart routes check the signed-in user on the server, so admin actions need an admin.
-
 </Section>
 
 <Section number="03" title="Under the hood">
 
-A Next.js 13 app with the Pages Router, Tailwind CSS, MongoDB through Mongoose, bcrypt password hashing and JWT sessions. Pages and API routes live in the same project. For the screenshots it runs against a local MongoDB with a generated seed of 14 products.
+A Next.js 13 app with the Pages Router, Tailwind CSS, MongoDB through Mongoose, bcrypt password hashing and JWT sessions. Pages and API routes live in the same project.
 
-Two Playwright tests cover signing in, filtering the shop, adding to the cart and the permission checks on the API. The repository is private.
+The repository is private.
 
-**What I would improve.** Tie the cart to the signed-in user in the database, which the original design did not, and add real checkout, which is disabled with a note for now.
+**What I would improve.** Tie the cart to the signed-in user in the database, and add real checkout.
 
 </Section>

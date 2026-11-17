@@ -128,13 +128,15 @@ test.describe("project templates", () => {
       await page.goto(`/en/projects/${project.slug}`);
       await ping;
       const minutes = project.wakeMinutes ?? 1;
-      await expect(page.getByText(`Waking the demo server (up to ${minutes} min)`)).toBeVisible();
-      release();
+      await expect(page.getByText(`the first load can take up to ${minutes} min`)).toBeVisible();
+      // The link is usable while the server wakes.
       const open = page.getByTestId("live-demo").getByRole("link", { name: "Open live demo" });
       await expect(open).toHaveAttribute("href", project.demoUrl!);
-      await open.hover();
+      release();
+      await expect(page.getByTestId("live-demo")).toHaveAttribute("data-state", "ready");
       await page.waitForLoadState("networkidle");
-      expect(new Set(external.requests)).toEqual(new Set([project.healthUrl!]));
+      // Only its own /health: the fetch probe and the image ping (?wake=...).
+      for (const url of external.requests) expect(url.startsWith(project.healthUrl!), url).toBe(true);
     });
   }
 
@@ -182,18 +184,15 @@ test("about", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(0);
 });
 
-test("contact", async ({ page }) => {
+test("contact details live in the footer; /contact redirects home", async ({ page }) => {
   await page.goto("/en/contact");
-  await expect(page.getByTestId("contact-email")).toHaveAttribute("href", "mailto:amineamdouni24@gmail.com");
-  await expect(page.getByTestId("contact-phone")).toHaveAttribute("href", "tel:+21650917560");
-  await expect(page.getByTestId("contact-linkedin")).toHaveAttribute(
-    "href",
-    "https://www.linkedin.com/in/amine-amdouni",
-  );
-  // Validation: empty submit shows field errors, nothing is opened.
-  await page.getByRole("button", { name: "Open in my email app" }).click();
-  await expect(page.getByRole("alert").filter({ hasText: "Some fields need a fix" })).toBeVisible();
-  await expect(page.getByText("Enter a valid email address, like name@example.com.")).toBeVisible();
+  await expect(page).toHaveURL(/\/en(#contact)?$/);
+  const footer = page.getByTestId("footer-contact");
+  await expect(footer.getByRole("link", { name: "amineamdouni24@gmail.com" })).toHaveAttribute("href", "mailto:amineamdouni24@gmail.com");
+  await expect(footer.getByRole("link", { name: "+216 50 917 560" })).toHaveAttribute("href", "tel:+21650917560");
+  await expect(footer.getByRole("link", { name: "LinkedIn" })).toHaveAttribute("href", "https://www.linkedin.com/in/amine-amdouni");
+  await expect(footer.getByText("Tunis, Tunisia")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Contact" })).toHaveCount(0);
 });
 
 test("404 inside a locale", async ({ page, consoleErrors }) => {

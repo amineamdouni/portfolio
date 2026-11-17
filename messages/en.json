@@ -6,8 +6,6 @@
     "projectsDescription": "Mobile apps, full-stack products, e-commerce projects and client sites, each with a live demo, screenshots or the live site.",
     "aboutTitle": "About",
     "aboutDescription": "Experience, education and skills of Amine Amdouni, full-stack developer in Tunis.",
-    "contactTitle": "Contact",
-    "contactDescription": "Email, LinkedIn or phone. I reply within two working days.",
     "notFoundTitle": "Page not found"
   },
   "nav": {
@@ -15,7 +13,6 @@
     "home": "Home",
     "projects": "Projects",
     "about": "About",
-    "contact": "Contact",
     "primary": "Primary",
     "skipToContent": "Skip to content",
     "openMenu": "Open menu",
@@ -34,12 +31,12 @@
   "footer": {
     "blurb": "Full-stack developer. NestJS, Next.js, React Native and Spring Boot.",
     "pages": "Pages",
-    "elsewhere": "Elsewhere",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "downloadCv": "Download CV",
-    "source": "Source of this site",
-    "note": "© {year} Amine Amdouni · Tunis, Tunisia"
+    "note": "© {year} Amine Amdouni · Tunis, Tunisia",
+    "contact": "Contact",
+    "address": "Tunis, Tunisia"
   },
   "home": {
     "eyebrow": "Amine Amdouni · Tunis, Tunisia",
@@ -133,14 +130,11 @@
     "reload": "Reload demo",
     "frameTitle": "{title} demo, running in a phone-sized frame",
     "openLive": "Open live demo",
-    "waking": "Waking the demo server (up to {minutes} min)",
-    "wakingCaption": "The demo runs on a free host that sleeps when idle. The button is available once the server answers.",
-    "readyCaption": "Opens in a new tab.",
-    "wakeFailedTitle": "The demo server didn't answer",
-    "wakeFailedBody": "It may be restarting. Try again in a minute.",
-    "tryAgain": "Try again",
+    "waking": "Server is starting, the first load can take up to {minutes} min.",
     "notOnline": "The live demo is not online yet.",
-    "notOnlineCaption": "TODO: demo URL and health URL arrive in Wave 4."
+    "notOnlineCaption": "TODO: demo URL and health URL arrive in Wave 4.",
+    "ready": "Server is up.",
+    "unknown": "Couldn't confirm the server from this browser. The demo may take a minute to load."
   },
   "gallery": {
     "enlarge": "Enlarge screenshot: {alt}",
@@ -248,39 +242,6 @@
       "french": "French",
       "frenchLevel": "intermediate"
     }
-  },
-  "contact": {
-    "title": "Contact",
-    "lead": "Email is the best way to reach me. I read everything and reply within two working days.",
-    "direct": "Direct",
-    "linkedin": "LinkedIn profile",
-    "phone": "Call {phone}",
-    "note": "Based in Tunis, Tunisia (UTC+1). Open to a PFE internship and client projects.",
-    "formTitle": "Or write a message",
-    "formNote": "This form opens your email app with the message filled in. Nothing is sent from this site.",
-    "name": "Name",
-    "email": "Email",
-    "emailPlaceholder": "name@example.com",
-    "topic": "What is this about?",
-    "topics": {
-      "internship": "PFE internship",
-      "project": "Project enquiry",
-      "job": "Job opportunity",
-      "other": "Something else"
-    },
-    "message": "Message",
-    "required": "(required)",
-    "optional": "(optional)",
-    "submit": "Open in my email app",
-    "errorTitle": "Some fields need a fix",
-    "errorBody": "Check the fields marked below, or email {email} directly.",
-    "nameError": "Enter your name.",
-    "emailError": "Enter a valid email address, like name@example.com.",
-    "messageError": "Write a message.",
-    "successTitle": "Your email app should now be open",
-    "successBody": "Thanks, {name}. If nothing opened, email {email} directly.",
-    "again": "Write another message",
-    "subject": "Message from {name}"
   },
   "notFound": {
     "eyebrow": "Error 404",

@@ -10,7 +10,6 @@ import { cx } from "./ui";
 const items = [
   { href: "/projects", key: "projects" },
   { href: "/about", key: "about" },
-  { href: "/contact", key: "contact" },
 ] as const;
 
 function isCurrent(pathname: string, href: string) {

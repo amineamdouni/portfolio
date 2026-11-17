@@ -10,11 +10,7 @@ DepoGro est le projet d'équipe que j'ai dirigé. De janvier à octobre 2024, j'
 
 Mon propre code couvre la connexion par téléphone avec codes SMS, les rôles, la gestion des commandes et la plupart des écrans mobiles, en arabe et en français (de droite à gauche et de gauche à droite).
 
-**Ce que montre cette démo.** Une reconstruction web de l'application mobile avec la dernière version d'Expo, avec 17 de ses écrans, en arabe et en français, pour les trois rôles. Choisissez Client, Commercial ou Livreur sur l'écran de connexion et parcourez le flux : parcourir le catalogue, remplir le panier, passer commande, suivre une commande, prendre une commande en tant que commercial, ou en accepter et livrer une. Tout tourne dans votre navigateur avec des données d'exemple (commerces, marques et produits inventés, faux numéros de téléphone). Vos modifications restent dans ce navigateur, et « Reset demo » rétablit le départ.
-
-**Ce qui est simulé.** Il n'y a pas de serveur. Les cartes sont une image statique, les appels affichent une note « Calls are simulated », et la suppression de compte et la photo de patente sont simulées. La connexion par SMS, l'inscription et les notifications push ne sont pas dans la démo. La tuile des gains du livreur utilise une commission de démo fixe de 5 pour cent, pas le vrai calcul.
-
-Le tableau de bord d'administration (commandes, détail d'une commande, ambassadeurs, produits, publicités) n'est montré qu'en captures, prises sur le vrai tableau de bord avec un serveur de données fictif local.
+L'application couvre les trois rôles : parcourir le catalogue, remplir le panier, passer commande, suivre une commande, prendre une commande en tant que commercial, ou en accepter et livrer une en tant que livreur.
 
 </Section>
 
@@ -26,22 +22,12 @@ Le tableau de bord d'administration (commandes, détail d'une commande, ambassad
 
 <Section number="04" title="Sous le capot">
 
-L'application d'origine est en Expo et React Native avec Redux, devant un serveur NestJS et PostgreSQL. Pour la démo, j'ai remplacé l'API par un store zustand dont les actions reprennent les anciens appels (ajouter au panier, créer une commande, changer le statut), enregistré dans le navigateur sous une clé versionnée. Si les données enregistrées sont illisibles, l'application revient aux données de départ.
-
-Des choix qui comptent :
-
-- J'ai gardé l'arabe et le français tels quels dans l'application, y compris la mise en page de droite à gauche, plutôt que d'ajouter l'anglais.
-- Un double appui sur « Confirmer » ne doit pas créer deux commandes. La démo crée la commande en une seule action synchrone et verrouille le bouton, et un test Playwright appuie deux fois et vérifie qu'une seule commande apparaît.
-- Le tableau de bord du livreur a dû être refait pour la démo : il affiche le nom, la disponibilité et quatre tuiles alimentées par le store.
-
-La suite Playwright compte 9 tests couvrant les trois rôles. Chaque test échoue à la moindre erreur de console ou à toute requête qui sort de l'application.
+L'application est en Expo et React Native avec Redux, devant un serveur NestJS et PostgreSQL.
 
 </Section>
 
 <Section number="05" title="Résultat">
 
-La démo est en ligne et couvre les trois rôles de bout en bout, sans aucun serveur.
-
-**Ce que j'améliorerais.** Ajouter une vraie recherche dans l'historique des commandes et un cache hors ligne pour le livreur, qui travaille sur la route, et remplacer les images de produits générées par de vraies photos.
+**Ce que j'améliorerais.** Ajouter une vraie recherche dans l'historique des commandes et un cache hors ligne pour le livreur, qui travaille sur la route.
 
 </Section>

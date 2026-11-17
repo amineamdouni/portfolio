@@ -6,11 +6,9 @@ A membership product has several kinds of people in one app. Members take course
 
 <Section number="02" title="What I built">
 
-This is a team project, and I worked on it as a freelance full-stack developer from July 2026. My part was online payments, live voice rooms for multiplayer games and player leaderboards, on web and mobile. The product itself belongs to someone else, so this page shows a rebuilt demo under a neutral name, "Membership app", with no real branding, people, prices or data.
+This is a team project, and I worked on it as a freelance full-stack developer from July 2026. My part was online payments, live voice rooms for multiplayer games and player leaderboards, on web and mobile. The product itself belongs to someone else, so this page uses a neutral name, "Membership app".
 
-**What this demo shows.** 31 screens on the latest Expo SDK, across three roles you pick at login: Member, Coach and Founder. A member can go through the academy (chapter, lesson, quiz, level-up), the community hub and chat rooms, a voice room, the leaderboard and rewards, fitness coaching with plan selection, and their stores and orders. A coach reviews clients and approves an intake form. A founder resolves reports and invites a team member. English and Arabic are both available, including right-to-left layout.
-
-**What is simulated.** Everything runs in your browser on made-up data, saved in this browser only. "Reset demo" and "Switch role" are always at hand. The voice room is static, voice notes have a simulated playing clock and no audio, checkout shows "Payments are simulated", uploads show a note, and the live, card-game and store-editor features that need the real services open a "Not in this demo" card.
+The app has three roles: Member, Coach and Founder. A member can go through the academy (chapter, lesson, quiz, level-up), the community hub and chat rooms, a voice room, the leaderboard and rewards, fitness coaching with plan selection, and their stores and orders. A coach reviews clients and approves an intake form. A founder resolves reports and invites a team member. English and Arabic are both available, including right-to-left layout.
 
 </Section>
 
@@ -22,18 +20,6 @@ This is a team project, and I worked on it as a freelance full-stack developer f
 
 <Section number="04" title="Under the hood">
 
-The real app talks to a server and to live audio, payment and push services. For the demo I kept the screens, hooks and types as they were and swapped the layer below them: an adapter exposes the same API object and method names the hooks already call, and writes to a zustand store instead of a network. Quiz grading, XP and level-ups, chat messages, voice-room state, notifications, store status and intake decisions all change real state, so the screens react the way they do in the app. Features that only exist with the live services reject with a clear "not available" code.
-
-The shared package of types and zod schemas was pruned to what the app imports and renamed, and the removed services (live audio, payments, realtime, push, error reporting) are gone from the bundle.
-
-Tests: Playwright at phone size walks each role's main flow, switches to Arabic and back, checks that a change survives a reload and that "Reset demo" restores the seed. Every test fails on a console error or a request to anything but the app itself. The suite has 5 tests.
-
-</Section>
-
-<Section number="05" title="Result">
-
-The demo is live, runs every kept screen for all three roles and makes no request outside its own host.
-
-**What I would improve.** Cut the image folder, which still bundles about 17 MB of assets the demo does not use, and move the demo store from one large file to a slice per feature so each area can be tested alone.
+The app talks to a server and to live audio, payment and push services.
 
 </Section>

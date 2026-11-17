@@ -1,4 +1,4 @@
-import { ArrowRight, Download, ExternalLink, Mail } from "lucide-react";
+import { ArrowRight, Download, ExternalLink, Mail, Phone } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFeatured, getProjects } from "@/lib/projects";
@@ -70,6 +70,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <a href={`mailto:${site.email}`} className={buttonClass("secondary")}>
             <Mail {...iconProps} />
             {site.email}
+          </a>
+          <a href={site.phoneHref} className={buttonClass("secondary")}>
+            <Phone {...iconProps} />
+            {site.phoneDisplay}
           </a>
           <a
             href={site.linkedinUrl}

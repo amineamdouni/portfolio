@@ -8,11 +8,9 @@ Les petites équipes ont besoin d'un endroit pour voir ce qui est en cours, qui 
 
 La première version, construite en août 2025 pendant un stage de développeur full-stack, était une application de gestion de projet à la Trello avec un backend Java et Spring Boot : tableaux, tâches, étiquettes et étapes de workflow personnalisées, puis invitations d'équipe, permissions par rôle et attribution des tâches.
 
-Sift est la version que j'ai reconstruite pour ce portfolio, seul. L'API garde la conception d'origine et la forme des appels, avec les mêmes chemins `/api/dashboards`, et l'interface est nouvelle, construite à partir d'un système de design suivi écran par écran.
+Sift est la version que j'ai reconstruite seul. L'API garde la conception d'origine et la forme des appels, avec les mêmes chemins `/api/dashboards`, et l'interface est nouvelle, construite à partir d'un système de design suivi écran par écran.
 
-**Ce que montre cette démo.** Une page d'accueil des tableaux, un tableau avec colonnes et tickets, un glisser-déposer enregistré (souris, tactile et clavier), et un panneau de ticket avec sa propre URL : description, étiquettes, assignés, dates, listes de tâches et commentaires. Les administrateurs d'un tableau gèrent les membres, les étiquettes et les catégories ; les membres travaillent sur les tickets et ne voient pas les commandes qu'ils ne peuvent pas utiliser. Il y a un thème clair et un thème sombre, des états de chargement et d'erreur, et une page de compte.
-
-**Ce qui est simulé.** Utilisez « Log in as demo user ». Tout le monde partage ce compte, qui travaille sur deux tableaux d'exemple, et les modifications sont visibles par les autres visiteurs et effacées chaque nuit. Le compte ne peut pas changer son nom, son e-mail ou son mot de passe, quitter des tableaux ni se supprimer. Il n'y a ni inscription publique ni réinitialisation du mot de passe, car rien ici n'envoie d'e-mail, et pas de mises à jour en direct entre visiteurs : le tableau se rafraîchit après vos propres modifications. Le serveur gratuit de l'API s'endort quand il est inactif : le premier chargement peut prendre jusqu'à trois minutes.
+L'application comprend une page d'accueil des tableaux, un tableau avec colonnes et tickets, un glisser-déposer enregistré (souris, tactile et clavier), et un panneau de ticket avec sa propre URL : description, étiquettes, assignés, dates, listes de tâches et commentaires. Les administrateurs d'un tableau gèrent les membres, les étiquettes et les catégories ; les membres travaillent sur les tickets et ne voient pas les commandes qu'ils ne peuvent pas utiliser. Il y a un thème clair et un thème sombre, des états de chargement et d'erreur, et une page de compte.
 
 </Section>
 
@@ -28,7 +26,7 @@ L'API est en Java 21 et Spring Boot 3.5 avec une sécurité JWT sans état, Spri
 
 La décision que je défendrais est la gestion de l'ordre. Les catégories et les tickets ont des positions entières, et un seul point d'accès reçoit la nouvelle disposition d'un tableau, verrouille la ligne du tableau, vérifie chaque identifiant et ne réécrit que les positions modifiées dans une seule transaction. Les contraintes d'unicité des positions sont différables, ce qui permet à la réécriture de passer par des états qui entreraient sinon en collision. Le tableau se met à jour de façon optimiste dans le navigateur et revient en arrière si l'enregistrement échoue.
 
-Le compromis : l'original tournait sur MySQL, et je suis passé à PostgreSQL avec des migrations Flyway plutôt que de garder l'ancien schéma. C'était plus de travail au départ, mais cela a rendu possibles la réinitialisation nocturne et les contraintes d'ordre différables.
+Le compromis : l'original tournait sur MySQL, et je suis passé à PostgreSQL avec des migrations Flyway plutôt que de garder l'ancien schéma. C'était plus de travail au départ, mais cela a rendu possibles les contraintes d'ordre différables.
 
 <Architecture />
 
@@ -38,14 +36,12 @@ Le compromis : l'original tournait sur MySQL, et je suis passé à PostgreSQL av
 
 Chaque point d'accès exige un jeton, sauf la connexion, la connexion de démo et les vérifications de santé. Le jeton contient l'identifiant de l'utilisateur et l'utilisateur est chargé à chaque requête : un compte supprimé cesse de fonctionner immédiatement. Les rôles sont portés par l'appartenance à un tableau et non par l'utilisateur, et chaque requête relie sa ressource à un tableau et vérifie le rôle de l'appelant. Les personnes extérieures à un tableau reçoivent une 404, de sorte que l'API ne révèle pas son existence. Les auteurs de commentaires viennent du jeton. Les erreurs ont toutes la même forme. Les limites sont de 60 requêtes par minute et par IP et de 100 ko par requête, plus des plafonds par tableau sur les tickets, les commentaires, les étiquettes et les catégories.
 
-Les tests sont en JUnit avec Testcontainers sur un vrai PostgreSQL : authentification (dont un balayage qui vérifie que chaque point d'accès répond 401 sans jeton), CRUD et cloisonnement des tableaux, et réordonnancement (déplacements dans une colonne et entre colonnes, annulation sur un identifiant étranger, réordonnancements concurrents). Playwright couvre la connexion, la création d'un ticket, le glisser entre colonnes à la souris et au clavier avec rechargement, les commentaires, et les commandes Membre contre Administrateur, et échoue à la moindre erreur de console. L'API tourne dans Docker avec des options JVM réglées pour un hôte de 512 Mo, et une tâche GitHub Actions nocturne réinitialise les données de la démo.
+Les tests sont en JUnit avec Testcontainers sur un vrai PostgreSQL : authentification (dont un balayage qui vérifie que chaque point d'accès répond 401 sans jeton), CRUD et cloisonnement des tableaux, et réordonnancement (déplacements dans une colonne et entre colonnes, annulation sur un identifiant étranger, réordonnancements concurrents). Playwright couvre la connexion, la création d'un ticket, le glisser entre colonnes à la souris et au clavier avec rechargement, les commentaires, et les commandes Membre contre Administrateur, et échoue à la moindre erreur de console. L'API tourne dans Docker avec des options JVM réglées pour un hôte de 512 Mo.
 
 </Section>
 
 <Section number="06" title="Résultat">
 
-La reconstruction a ajouté à l'API des migrations, des données de départ, l'authentification sur chaque point d'accès et des tests, ainsi qu'une interface qui suit un système de design. La démo est un vrai tableau que l'on peut faire glisser.
-
-**Ce que j'améliorerais.** Des mises à jour en direct, pour que deux visiteurs voient les déplacements de l'autre, et un fil d'activité. Les deux ont été écartés volontairement pour garder la démo petite.
+**Ce que j'améliorerais.** Des mises à jour en direct, pour que deux utilisateurs voient les déplacements de l'autre, et un fil d'activité.
 
 </Section>

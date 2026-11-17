@@ -8,18 +8,14 @@
 
 MangaDana est une boutique en ligne de vêtements inspirés des mangas, de cosplay et d'accessoires. Je l'ai construite seul en décembre 2022 : les clients s'inscrivent, parcourent un catalogue avec filtres, ouvrent une fiche produit, ajoutent des articles au panier et ont un profil, et une page d'administration permet au propriétaire d'ajouter, modifier et supprimer des produits et de gérer les utilisateurs.
 
-C'est un projet de jeunesse et il n'y a pas de démo en ligne, seulement des captures d'écran : la boutique, une fiche produit, le panier et la boutique sur téléphone. Tous les produits visibles sont inventés pour les captures : séries imaginaires, illustrations à plat et comptes d'exemple.
-
-En le reprenant pour ce portfolio, j'ai fait des changements purement visuels : une échelle typographique et une couleur de marque tirée du logo, une grille adaptative, des images de produits homogènes en 4:5, des états de chargement et de liste vide, et un panneau de panier. J'ai aussi fait vérifier l'utilisateur connecté côté serveur sur les routes d'utilisateurs, de produits et de panier, pour que les actions d'administration exigent un administrateur.
-
 </Section>
 
 <Section number="03" title="Sous le capot">
 
-Une application Next.js 13 avec le Pages Router, Tailwind CSS, MongoDB via Mongoose, hachage des mots de passe avec bcrypt et sessions JWT. Les pages et les routes d'API vivent dans le même projet. Pour les captures, elle tourne sur un MongoDB local avec un jeu de départ généré de 14 produits.
+Une application Next.js 13 avec le Pages Router, Tailwind CSS, MongoDB via Mongoose, hachage des mots de passe avec bcrypt et sessions JWT. Les pages et les routes d'API vivent dans le même projet.
 
-Deux tests Playwright couvrent la connexion, le filtrage de la boutique, l'ajout au panier et les contrôles de permissions de l'API. Le dépôt est privé.
+Le dépôt est privé.
 
-**Ce que j'améliorerais.** Rattacher le panier à l'utilisateur connecté en base, ce que la conception d'origine ne faisait pas, et ajouter un vrai paiement, désactivé avec une note pour l'instant.
+**Ce que j'améliorerais.** Rattacher le panier à l'utilisateur connecté en base, et ajouter un vrai paiement.
 
 </Section>

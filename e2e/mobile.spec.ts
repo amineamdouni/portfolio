@@ -24,7 +24,7 @@ test("mobile demo: no frame under 768px, a full-screen button instead", async ({
 
 test("no horizontal scroll on the main pages", async ({ page, external }) => {
   external.allow.push("https://trustit-api.onrender.com/health");
-  for (const path of ["/en", "/fr/projects", "/en/projects/trustit", "/fr/about", "/en/contact"]) {
+  for (const path of ["/en", "/fr/projects", "/en/projects/trustit", "/fr/about"]) {
     await page.goto(path);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, path).toBeLessThanOrEqual(0);

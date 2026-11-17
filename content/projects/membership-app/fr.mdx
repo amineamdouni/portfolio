@@ -6,11 +6,9 @@ Un produit d'abonnement réunit plusieurs types de personnes dans une même appl
 
 <Section number="02" title="Ce que j'ai construit">
 
-C'est un projet d'équipe, sur lequel je travaille comme développeur full-stack freelance depuis juillet 2026. Ma part : les paiements en ligne, les salons vocaux en direct pour des jeux multijoueurs et les classements de joueurs, sur web et mobile. Le produit appartient à quelqu'un d'autre ; cette page présente donc une démo reconstruite sous un nom neutre, « Membership app », sans marque, personnes, prix ni données réels.
+C'est un projet d'équipe, sur lequel je travaille comme développeur full-stack freelance depuis juillet 2026. Ma part : les paiements en ligne, les salons vocaux en direct pour des jeux multijoueurs et les classements de joueurs, sur web et mobile. Le produit appartient à quelqu'un d'autre ; cette page utilise donc un nom neutre, « Membership app ».
 
-**Ce que montre cette démo.** 31 écrans avec la dernière version d'Expo, pour trois rôles à choisir à la connexion : Membre, Coach et Fondateur. Un membre peut suivre l'académie (chapitre, leçon, quiz, passage de niveau), explorer l'espace communautaire et les salons de discussion, entrer dans un salon vocal, voir le classement et les récompenses, choisir un plan de coaching sportif, et consulter ses boutiques et commandes. Un coach examine ses clients et valide un formulaire d'accueil. Un fondateur traite des signalements et invite un membre de l'équipe. L'anglais et l'arabe sont disponibles, avec la mise en page de droite à gauche.
-
-**Ce qui est simulé.** Tout tourne dans votre navigateur avec des données inventées, enregistrées dans ce navigateur uniquement. « Reset demo » et « Switch role » sont toujours à portée de main. Le salon vocal est statique, les messages vocaux ont une horloge de lecture simulée et aucun son, le paiement affiche « Payments are simulated », les envois de fichiers affichent une note, et les fonctions en direct, de jeu de cartes et d'éditeur de boutique qui demandent les vrais services ouvrent une carte « Not in this demo ».
+L'application a trois rôles : Membre, Coach et Fondateur. Un membre peut suivre l'académie (chapitre, leçon, quiz, passage de niveau), explorer l'espace communautaire et les salons de discussion, entrer dans un salon vocal, voir le classement et les récompenses, choisir un plan de coaching sportif, et consulter ses boutiques et commandes. Un coach examine ses clients et valide un formulaire d'accueil. Un fondateur traite des signalements et invite un membre de l'équipe. L'anglais et l'arabe sont disponibles, avec la mise en page de droite à gauche.
 
 </Section>
 
@@ -22,18 +20,6 @@ C'est un projet d'équipe, sur lequel je travaille comme développeur full-stack
 
 <Section number="04" title="Sous le capot">
 
-La vraie application dialogue avec un serveur et avec des services d'audio en direct, de paiement et de notifications. Pour la démo, j'ai gardé les écrans, les hooks et les types tels quels et remplacé la couche en dessous : un adaptateur expose le même objet d'API et les mêmes noms de méthodes que ceux déjà appelés par les hooks, et écrit dans un store zustand au lieu du réseau. La correction des quiz, l'XP et les passages de niveau, les messages, l'état des salons vocaux, les notifications, le statut des boutiques et les décisions d'accueil modifient un vrai état, et les écrans réagissent comme dans l'application. Les fonctions qui n'existent qu'avec les services en direct répondent par un code « non disponible » explicite.
-
-Le paquet partagé de types et de schémas zod a été réduit à ce que l'application importe et renommé, et les services retirés (audio en direct, paiement, temps réel, notifications, suivi d'erreurs) ne figurent plus dans le bundle.
-
-Tests : Playwright en taille téléphone parcourt le flux principal de chaque rôle, passe en arabe et revient, vérifie qu'une modification survit à un rechargement et que « Reset demo » rétablit les données de départ. Chaque test échoue à la moindre erreur de console ou à toute requête vers autre chose que l'application. La suite compte 5 tests.
-
-</Section>
-
-<Section number="05" title="Résultat">
-
-La démo est en ligne, fait tourner chaque écran conservé pour les trois rôles et n'envoie aucune requête hors de son propre domaine.
-
-**Ce que j'améliorerais.** Alléger le dossier d'images, qui embarque encore environ 17 Mo de ressources inutilisées par la démo, et découper le store de démo en un slice par fonctionnalité pour pouvoir tester chaque zone isolément.
+L'application dialogue avec un serveur et avec des services d'audio en direct, de paiement et de notifications.
 
 </Section>

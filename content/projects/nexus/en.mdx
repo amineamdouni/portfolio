@@ -6,9 +6,9 @@ At the faculty this project was designed for, final-year projects (PFE, projet d
 
 <Section number="02" title="What I built">
 
-I built Nexus as a solo project between 2025 and 2026, from a project deck that defined the actors, the use cases and three sprints. For this portfolio I rebuilt it on a new stack, using the first version as a reference for the product.
+I built Nexus as a solo project between 2025 and 2026, from a project deck that defined the actors, the use cases and three sprints.
 
-**What this demo shows.** Everything in the first three sprints works, and every visible button does something:
+The app covers every use case of the first three sprints:
 
 - Admin: create and delete students and supervisors, create, edit and delete PFE subjects, assign a PFE to a student and a supervisor, see all PFEs, and see the students of each supervisor.
 - Supervisor: see the PFEs they supervise, follow their progress and move them forward.
@@ -16,8 +16,6 @@ I built Nexus as a solo project between 2025 and 2026, from a project deck that 
 - Everyone: a dashboard with statistics for their role, a searchable archive and history (by year, supervisor and theme), a profile page, and an English and French interface with a toggle.
 
 A PFE moves through six statuses: Proposed, Assigned, In progress, Submitted, Finished, Archived. Two rules are enforced on the server and shown in the interface: a student can have only one active PFE, and a person assigned to an active PFE cannot be deleted.
-
-**What is simulated.** Log in with one of three demo buttons (Admin, Supervisor, Student). The data is generated: 1 admin, 10 supervisors, 40 students and 35 PFEs over three academic years, in every status, with fake ID numbers that start with 00. Anything you change is visible to other visitors and deleted every night. Demo accounts cannot be deleted or change their password. Uploaded PDFs, limited to 2 MB, are kept in the database and cleared at the reset. The free server sleeps when idle, so the first load can take up to a minute.
 
 </Section>
 
@@ -49,8 +47,6 @@ Tests: 6 unit tests for the status transition table, 45 end-to-end API tests (bo
 
 <Section number="06" title="Result">
 
-The demo is live in English and French, with a working version of every sprint 1 to 3 use case.
-
-**What I would improve.** Add the mobile filter sheet that the design had and the demo leaves out (filters wrap on small screens for now), and build the features the deck lists as future evolutions, such as a coaching module and a company partnership space.
+**What I would improve.** Add the mobile filter sheet that the design had (filters wrap on small screens for now), and build the features the deck lists as future evolutions, such as a coaching module and a company partnership space.
 
 </Section>
