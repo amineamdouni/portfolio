@@ -38,7 +38,8 @@ export async function ProjectHeader({ project }: { project: ProjectMeta }) {
     { label: t("project.role"), value: role },
     { label: t("project.timeline"), value: dates },
   ];
-  if (project.category !== "client") facts.push({ label: t("project.team"), value: team });
+  // "Solo" would repeat the role ("Solo project"); show Team only for team work.
+  if (project.team.kind === "team") facts.push({ label: t("project.team"), value: team });
   facts.push({
     label: t("project.code"),
     value: project.repo.visibility === "private" ? t("project.privateRepo") : t("project.publicRepo"),

@@ -15,10 +15,33 @@ const STALE_MS = 5 * 60_000;
 type State = "waking" | "ready" | "failed";
 
 /**
+ * One wake-up attempt; true when the backend answered.
+ * First a CORS request, which can read the status: 2xx means up, anything else
+ * (e.g. the host's 502 while it starts) means not yet. CORS is also immune to a
+ * `Cross-Origin-Resource-Policy: same-origin` header on /health. If the CORS
+ * request fails without timing out (no CORS headers on /health), an opaque
+ * no-cors request is the fallback: any answer means the server is up.
+ */
+async function probeHealth(url: string, timeoutMs = REQUEST_TIMEOUT_MS): Promise<boolean> {
+  const init = { cache: "no-store", credentials: "omit" } as const;
+  try {
+    const res = await fetch(url, { ...init, mode: "cors", signal: AbortSignal.timeout(timeoutMs) });
+    return res.ok;
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "TimeoutError") return false;
+    try {
+      await fetch(url, { ...init, mode: "no-cors", signal: AbortSignal.timeout(timeoutMs) });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+}
+
+/**
  * Wakes this project's backend only (never all backends), by fetching its
  * /health URL on page load and again on hover/focus. Free hosts hold the
- * request while the server starts, so one answered request means it is up.
- * `no-cors`: an opaque answer is enough, no CORS setup needed on /health.
+ * request while the server starts, so one answer means it is up.
  */
 export function LiveDemoButton({
   demoUrl,
@@ -41,19 +64,13 @@ export function LiveDemoButton({
     running.current = true;
     const deadline = Date.now() + deadlineFor(wakeMinutes);
     while (Date.now() < deadline) {
-      try {
-        await fetch(healthUrl, {
-          mode: "no-cors",
-          cache: "no-store",
-          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-        });
+      if (await probeHealth(healthUrl)) {
         lastOk.current = Date.now();
         running.current = false;
         setState("ready");
         return;
-      } catch {
-        await new Promise((r) => setTimeout(r, RETRY_MS));
       }
+      await new Promise((r) => setTimeout(r, RETRY_MS));
     }
     running.current = false;
     setState((s) => (s === "ready" ? s : "failed"));

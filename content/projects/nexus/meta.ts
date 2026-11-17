@@ -57,7 +57,7 @@ const meta: ProjectMeta = {
       title: "Client",
       nodes: [
         {
-          name: "Browser",
+          name: { en: "Browser", fr: "Navigateur" },
           note: "EN / FR"
         }
       ],
@@ -70,10 +70,10 @@ const meta: ProjectMeta = {
           name: "Admin"
         },
         {
-          name: "Supervisor"
+          name: { en: "Supervisor", fr: "Encadrant" }
         },
         {
-          name: "Student"
+          name: { en: "Student", fr: "Étudiant" }
         }
       ],
       arrow: "accent"
@@ -83,22 +83,22 @@ const meta: ProjectMeta = {
       kind: "accent",
       nodes: [
         {
-          name: "JWT auth",
-          note: "roles"
+          name: { en: "JWT auth", fr: "auth JWT" },
+          note: { en: "roles", fr: "rôles" }
         },
         {
-          name: "REST API",
+          name: { en: "REST API", fr: "API REST" },
           note: "Prisma"
         }
       ],
       arrow: "plain"
     },
     {
-      title: "Data",
+      title: { en: "Data", fr: "Données" },
       nodes: [
         {
           name: "PostgreSQL",
-          note: "nexus schema"
+          note: { en: "nexus schema", fr: "schéma nexus" }
         }
       ]
     }

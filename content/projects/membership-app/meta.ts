@@ -63,8 +63,8 @@ const meta: ProjectMeta = {
     ],
     fr: [
       "Connectez-vous en Membre et ouvrez l'académie : lisez une leçon, répondez au quiz et regardez le niveau monter.",
-      "Passez par le classement et un salon vocal, puis « Changer de rôle » pour devenir Coach et approuver un formulaire d'admission.",
-      "Passez en arabe pour voir la mise en page de droite à gauche. « Réinitialiser la démo » remet tout à zéro."
+      "Passez par le classement et un salon vocal, puis « Switch role » (changer de rôle) pour devenir Coach et approuver un formulaire d'admission.",
+      "Passez en arabe pour voir la mise en page de droite à gauche. « Reset demo » remet tout à zéro."
     ]
   },
   featured: false,

@@ -82,7 +82,7 @@ export function Gallery({ shots, intro }: { shots: GalleryShot[]; intro?: string
           <ul
             key={g.kind}
             className={cx(
-              "grid gap-x-4 gap-y-6 md:gap-x-6 md:gap-y-8",
+              "grid list-none ps-0 gap-x-4 gap-y-6 md:gap-x-6 md:gap-y-8",
               g.kind === "desktop"
                 ? "grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))]"
                 : "grid-cols-[repeat(auto-fill,minmax(140px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))]",
@@ -126,6 +126,20 @@ export function Gallery({ shots, intro }: { shots: GalleryShot[]; intro?: string
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") move(1);
           if (e.key === "ArrowLeft") move(-1);
+          if (e.key === "Tab") {
+            // Keep Tab inside the viewer (the native modal lets it reach the browser chrome).
+            const items = Array.from(e.currentTarget.querySelectorAll<HTMLElement>("button:not([disabled])"));
+            if (!items.length) return;
+            const first = items[0];
+            const last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
         }}
         onClick={(e) => {
           if (e.target === e.currentTarget) close();

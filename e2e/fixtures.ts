@@ -5,6 +5,8 @@ type External = {
   allow: Array<string | RegExp>;
   /** Every request to another origin, in order. */
   requests: string[];
+  /** Let allowed requests reach the real network instead of the stub (live checks only). */
+  live: boolean;
 };
 
 /**
@@ -18,7 +20,7 @@ export const test = base.extend<{ consoleErrors: string[]; external: External }>
   external: [
     async ({ page, baseURL }, use) => {
       const origin = new URL(baseURL!).origin;
-      const external: External = { allow: [], requests: [] };
+      const external: External = { allow: [], requests: [], live: false };
       await page.route(
         (url) => url.protocol.startsWith("http") && url.origin !== origin,
         async (route) => {
@@ -26,10 +28,16 @@ export const test = base.extend<{ consoleErrors: string[]; external: External }>
           external.requests.push(url);
           const allowed = external.allow.some((a) => (typeof a === "string" ? url === a || url.startsWith(a) : a.test(url)));
           if (!allowed) return route.abort();
+          if (external.live) return route.continue();
+          if (route.request().resourceType() === "document") {
+            return route.fulfill({ status: 200, contentType: "text/html", body: "<!doctype html><title>demo</title><p>demo</p>" });
+          }
+          // A /health that answers CORS for this site, like the real APIs.
           return route.fulfill({
             status: 200,
-            contentType: route.request().resourceType() === "document" ? "text/html" : "application/json",
-            body: route.request().resourceType() === "document" ? "<!doctype html><title>demo</title><p>demo</p>" : '{"status":"ok"}',
+            contentType: "application/json",
+            headers: { "access-control-allow-origin": origin },
+            body: '{"status":"ok"}',
           });
         },
       );

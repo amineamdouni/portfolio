@@ -45,10 +45,10 @@ const meta: ProjectMeta = {
       title: "Clients",
       nodes: [
         {
-          name: "Customer site"
+          name: { en: "Customer site", fr: "Site client" }
         },
         {
-          name: "Admin dashboard"
+          name: { en: "Admin dashboard", fr: "Tableau de bord d'admin" }
         }
       ],
       arrow: "accent"
@@ -58,7 +58,7 @@ const meta: ProjectMeta = {
       kind: "accent",
       nodes: [
         {
-          name: "REST API",
+          name: { en: "REST API", fr: "API REST" },
           note: "Prisma"
         },
         {
@@ -68,18 +68,18 @@ const meta: ProjectMeta = {
       arrow: "plain"
     },
     {
-      title: "Data",
+      title: { en: "Data", fr: "Données" },
       nodes: [
         {
           name: "PostgreSQL",
-          note: "amscars schema"
+          note: { en: "amscars schema", fr: "schéma amscars" }
         }
       ]
     }
   ],
   demoHint: {
     en: "The customer site needs no login. In the admin dashboard, use the \"Log in as demo admin\" button.",
-    fr: "Le site client ne demande pas de connexion. Dans le tableau de bord, utilisez le bouton de connexion en administrateur de démo."
+    fr: "Le site client ne demande pas de connexion. Dans le tableau de bord, utilisez le bouton « Log in as demo admin »."
   },
   links: [
     {

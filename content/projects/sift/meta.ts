@@ -56,7 +56,7 @@ const meta: ProjectMeta = {
       title: "Client",
       nodes: [
         {
-          name: "Web app"
+          name: { en: "Web app", fr: "Application web" }
         }
       ],
       arrow: "accent"
@@ -66,17 +66,17 @@ const meta: ProjectMeta = {
       kind: "accent",
       nodes: [
         {
-          name: "REST API",
+          name: { en: "REST API", fr: "API REST" },
           note: "JWT"
         },
         {
-          name: "Reorder endpoint"
+          name: { en: "Reorder endpoint", fr: "Route de réordonnancement" }
         }
       ],
       arrow: "plain"
     },
     {
-      title: "Data",
+      title: { en: "Data", fr: "Données" },
       nodes: [
         {
           name: "PostgreSQL",
@@ -88,7 +88,7 @@ const meta: ProjectMeta = {
   wakeMinutes: 3,
   demoHint: {
     en: "No password needed: use \"Log in as demo user\" in the app.",
-    fr: "Pas de mot de passe : utilisez « Se connecter en utilisateur de démo » dans l'application."
+    fr: "Pas de mot de passe : utilisez le bouton « Log in as demo user » dans l'application."
   },
   featured: false,
   order: 3,

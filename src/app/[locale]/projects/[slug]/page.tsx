@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { getProject, getProjects, pick } from "@/lib/projects";
-import { alternates } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 import { ProjectClient, ProjectEcommerce, ProjectFullstack, ProjectMobile } from "@/components/templates";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -19,11 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return {
-    title: project.title,
-    description: pick(project.summary, locale as Locale) ?? undefined,
-    alternates: alternates(locale, `/projects/${slug}`),
-  };
+  const text = { title: project.title, description: pick(project.summary, locale as Locale) ?? undefined };
+  return { ...text, ...pageMeta(locale, `/projects/${slug}`, text) };
 }
 
 export default async function ProjectPage({ params }: Props) {

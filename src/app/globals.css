@@ -279,11 +279,12 @@
   .prose-doc > * + * {
     margin-top: 16px;
   }
-  .prose-doc ul {
+  /* Only plain Markdown lists; component lists (gallery grid) carry their own classes. */
+  .prose-doc ul:not([class]) {
     list-style: disc;
     padding-inline-start: 1.25em;
   }
-  .prose-doc ol {
+  .prose-doc ol:not([class]) {
     list-style: decimal;
     padding-inline-start: 1.25em;
   }

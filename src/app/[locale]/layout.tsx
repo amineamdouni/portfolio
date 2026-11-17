@@ -7,7 +7,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
 import { routing } from "@/i18n/routing";
 import { site } from "@/lib/site";
-import { alternates } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 import { Providers } from "@/components/Providers";
 import { SiteHeader } from "@/components/SiteHeader";
 import { PageFooter } from "@/components/PageFooter";
@@ -44,8 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(site.url),
     title: { default: t("siteTitle"), template: `%s · ${site.name}` },
     description: t("siteDescription"),
-    alternates: alternates(locale, ""),
-    openGraph: { type: "website", siteName: site.name, locale: locale === "fr" ? "fr_FR" : "en_US" },
+    ...pageMeta(locale, "", { title: t("siteTitle"), description: t("siteDescription") }),
     twitter: { card: "summary_large_image" },
   };
 }

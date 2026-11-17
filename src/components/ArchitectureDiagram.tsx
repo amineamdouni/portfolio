@@ -1,5 +1,6 @@
-import { getTranslations } from "next-intl/server";
-import type { DiagramColumn } from "@content/projects/types";
+import { getLocale, getTranslations } from "next-intl/server";
+import type { DiagramColumn, DiagramText } from "@content/projects/types";
+import type { Locale } from "@/i18n/routing";
 
 const COL_W = 190;
 const GAP = 56;
@@ -13,8 +14,15 @@ const GROUP_PAD = 14;
  * Simple SVG architecture diagram (full-stack pages only). It never scales
  * text down: the SVG keeps its natural size and the frame scrolls instead.
  */
-export async function ArchitectureDiagram({ columns }: { columns: DiagramColumn[] }) {
+export async function ArchitectureDiagram({ columns: raw }: { columns: DiagramColumn[] }) {
   const t = await getTranslations("diagram");
+  const locale = (await getLocale()) as Locale;
+  const text = (v: DiagramText): string => (typeof v === "string" ? v : v[locale]);
+  const columns = raw.map((c) => ({
+    ...c,
+    title: text(c.title),
+    nodes: c.nodes.map((n) => ({ name: text(n.name), note: n.note === undefined ? undefined : text(n.note) })),
+  }));
   const maxNodes = Math.max(...columns.map((c) => c.nodes.length));
   const groupH = GROUP_PAD * 2 + TITLE_H + maxNodes * NODE_H + (maxNodes - 1) * NODE_GAP;
   const width = PAD * 2 + columns.length * COL_W + (columns.length - 1) * GAP;

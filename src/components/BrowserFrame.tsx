@@ -31,7 +31,7 @@ export function BrowserFrame({
             {url}
           </span>
           {sampleDataLabel && (
-            <span className="inline-flex h-5 items-center rounded-xs border bg-warning-subtle px-[7px] font-mono text-[10px] whitespace-nowrap text-warning uppercase">
+            <span className="hidden h-5 shrink-0 items-center rounded-xs border bg-warning-subtle px-[7px] font-mono text-[10px] whitespace-nowrap text-warning uppercase sm:inline-flex">
               {sampleDataLabel}
             </span>
           )}

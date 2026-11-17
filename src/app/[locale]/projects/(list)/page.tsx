@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { categories, getProjects, isCategory, type Category } from "@/lib/projects";
-import { alternates } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
 import { EmptyState, buttonClass, cx } from "@/components/ui";
 
@@ -14,11 +14,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return {
-    title: t("projectsTitle"),
-    description: t("projectsDescription"),
-    alternates: alternates(locale, "/projects"),
-  };
+  const text = { title: t("projectsTitle"), description: t("projectsDescription") };
+  return { ...text, ...pageMeta(locale, "/projects", text) };
 }
 
 export default async function ProjectsPage({ params, searchParams }: Props) {

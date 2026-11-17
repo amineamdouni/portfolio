@@ -1,6 +1,7 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { Suspense, useSyncExternalStore } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -52,24 +53,45 @@ export function ThemeToggle() {
   );
 }
 
+/**
+ * EN/FR toggle. The accessible name starts with the visible code ("FR, Français")
+ * so it matches what sighted voice-control users see (WCAG 2.5.3). The projects
+ * filter (?type=) is carried over; reading the query needs a Suspense boundary
+ * on static pages, so the server renders the link without it.
+ */
 export function LocaleSwitch() {
+  return (
+    <Suspense fallback={<LocaleSwitchLink search="" />}>
+      <LocaleSwitchWithQuery />
+    </Suspense>
+  );
+}
+
+function LocaleSwitchWithQuery() {
+  const params = useSearchParams();
+  const type = params.get("type");
+  return <LocaleSwitchLink search={type ?? ""} />;
+}
+
+function LocaleSwitchLink({ search }: { search: string }) {
   const t = useTranslations("locale");
   const locale = useLocale();
   const pathname = usePathname();
   const other = routing.locales.find((l) => l !== locale) ?? routing.defaultLocale;
+  const href = search ? { pathname, query: { type: search } } : pathname;
 
   return (
     <Link
-      href={pathname}
+      href={href}
       locale={other}
       hrefLang={other}
       lang={other}
-      aria-label={t("switchLabel")}
       title={t("switchLabel")}
       data-testid="locale-switch"
       className={cx(iconButton, "font-mono text-[13px] font-medium tracking-[0.04em]")}
     >
       {t("switchShort")}
+      <span className="sr-only">, {t("switchLabel")}</span>
     </Link>
   );
 }

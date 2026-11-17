@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { alternates } from "@/lib/seo";
+import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { SkillsList } from "@/components/SkillsList";
 import { SectionHeading, buttonClass, iconProps } from "@/components/ui";
@@ -15,7 +15,8 @@ const langs = ["arabic", "english", "french"] as const;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: t("aboutTitle"), description: t("aboutDescription"), alternates: alternates(locale, "/about") };
+  const text = { title: t("aboutTitle"), description: t("aboutDescription") };
+  return { ...text, ...pageMeta(locale, "/about", text) };
 }
 
 export default async function AboutPage({ params }: Props) {

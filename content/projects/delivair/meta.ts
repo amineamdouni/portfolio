@@ -58,9 +58,9 @@ const meta: ProjectMeta = {
       "Open a traveller and send a message (replies are scripted), then use \"Reset demo\" to start over."
     ],
     fr: [
-      "Touchez « Continuer en utilisateur de démo » sur l'écran de connexion.",
+      "Touchez « Continue as demo user » (continuer en utilisateur de démo) sur l'écran de connexion.",
       "Sur l'accueil, saisissez Tunis et Paris puis confirmez : l'avion cherche, puis faites défiler les voyageurs trouvés.",
-      "Ouvrez un voyageur et envoyez un message (les réponses sont scriptées), puis « Réinitialiser la démo » pour recommencer."
+      "Ouvrez un voyageur et envoyez un message (les réponses sont scriptées), puis « Reset demo » pour recommencer."
     ]
   },
   featured: true,

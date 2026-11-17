@@ -13,6 +13,9 @@ export default function NotFound() {
 
   return (
     <section className="pt-16 pb-24 md:pt-[120px] md:pb-40">
+      {/* A nested not-found can't export metadata; React hoists these into <head>. */}
+      <title>{`${t("notFound.title")} · Amine Amdouni`}</title>
+      <meta name="robots" content="noindex" />
       <p className="mb-5 font-mono text-[13px] tracking-[0.04em] text-text-muted uppercase">{t("notFound.eyebrow")}</p>
       <h1 className="max-w-[18ch] text-display leading-[1.1]">{t("notFound.title")}</h1>
       <p className="mt-5 mb-8 max-w-[48ch] text-text-secondary">{t("notFound.text")}</p>

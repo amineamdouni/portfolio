@@ -34,9 +34,11 @@ export type Shot = {
   caption?: Localized;
 };
 
-export type DiagramNode = { name: string; note?: string };
+/** Diagram label: a product or tech name as-is, or a generic word translated. */
+export type DiagramText = string | Localized;
+export type DiagramNode = { name: DiagramText; note?: DiagramText };
 export type DiagramColumn = {
-  title: string;
+  title: DiagramText;
   kind?: "plain" | "accent" | "external";
   nodes: DiagramNode[];
   /** Arrow drawn to the right of this column. */

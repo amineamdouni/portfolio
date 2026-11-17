@@ -201,6 +201,7 @@ test("404 inside a locale", async ({ page, consoleErrors }) => {
   expect(res?.status()).toBe(404);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("This page doesn't exist");
   await expect(page.getByRole("link", { name: "Go to the home page" })).toBeVisible();
+  await expect(page).toHaveTitle("This page doesn't exist · Amine Amdouni");
   // The browser logs the document's own 404 status; that one is expected.
   const unexpected = consoleErrors.filter((e) => !/status of 404/.test(e));
   expect(unexpected).toEqual([]);
@@ -215,6 +216,16 @@ test("language toggle keeps the page", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("À propos");
   await page.getByTestId("locale-switch").click();
   await expect(page).toHaveURL(/\/en\/about$/);
+});
+
+test("language toggle: name contains its visible text, filter is kept", async ({ page }) => {
+  await page.goto("/en/projects?type=mobile");
+  const toggle = page.getByTestId("locale-switch");
+  await expect(toggle).toHaveAccessibleName(/^FR\b.*Français/);
+  await expect(toggle).toHaveAttribute("href", "/fr/projects?type=mobile");
+  await toggle.click();
+  await expect(page).toHaveURL(/\/fr\/projects\?type=mobile$/);
+  await expect(page.getByTestId("project-card")).toHaveCount(3);
 });
 
 test("theme toggle switches and persists", async ({ page }) => {
@@ -239,6 +250,7 @@ test("follows the system theme by default", async ({ page }) => {
 test("sitemap, robots and Open Graph image", async ({ request }) => {
   expect((await request.get("/sitemap.xml")).ok()).toBe(true);
   expect((await request.get("/robots.txt")).ok()).toBe(true);
-  const og = await request.get("/en/projects/delivair/opengraph-image");
+  const og = await request.get("/en/projects/delivair/opengraph-image/card");
   expect(og.headers()["content-type"]).toContain("image/png");
+  for (const icon of ["/icon.svg", "/apple-icon"]) expect((await request.get(icon)).ok(), icon).toBe(true);
 });

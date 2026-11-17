@@ -49,7 +49,7 @@ const meta: ProjectMeta = {
       title: "Client",
       nodes: [
         {
-          name: "Browser"
+          name: { en: "Browser", fr: "Navigateur" }
         }
       ],
       arrow: "plain"
@@ -59,7 +59,7 @@ const meta: ProjectMeta = {
       kind: "accent",
       nodes: [
         {
-          name: "Customer site"
+          name: { en: "Customer site", fr: "Site client" }
         }
       ],
       arrow: "accent"
@@ -68,7 +68,7 @@ const meta: ProjectMeta = {
       title: "API · NestJS",
       nodes: [
         {
-          name: "REST API",
+          name: { en: "REST API", fr: "API REST" },
           note: "Prisma"
         },
         {
@@ -78,18 +78,18 @@ const meta: ProjectMeta = {
       arrow: "plain"
     },
     {
-      title: "Data",
+      title: { en: "Data", fr: "Données" },
       nodes: [
         {
           name: "PostgreSQL",
-          note: "trustit schema"
+          note: { en: "trustit schema", fr: "schéma trustit" }
         }
       ]
     }
   ],
   demoHint: {
     en: "No password needed: use \"Log in as demo user\" on the site. To track a repair without logging in, enter the sample code DEMO42.",
-    fr: "Pas de mot de passe : utilisez « Se connecter en utilisateur de démo » sur le site. Pour suivre une réparation sans connexion, saisissez le code d'exemple DEMO42."
+    fr: "Pas de mot de passe : utilisez le bouton « Log in as demo user » sur le site. Pour suivre une réparation sans connexion, saisissez le code d'exemple DEMO42."
   },
   featured: true,
   order: 1,

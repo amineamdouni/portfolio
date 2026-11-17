@@ -63,7 +63,7 @@ export async function ProjectMobile({ project }: { project: ProjectMeta }) {
       <ProjectHeader project={project} />
       <section id="demo" className="mt-16 md:mt-24" data-template="mobile">
         <SectionHeading>{t("project.tryDemo")}</SectionHeading>
-        <div className="mt-8 grid items-start gap-8 lg:grid-cols-[390px_minmax(0,1fr)] lg:gap-20">
+        <div className="mt-8 grid items-start gap-8 *:min-w-0 lg:grid-cols-[390px_minmax(0,1fr)] lg:gap-20">
           <PhoneFrame title={project.title} demoUrl={project.demoUrl} fallbackSrc={fallback} />
           <div>
             {steps.length > 0 && (
@@ -119,7 +119,7 @@ export async function ProjectFullstack({ project }: { project: ProjectMeta }) {
         <SectionHeading>{t("project.liveDemo")}</SectionHeading>
         <DemoNotice className="mt-8" />
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
-          <div className="order-3 lg:order-1">
+          <div className="order-3 min-w-0 lg:order-1">
             <BrowserFrame
               url={project.demoUrl ? hostOf(project.demoUrl) : `${project.slug}.example`}
               sampleDataLabel={t("demo.sampleData")}
@@ -136,7 +136,7 @@ export async function ProjectFullstack({ project }: { project: ProjectMeta }) {
               )}
             </BrowserFrame>
           </div>
-          <div className="order-1 flex flex-col gap-5 lg:order-2">
+          <div className="order-1 flex min-w-0 flex-col gap-5 lg:order-2">
             {project.demoUrl ? (
               <LiveDemoButton demoUrl={project.demoUrl} healthUrl={project.healthUrl} wakeMinutes={project.wakeMinutes} />
             ) : (
