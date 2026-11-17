@@ -375,6 +375,34 @@
     1440,
     900
   ],
+  "sift/board-desktop": [
+    1440,
+    900
+  ],
+  "sift/board-mobile": [
+    780,
+    1688
+  ],
+  "sift/boards-desktop": [
+    1440,
+    900
+  ],
+  "sift/login-desktop": [
+    1440,
+    900
+  ],
+  "sift/settings-labels-desktop": [
+    1440,
+    900
+  ],
+  "sift/settings-members-desktop": [
+    1440,
+    900
+  ],
+  "sift/ticket-desktop": [
+    1440,
+    900
+  ],
   "smilescan/home-desktop": [
     1440,
     900

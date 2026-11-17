@@ -42,8 +42,15 @@ const meta: ProjectMeta = {
     url: null
   },
   liveUrl: null,
-  // TODO (shots batch 2/3): add screenshots with shotsFor("sift", [...]).
-  shots: shotsFor("sift", []),
+  shots: shotsFor("sift", [
+    ["board-desktop", "A board with columns of tickets, labels and assignees.", "Un tableau avec ses colonnes de tickets, étiquettes et personnes assignées."],
+    ["ticket-desktop", "Ticket panel with description, labels, assignees, dates, checklist and comments.", "Panneau d'un ticket avec description, étiquettes, personnes assignées, dates, checklist et commentaires."],
+    ["boards-desktop", "Boards home listing the two sample boards.", "Accueil des tableaux avec les deux tableaux d'exemple."],
+    ["settings-labels-desktop", "Board settings for an admin: labels and categories.", "Réglages d'un tableau pour un admin : étiquettes et catégories."],
+    ["settings-members-desktop", "Board settings for an admin: members and visibility.", "Réglages d'un tableau pour un admin : membres et visibilité."],
+    ["login-desktop", "Login page with the \"Log in as demo user\" button.", "Page de connexion avec le bouton de connexion en utilisateur de démo."],
+    ["board-mobile", "The board on a phone.", "Le tableau sur téléphone."],
+  ]),
   architecture: [
     {
       title: "Client",
