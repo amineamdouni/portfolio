@@ -1,6 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { site } from "@/lib/site";
+import { cvPath, site } from "@/lib/site";
 
 const plainLink =
   "w-fit text-[15px] text-text-primary no-underline hover:text-text-primary hover:underline";
@@ -8,6 +8,7 @@ const plainLink =
 export async function PageFooter() {
   const t = await getTranslations("footer");
   const nav = await getTranslations("nav");
+  const locale = await getLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -42,11 +43,9 @@ export async function PageFooter() {
               {t("github")}
             </a>
             <p className="text-[15px] text-text-muted">{t("address")}</p>
-            {site.showCvDownload && (
-              <a href={site.cvPath} className={plainLink} download>
-                {t("downloadCv")}
-              </a>
-            )}
+            <a href={cvPath(locale)} className={plainLink} download>
+              {t("downloadCv")}
+            </a>
           </div>
         </div>
         <p className="mt-7 border-t pt-5 font-mono text-xs text-text-muted">{t("note", { year })}</p>

@@ -42,7 +42,6 @@ Environment variables (all optional, none secret):
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Absolute URL for sitemap, canonical and Open Graph links. Default `https://amine-amdouni.vercel.app`. |
-| `NEXT_PUBLIC_SHOW_CV` | `1` shows the "Download CV" buttons. Keep unset until `public/cv.pdf` exists. |
 
 ## Structure
 

@@ -10,8 +10,8 @@ const meta: ProjectMeta = {
     fr: "Site de réservation de réparations : choisir l'appareil, décrire le problème, suivre la réparation."
   },
   role: {
-    en: "Solo project",
-    fr: "Projet solo"
+    en: "Solo, at InnoThink",
+    fr: "Solo, chez InnoThink"
   },
   team: {
     kind: "solo"

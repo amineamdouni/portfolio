@@ -18,14 +18,22 @@ test.describe("home", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Full-stack developer");
     await expect(page.getByTestId("project-card")).toHaveCount(4);
-    // The CV button is hidden until the final CV arrives (Gate C).
-    await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(0);
+    // Hero and footer both link the English CV.
+    const cv = page.getByRole("link", { name: "Download CV" });
+    await expect(cv).toHaveCount(2);
+    await expect(cv.first()).toHaveAttribute("href", "/Amine_Amdouni_CV_EN.pdf");
   });
 
   test("renders in French", async ({ page }) => {
     await page.goto("/fr");
     await expect(page.locator("html")).toHaveAttribute("lang", "fr");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Développeur full-stack");
+    await expect(page.getByRole("link", { name: "Télécharger le CV" }).first()).toHaveAttribute(
+      "href",
+      "/Amine_Amdouni_CV_FR.pdf",
+    );
+    const pdf = await page.request.get("/Amine_Amdouni_CV_FR.pdf");
+    expect(pdf.headers()["content-type"]).toContain("application/pdf");
   });
 
   for (const path of ["/en", "/fr", "/en/projects", "/fr/projects"]) {
@@ -181,7 +189,10 @@ test("about", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
   await expect(page.getByRole("heading", { name: "Agile team lead" })).toBeVisible();
   await expect(page.getByText("TED University, Tunisia", { exact: false })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(0);
+  await expect(page.getByRole("main").getByRole("link", { name: "Download CV" })).toHaveAttribute(
+    "href",
+    "/Amine_Amdouni_CV_EN.pdf",
+  );
 });
 
 test("contact details live in the footer; /contact redirects home", async ({ page }) => {

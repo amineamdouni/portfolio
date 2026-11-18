@@ -2,7 +2,7 @@ import { ArrowRight, Download, ExternalLink, Mail, Phone } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFeatured, getProjects } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { cvPath, site } from "@/lib/site";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SkillsList } from "@/components/SkillsList";
 import { SectionHeading, buttonClass, iconProps } from "@/components/ui";
@@ -25,12 +25,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {t("viewProjects")}
             <ArrowRight {...iconProps} className="rtl:-scale-x-100" />
           </Link>
-          {site.showCvDownload && (
-            <a href={site.cvPath} download className={buttonClass("secondary")}>
-              <Download {...iconProps} />
-              {t("downloadCv")}
-            </a>
-          )}
+          <a href={cvPath(locale)} download className={buttonClass("secondary")}>
+            <Download {...iconProps} />
+            {t("downloadCv")}
+          </a>
         </div>
       </section>
 

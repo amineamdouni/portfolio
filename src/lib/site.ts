@@ -12,11 +12,10 @@ export const site = {
   linkedinUrl: "https://www.linkedin.com/in/amine-amdouni",
   linkedinDisplay: "linkedin.com/in/amine-amdouni",
   githubUrl: "https://github.com/amineamdouni",
-  cvPath: "/cv.pdf",
-  /**
-   * The final CV arrives at Gate C. Until then every "Download CV" control is
-   * hidden and public/cv.pdf does not exist. Set NEXT_PUBLIC_SHOW_CV=1 once
-   * public/cv.pdf is in place.
-   */
-  showCvDownload: process.env.NEXT_PUBLIC_SHOW_CV === "1",
+  /** One CV per locale, in public/. Sources live outside the repo (cv-en.html, cv-fr.html). */
+  cvPaths: { en: "/Amine_Amdouni_CV_EN.pdf", fr: "/Amine_Amdouni_CV_FR.pdf" },
 } as const;
+
+export function cvPath(locale: string): string {
+  return locale === "fr" ? site.cvPaths.fr : site.cvPaths.en;
+}

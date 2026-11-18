@@ -7,7 +7,7 @@ export const skillGroups = [
   { key: "backend", items: ["NestJS", "Node.js", "Express.js", "Spring Boot", "REST APIs", "WebSockets"] },
   { key: "databases", items: ["PostgreSQL", "Prisma", "Redis", "MySQL", "MongoDB"] },
   { key: "aiPayments", items: ["Anthropic and OpenAI APIs", "Stripe", "MyFatoorah"] },
-  { key: "tools", items: ["Git", "GitHub Actions", "AWS", "Turborepo", "Jest", "Vitest", "Playwright", "Agile / Scrum"] },
+  { key: "tools", items: ["Git", "GitHub Actions", "Docker", "AWS", "Turborepo", "Jest", "Vitest", "Playwright", "Agile / Scrum"] },
 ] as const;
 
 export async function SkillsList() {

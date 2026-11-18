@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { cvPath } from "@/lib/site";
 import { SkillsList } from "@/components/SkillsList";
 import { SectionHeading, buttonClass, iconProps } from "@/components/ui";
 
@@ -32,15 +32,13 @@ export default async function AboutPage({ params }: Props) {
           <p>{t("p1")}</p>
           <p>{t("p2")}</p>
         </div>
-        {site.showCvDownload && (
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <a href={site.cvPath} download className={buttonClass("primary")}>
-              <Download {...iconProps} />
-              {t("downloadCv")}
-            </a>
-            <span className="font-mono text-[13px] text-text-muted">{t("cvMeta")}</span>
-          </div>
-        )}
+        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a href={cvPath(locale)} download className={buttonClass("primary")}>
+            <Download {...iconProps} />
+            {t("downloadCv")}
+          </a>
+          <span className="font-mono text-[13px] text-text-muted">{t("cvMeta")}</span>
+        </div>
       </section>
 
       <section className="mt-16 md:mt-24" aria-labelledby="experience">

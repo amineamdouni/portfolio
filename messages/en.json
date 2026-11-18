@@ -168,7 +168,7 @@
     "remote": "Remote",
     "jobs": {
       "freelance": {
-        "period": "July 2026 — present",
+        "period": "Jul 2026 — present",
         "role": "Freelance full-stack developer",
         "meta": "Remote",
         "points": [
@@ -180,7 +180,7 @@
         ]
       },
       "billcom": {
-        "period": "August 2025",
+        "period": "Aug 2025",
         "role": "Full-stack developer intern",
         "meta": "Billcom Consulting",
         "points": [
@@ -189,7 +189,7 @@
         ]
       },
       "swiver": {
-        "period": "July 2025",
+        "period": "Jul 2025",
         "role": "Software developer intern",
         "meta": "Swiver",
         "points": [
@@ -198,7 +198,7 @@
         ]
       },
       "innothinkLead": {
-        "period": "January 2024 — October 2024",
+        "period": "Jan 2024 — Oct 2024",
         "role": "Agile team lead",
         "meta": "InnoThink · team of 6",
         "points": [
@@ -208,7 +208,7 @@
         ]
       },
       "innothinkDev": {
-        "period": "February 2023 — December 2023",
+        "period": "Feb 2023 — Dec 2023",
         "role": "Full-stack developer",
         "meta": "InnoThink",
         "points": [
