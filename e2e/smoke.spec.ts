@@ -200,7 +200,7 @@ test("contact details live in the footer; /contact redirects home", async ({ pag
   await expect(page).toHaveURL(/\/en(#contact)?$/);
   const footer = page.getByTestId("footer-contact");
   await expect(footer.getByRole("link", { name: "amineamdouni24@gmail.com" })).toHaveAttribute("href", "mailto:amineamdouni24@gmail.com");
-  await expect(footer.getByRole("link", { name: "+216 50 917 560" })).toHaveAttribute("href", "tel:+21650917560");
+  await expect(footer.getByRole("link", { name: "+216 52 079 640" })).toHaveAttribute("href", "tel:+21652079640");
   await expect(footer.getByRole("link", { name: "LinkedIn" })).toHaveAttribute("href", "https://www.linkedin.com/in/amine-amdouni");
   await expect(footer.getByText("Tunis, Tunisia")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Contact" })).toHaveCount(0);

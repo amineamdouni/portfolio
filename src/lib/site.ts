@@ -7,8 +7,8 @@ export const site = {
   /** Wave 4: set NEXT_PUBLIC_SITE_URL to the final Vercel URL. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://amine-amdouni.vercel.app",
   email: "amineamdouni24@gmail.com",
-  phoneDisplay: "+216 50 917 560",
-  phoneHref: "tel:+21650917560",
+  phoneDisplay: "+216 52 079 640",
+  phoneHref: "tel:+21652079640",
   linkedinUrl: "https://www.linkedin.com/in/amine-amdouni",
   linkedinDisplay: "linkedin.com/in/amine-amdouni",
   githubUrl: "https://github.com/amineamdouni",
