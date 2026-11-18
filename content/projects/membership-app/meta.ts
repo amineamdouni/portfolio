@@ -28,8 +28,7 @@ const meta: ProjectMeta = {
     "TypeScript",
     "zustand",
     "React Query",
-    "zod",
-    "Playwright"
+    "zod"
   ],
   demoUrl: "https://membership-app-demo.vercel.app",
   healthUrl: null,

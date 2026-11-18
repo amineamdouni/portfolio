@@ -41,7 +41,7 @@ La connexion pose un cookie httpOnly depuis des route handlers Next, et un proxy
 
 Les modules couvrent la santé, l'authentification (connexion, connexion de démo, déconnexion), l'utilisateur courant (profil, mot de passe), les utilisateurs (étudiants, encadrants), les PFE (CRUD, affectation, statut, avancement, archivage et restauration, livrables) et les statistiques par rôle. Des gardes globaux gèrent la limitation de débit par IP, le JWT (l'utilisateur est chargé à chaque requête, avec une version de jeton et un changement de mot de passe forcé pour les nouveaux comptes) et les rôles. Les erreurs ont des codes stables. La migration ajoute du SQL brut pour l'index unique partiel et pour des contrôles sur l'avancement (0 à 100), la taille du livrable (2 Mo au plus), le format du CIN et l'e-mail en minuscules.
 
-Tests : 6 tests unitaires pour la table des transitions de statut, 45 tests de bout en bout de l'API (les deux règles, y compris une course concurrente, l'affectation, chaque rôle et chaque transition renvoyant le bon 403 ou 409, la propriété des données, les livrables, les jetons révoqués, le parcours du mot de passe temporaire et les limites 429 et 413) et 3 tests Playwright, un par rôle. La CI lance lint, typecheck, tests unitaires, bout en bout, build et tests Playwright à chaque push.
+Tests : 6 tests unitaires pour la table des transitions de statut, 45 tests de bout en bout de l'API (les deux règles, y compris une course concurrente, l'affectation, chaque rôle et chaque transition renvoyant le bon 403 ou 409, la propriété des données, les livrables, les jetons révoqués, le parcours du mot de passe temporaire et les limites 429 et 413). La CI lance lint, typecheck, tests unitaires, bout en bout et build à chaque push.
 
 </Section>
 

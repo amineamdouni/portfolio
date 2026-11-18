@@ -34,7 +34,7 @@ Autres choix : des contraintes CHECK en base pour la note (1 à 5), la longueur 
 
 L'API expose des vérifications de santé (avec et sans base de données), la connexion et une connexion de démo qui ne fonctionne que si le mode démo est activé, le profil du client, le catalogue d'appareils, les centres et les experts, le suivi par code, le CRUD des réparations limité aux réparations du client, les avis et les articles. Le contenu des articles est assaini à la lecture. Un garde JWT global protège tout sauf les routes marquées publiques, les entrées sont validées par liste blanche, et toutes les erreurs ont la même forme : statut, code et message.
 
-L'API compte 31 tests de bout en bout (Jest et supertest, sur un schéma séparé) qui couvrent la connexion, la création de réparation, le suivi, la propriété des données, les limites et la limitation de débit elle-même. Quatre tests Playwright pilotent le site, dont la réservation via l'assistant, le suivi du nouveau code et la mise en page mobile. La CI lance lint, typecheck, tests, build et tests navigateur à chaque push.
+L'API compte 31 tests de bout en bout (Jest et supertest, sur un schéma séparé) qui couvrent la connexion, la création de réparation, le suivi, la propriété des données, les limites et la limitation de débit elle-même. La CI lance lint, typecheck, tests et build à chaque push.
 
 </Section>
 

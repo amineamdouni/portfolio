@@ -40,7 +40,7 @@ Admin sessions use an httpOnly cookie through a same-origin proxy. Each admin ha
 
 Routes cover cars (public list and detail, archived cars hidden), availability, rentals (public create, lookup by reference and email, admin list and status changes), contact requests, admin stats and car CRUD, and photo upload. Uploads are limited to 2 MB, JPEG, PNG or WebP checked by file signature, 6 per car and 40 in total, and stored in the database. Throttling is 60 requests a minute per IP across the API, with a stricter 10 a minute on login, booking and contact.
 
-Tests: 17 unit tests for pricing, 57 end-to-end API tests (availability, parallel bookings, auth and forged tokens, car CRUD, upload limits, a 413 on large bodies, CORS, the rate limit), and Playwright tests on the site and the admin (3 each). I also removed a guard on purpose to check the tests fail without it: dropping the month cap, the row lock and the token-purpose check each broke a test. CI runs everything on a Postgres service.
+Tests: 17 unit tests for pricing, 57 end-to-end API tests (availability, parallel bookings, auth and forged tokens, car CRUD, upload limits, a 413 on large bodies, CORS, the rate limit). I also removed a guard on purpose to check the tests fail without it: dropping the month cap, the row lock and the token-purpose check each broke a test. CI runs everything on a Postgres service.
 
 </Section>
 

@@ -26,8 +26,7 @@ const meta: ProjectMeta = {
     "Expo Router",
     "TypeScript",
     "Reanimated",
-    "zustand",
-    "Playwright"
+    "zustand"
   ],
   demoUrl: "https://delivair-demo.vercel.app",
   healthUrl: null,

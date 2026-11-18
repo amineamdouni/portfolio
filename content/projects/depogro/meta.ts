@@ -27,8 +27,7 @@ const meta: ProjectMeta = {
     "TypeScript",
     "React Navigation",
     "zustand",
-    "i18next",
-    "Playwright"
+    "i18next"
   ],
   demoUrl: "https://depogro-demo.vercel.app",
   healthUrl: null,

@@ -26,8 +26,7 @@ const meta: ProjectMeta = {
     "Tailwind CSS",
     "MongoDB",
     "Mongoose",
-    "TypeScript",
-    "Playwright"
+    "TypeScript"
   ],
   demoUrl: null,
   healthUrl: null,

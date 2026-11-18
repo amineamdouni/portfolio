@@ -41,7 +41,7 @@ Sign-in sets an httpOnly cookie from Next route handlers, and a proxy adds the b
 
 Modules cover health, auth (login, demo login, logout), the current user (profile, password), users (students, supervisors), PFEs (CRUD, assignment, status, progress, archive and restore, deliverables), and stats per role. Global guards handle rate limiting per client IP, JWT (the user is loaded on every request, with a token version and a forced password change for new accounts) and roles. Errors have stable codes. The migration adds raw SQL for the partial unique index and for checks on progress (0 to 100), deliverable size (2 MB at most), ID number format and lower-case email.
 
-Tests: 6 unit tests for the status transition table, 45 end-to-end API tests (both rules including a concurrent race, assignment, every role and transition returning the right 403 or 409, ownership, deliverables, revoked tokens, the temporary-password flow, and the 429 and 413 limits) and 3 Playwright smoke tests, one per role. CI runs lint, typecheck, unit, end-to-end, build and the smoke tests on every push.
+Tests: 6 unit tests for the status transition table, 45 end-to-end API tests (both rules including a concurrent race, assignment, every role and transition returning the right 403 or 409, ownership, deliverables, revoked tokens, the temporary-password flow, and the 429 and 413 limits). CI runs lint, typecheck, unit, end-to-end and build on every push.
 
 </Section>
 

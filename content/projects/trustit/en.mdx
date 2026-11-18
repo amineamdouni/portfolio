@@ -34,7 +34,7 @@ Other choices: database CHECK constraints for the rating (1 to 5), the comment l
 
 The API exposes health checks (with and without the database), login and a demo login that only works when demo mode is on, the customer's profile, the device catalogue, repair centres and experts, tracking by code, repair CRUD limited to the customer's own repairs, reviews and blogs. Blog content is sanitised when it is read. A global JWT guard protects everything except routes marked public, input is validated with a whitelist, and every error has the same shape: status, code and message.
 
-The API has 31 end-to-end tests (Jest and supertest, against a separate schema) covering login, repair creation, tracking, ownership, limits and the rate limit itself. Four Playwright tests run the site, including booking through the wizard, tracking the new code and the mobile layout. CI runs lint, typecheck, tests, build and the browser tests on every push.
+The API has 31 end-to-end tests (Jest and supertest, against a separate schema) covering login, repair creation, tracking, ownership, limits and the rate limit itself. CI runs lint, typecheck, tests and build on every push.
 
 </Section>
 

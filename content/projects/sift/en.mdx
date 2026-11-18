@@ -36,7 +36,7 @@ The trade-off: the original ran on MySQL, and I moved to PostgreSQL with Flyway 
 
 Every endpoint needs a token except login, the demo login and the health checks. The token holds the user id and the user is loaded on every request, so a deleted account stops working at once. Board roles live on the membership rather than the user, and each request resolves its resource to a board and checks the caller's role. People outside a board get a 404, so the API does not reveal that the board exists. Comment authors come from the token. Errors share one shape. Limits are 60 requests a minute per IP and 100 kB per request, plus caps per board on tickets, comments, labels and categories.
 
-Tests are JUnit with Testcontainers on a real PostgreSQL: authentication (including a sweep that checks every mapped endpoint returns 401 without a token), board CRUD and scoping, and reordering (moves within and across columns, rollback on a foreign id, and concurrent reorders). Playwright covers login, creating a ticket, dragging between columns with the mouse and the keyboard and reloading, commenting, and Member versus Admin controls, and fails on any console error. The API runs in Docker with JVM flags set for a 512 MB host.
+Tests are JUnit with Testcontainers on a real PostgreSQL: authentication (including a sweep that checks every mapped endpoint returns 401 without a token), board CRUD and scoping, and reordering (moves within and across columns, rollback on a foreign id, and concurrent reorders). The API runs in Docker with JVM flags set for a 512 MB host.
 
 </Section>
 

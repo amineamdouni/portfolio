@@ -22,8 +22,7 @@ const meta: ProjectMeta = {
     "React",
     "TypeScript",
     "Tailwind CSS",
-    "Radix UI",
-    "Playwright"
+    "Radix UI"
   ],
   demoUrl: "https://digitalynx-ten.vercel.app",
   healthUrl: null,
