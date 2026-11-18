@@ -9,8 +9,8 @@ export const site = {
   email: "amineamdouni24@gmail.com",
   phoneDisplay: "+216 52 079 640",
   phoneHref: "tel:+21652079640",
-  linkedinUrl: "https://www.linkedin.com/in/amine-amdouni",
-  linkedinDisplay: "linkedin.com/in/amine-amdouni",
+  linkedinUrl: "https://www.linkedin.com/in/amineamdouni",
+  linkedinDisplay: "linkedin.com/in/amineamdouni",
   githubUrl: "https://github.com/amineamdouni",
   /** One CV per locale, in public/. Sources live outside the repo (cv-en.html, cv-fr.html). */
   cvPaths: { en: "/Amine_Amdouni_CV_EN.pdf", fr: "/Amine_Amdouni_CV_FR.pdf" },
