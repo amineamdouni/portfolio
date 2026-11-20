@@ -327,6 +327,10 @@
     1440,
     900
   ],
+  "nexus/ai-suggestions-desktop": [
+    1440,
+    900
+  ],
   "nexus/archive-fr-desktop": [
     1440,
     900
@@ -334,6 +338,18 @@
   "nexus/archive-search-desktop": [
     1440,
     900
+  ],
+  "nexus/guide-desktop": [
+    1440,
+    900
+  ],
+  "nexus/landing-desktop": [
+    1440,
+    900
+  ],
+  "nexus/landing-mobile": [
+    780,
+    1688
   ],
   "nexus/login-desktop": [
     1440,
@@ -343,11 +359,19 @@
     780,
     1688
   ],
+  "nexus/messages-desktop": [
+    1440,
+    900
+  ],
   "nexus/pfe-detail-desktop": [
     1440,
     900
   ],
   "nexus/pfes-desktop": [
+    1440,
+    900
+  ],
+  "nexus/settings-desktop": [
     1440,
     900
   ],
@@ -360,6 +384,10 @@
     1688
   ],
   "nexus/supervisor-dashboard-desktop": [
+    1440,
+    900
+  ],
+  "nexus/supervisors-desktop": [
     1440,
     900
   ],

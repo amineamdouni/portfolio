@@ -6,9 +6,9 @@
 
 <Section number="02" title="Ce que j'ai construit">
 
-J'ai construit Nexus seul entre 2025 et 2026, à partir d'un dossier de présentation qui définissait les acteurs, les cas d'usage et trois sprints.
+J'ai construit Nexus seul entre 2025 et 2026, à partir d'un dossier de présentation qui définissait les acteurs, les cas d'usage et trois sprints, puis d'un cahier des charges qui ajoutait les établissements, la messagerie, les notifications et un module IA.
 
-L'application couvre chaque cas d'usage des trois premiers sprints :
+Le socle couvre chaque cas d'usage des trois premiers sprints :
 
 - Administrateur : créer et supprimer des étudiants et des encadrants, créer, modifier et supprimer des sujets de PFE, affecter un PFE à un étudiant et à un encadrant, voir tous les PFE et les étudiants de chaque encadrant.
 - Encadrant : voir les PFE qu'il encadre, suivre leur avancement et les faire avancer.
@@ -17,36 +17,61 @@ L'application couvre chaque cas d'usage des trois premiers sprints :
 
 Un PFE passe par six statuts : Proposé, Affecté, En cours, Déposé, Terminé, Archivé. Deux règles sont appliquées côté serveur et affichées dans l'interface : un étudiant ne peut avoir qu'un seul PFE actif, et une personne affectée à un PFE actif ne peut pas être supprimée.
 
+La mise à jour de novembre 2026 a ajouté le reste du cahier des charges :
+
+- Établissements et offres : chaque école a ses propres données et réglages, et l'une des trois offres (Essentiel, Standard, Étendu) qui plafonne les PFE créés par année universitaire à 300, 600 ou 1 200. L'administrateur fixe une date limite de dépôt.
+- Profils des encadrants : des mots-clés d'expertise et une capacité. Un encadrant complet ne peut plus recevoir de PFE, et la liste montre ses PFE actifs face à sa capacité.
+- Messagerie : un fil par PFE entre l'étudiant et l'encadrant, avec le nombre de messages non lus. L'administrateur peut lire mais pas écrire, et un PFE archivé passe en lecture seule.
+- Notifications par e-mail à l'affectation, au dépôt du rapport et à chaque changement de statut, en français et en anglais.
+- Alertes de suivi : une liste « À surveiller » signale les PFE dus dans 7 jours ou moins, en retard, ou sans avancement ni dépôt depuis 14 jours.
+- Une page d'accueil publique avec une démo en un clic par rôle, et un guide d'utilisation qui explique les tâches de chaque rôle.
+
 </Section>
 
-<Section number="03" title="Écrans">
+<Section number="03" title="Le module IA">
+
+L'IA propose, l'humain décide. Il est disponible avec les offres Standard et Étendu uniquement, avec un budget mensuel par établissement.
+
+- **Résumés des rapports.** Quand un étudiant dépose son rapport ou passe son PFE en Déposé, une tâche de fond lit le PDF, retire les noms, e-mails, numéros de téléphone et numéros CIN, puis demande à Claude Haiku 5.5 un résumé d'environ 150 mots, 5 à 8 mots-clés, un thème et la langue. Le résultat est vérifié (JSON, longueur, langue, aucune note) et relancé une fois sur Claude Sonnet 5.5 en cas d'échec. Il porte la mention « Généré par IA » ; l'encadrant peut le corriger et l'administrateur le régénérer.
+- **Suggestions d'encadrants.** Le code garde d'abord jusqu'à 8 encadrants qui ont de la place et dont l'expertise touche le sujet. Claude Sonnet 5.5 les classe ensuite avec un score sur 100 et une justification de deux phrases, à partir du sujet, de l'expertise et de la charge uniquement, jamais de données d'étudiant. Sans réponse en 10 secondes, la liste triée par charge s'affiche à la place. Un clic affecte l'encadrant choisi en passant par les règles habituelles.
+- **Maîtrise des coûts.** Chaque appel est enregistré avec sa tâche, son modèle, ses jetons en entrée et en sortie et son coût en dollars. Une fois le budget fixé par l'administrateur atteint, la génération se met en pause jusqu'au mois suivant. La page des réglages affiche les dépenses et le nombre de suggestions acceptées.
+
+</Section>
+
+<Section number="04" title="Écrans">
 
 <Screens />
 
 </Section>
 
-<Section number="04" title="Sous le capot">
+<Section number="05" title="Sous le capot">
 
 Un monorepo pnpm avec `apps/api` (NestJS 11, Prisma 6, PostgreSQL) et `apps/web` (Next.js 16, React 19, Tailwind CSS 4, next-intl). L'interface est construite à partir d'un système de design suivi jeton par jeton, avec un thème clair et un thème sombre.
 
 Le choix que je défendrais : la règle du PFE actif unique vit dans la base de données autant que dans le code. Un index unique partiel empêche un étudiant d'avoir deux PFE actifs même si deux requêtes arrivent en même temps. La règle de suppression verrouille la ligne de l'utilisateur, de sorte que supprimer quelqu'un et l'affecter au même instant ne peut pas laisser un PFE actif sans sa personne. Les deux ont des tests de concurrence.
 
-La connexion pose un cookie httpOnly depuis des route handlers Next, et un proxy ajoute le jeton bearer en route vers l'API : le navigateur ne le détient jamais. Le proxy web bloque les chemins de connexion et de mot de passe quelle que soit la casse.
+La connexion pose un cookie httpOnly depuis des route handlers Next, et un proxy ajoute le jeton bearer en route vers l'API : le navigateur ne le détient jamais. Le proxy web bloque les chemins de connexion et de mot de passe quelle que soit la casse. La déconnexion révoque le jeton côté serveur.
+
+Les e-mails et les tâches IA passent par des files dans Postgres au lieu d'être traités dans la requête. Le service d'envoi tourne toutes les 15 secondes, réessaie avec un délai croissant et n'envoie jamais un message deux fois. Chaque requête est filtrée par établissement : une école ne voit que ses propres utilisateurs, PFE, messages et statistiques.
 
 <Architecture />
 
 </Section>
 
-<Section number="05" title="API et backend">
+<Section number="06" title="API et backend">
 
-Les modules couvrent la santé, l'authentification (connexion, connexion de démo, déconnexion), l'utilisateur courant (profil, mot de passe), les utilisateurs (étudiants, encadrants), les PFE (CRUD, affectation, statut, avancement, archivage et restauration, livrables) et les statistiques par rôle. Des gardes globaux gèrent la limitation de débit par IP, le JWT (l'utilisateur est chargé à chaque requête, avec une version de jeton et un changement de mot de passe forcé pour les nouveaux comptes) et les rôles. Les erreurs ont des codes stables. La migration ajoute du SQL brut pour l'index unique partiel et pour des contrôles sur l'avancement (0 à 100), la taille du livrable (2 Mo au plus), le format du CIN et l'e-mail en minuscules.
+Les modules couvrent la santé, l'authentification (connexion, connexion de démo, déconnexion), l'utilisateur courant (profil, mot de passe), les utilisateurs (étudiants, encadrants), les PFE (CRUD, affectation, statut, avancement, archivage et restauration, livrables), la messagerie, les réglages de l'établissement, l'IA (résumés, suggestions d'encadrants, consommation) et les statistiques par rôle. Des gardes globaux gèrent la limitation de débit par IP, le JWT (l'utilisateur est chargé à chaque requête, avec une version de jeton et un changement de mot de passe forcé pour les nouveaux comptes) et les rôles. Les erreurs ont des codes stables. La migration ajoute du SQL brut pour l'index unique partiel et pour des contrôles sur l'avancement (0 à 100), la taille du livrable (2 Mo au plus), le format du CIN et l'e-mail en minuscules.
 
-Tests : 6 tests unitaires pour la table des transitions de statut, 45 tests de bout en bout de l'API (les deux règles, y compris une course concurrente, l'affectation, chaque rôle et chaque transition renvoyant le bon 403 ou 409, la propriété des données, les livrables, les jetons révoqués, le parcours du mot de passe temporaire et les limites 429 et 413). La CI lance lint, typecheck, tests unitaires, bout en bout et build à chaque push.
+Sans clé d'API Anthropic, le module IA passe en mode simulé et renvoie un résultat fixe sans coût : tout le parcours fonctionne en local.
+
+Tests : 6 tests unitaires pour la table des transitions de statut, 45 tests de bout en bout de l'API (les deux règles, y compris une course concurrente, l'affectation, chaque rôle et chaque transition renvoyant le bon 403 ou 409, la propriété des données, les livrables, les jetons révoqués, le parcours du mot de passe temporaire et les limites 429 et 413). La CI lance lint, typecheck, tests unitaires, bout en bout et build à chaque push, et l'API n'est déployée sur Render que si la CI passe.
 
 </Section>
 
-<Section number="06" title="Résultat">
+<Section number="07" title="Résultat">
 
-**Ce que j'améliorerais.** Ajouter la feuille de filtres mobile prévue par la maquette (les filtres passent à la ligne sur petit écran pour l'instant), et construire les évolutions futures listées dans le dossier, comme un module de coaching et un espace partenariat avec les entreprises.
+Tout le cahier des charges est couvert, module IA compris, et tout tourne dans la démo en ligne.
+
+**Ce que j'améliorerais.** Envoyer de vrais e-mails via un serveur SMTP (la démo se contente de les journaliser), utiliser le traitement par lots pour réduire le coût des résumés, ajouter un contrôle qualité automatique des résumés, et écrire des tests de bout en bout pour les fonctions ajoutées en novembre.
 
 </Section>
