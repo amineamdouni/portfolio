@@ -52,6 +52,32 @@ test.describe("home", () => {
   });
 });
 
+test.describe("security headers", () => {
+  for (const path of ["/en", "/fr/projects/nexus", "/en/does-not-exist"]) {
+    test(`on ${path}`, async ({ page }) => {
+      const h = (await page.request.get(path)).headers();
+      expect(h["x-content-type-options"]).toBe("nosniff");
+      expect(h["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+      expect(h["x-frame-options"]).toBe("SAMEORIGIN");
+      const csp = h["content-security-policy"];
+      expect(csp).toContain("frame-ancestors 'self'");
+      expect(csp).toContain("object-src 'none'");
+      // Every backend and framed demo stays reachable, and nothing is wide open.
+      const connect = csp.split("; ").find((d) => d.startsWith("connect-src"))!;
+      for (const b of backends) expect(connect).toContain(new URL(b).origin);
+      const frames = csp.split("; ").find((d) => d.startsWith("frame-src"))!;
+      for (const p of projects.filter((p) => p.category === "mobile")) expect(frames).toContain(new URL(p.demoUrl!).origin);
+      expect(csp).not.toMatch(/\s\*|https:(?!\/\/)/);
+    });
+  }
+
+  test("the CV opens in the browser's PDF viewer (no CSP on PDFs)", async ({ page }) => {
+    const h = (await page.request.get("/Amine_Amdouni_CV_EN.pdf")).headers();
+    expect(h["x-content-type-options"]).toBe("nosniff");
+    expect(h["content-security-policy"]).toBeUndefined();
+  });
+});
+
 test.describe("projects", () => {
   for (const f of filters) {
     test(`filter: ${f.key}`, async ({ page }) => {
