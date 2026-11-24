@@ -41,7 +41,7 @@
   "home": {
     "eyebrow": "Amine Amdouni · Tunis, Tunisia",
     "title": "Full-stack developer",
-    "lead": "I build web and mobile apps with TypeScript, NestJS, Next.js and React Native, and Spring Boot services in Java. I'm a final-year software engineering student looking for a PFE internship (end-of-studies internship).",
+    "lead": "I build web and mobile apps with TypeScript, NestJS, Next.js and React Native, and Spring Boot services in Java. I'm a final-year software engineering student.",
     "viewProjects": "View projects",
     "downloadCv": "Download CV",
     "selectedWork": "Selected work",
@@ -158,7 +158,7 @@
   "about": {
     "title": "About",
     "p1": "I'm a full-stack developer with 2+ years of experience building web and mobile apps for clients in many fields. I currently build AI-powered online store products, and I previously led a team of 6 developers as an Agile team lead.",
-    "p2": "I'm a final-year software engineering student, looking for a PFE internship (end-of-studies internship).",
+    "p2": "I'm a final-year software engineering student.",
     "downloadCv": "Download CV",
     "cvMeta": "PDF",
     "experience": "Experience",

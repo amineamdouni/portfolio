@@ -41,7 +41,7 @@
   "home": {
     "eyebrow": "Amine Amdouni · Tunis, Tunisie",
     "title": "Développeur full-stack",
-    "lead": "Je développe des applications web et mobiles avec TypeScript, NestJS, Next.js et React Native, ainsi que des services Spring Boot en Java. Étudiant en dernière année de génie logiciel, je cherche un stage de fin d'études (PFE).",
+    "lead": "Je développe des applications web et mobiles avec TypeScript, NestJS, Next.js et React Native, ainsi que des services Spring Boot en Java. Je suis étudiant en dernière année de génie logiciel.",
     "viewProjects": "Voir les projets",
     "downloadCv": "Télécharger le CV",
     "selectedWork": "Projets choisis",
@@ -158,7 +158,7 @@
   "about": {
     "title": "À propos",
     "p1": "Je suis développeur full-stack, avec plus de 2 ans d'expérience dans la création d'applications web et mobiles pour des clients de nombreux secteurs. Je développe aujourd'hui des produits de boutique en ligne avec de l'IA, et j'ai dirigé une équipe de 6 développeurs en tant que chef d'équipe Agile.",
-    "p2": "Étudiant en dernière année de génie logiciel, je cherche un stage de fin d'études (PFE).",
+    "p2": "Je suis étudiant en dernière année de génie logiciel.",
     "downloadCv": "Télécharger le CV",
     "cvMeta": "PDF",
     "experience": "Expérience",
