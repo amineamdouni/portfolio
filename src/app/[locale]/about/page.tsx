@@ -30,7 +30,6 @@ export default async function AboutPage({ params }: Props) {
         <h1 className="mb-6 text-h1">{t("title")}</h1>
         <div className="flex max-w-(--measure) flex-col gap-4">
           <p>{t("p1")}</p>
-          <p>{t("p2")}</p>
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
           <a href={cvPath(locale)} download className={buttonClass("primary")}>
