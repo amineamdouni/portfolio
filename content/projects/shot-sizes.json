@@ -339,7 +339,19 @@
     1440,
     900
   ],
+  "nexus/defenses-desktop": [
+    1440,
+    900
+  ],
+  "nexus/grading-desktop": [
+    1440,
+    900
+  ],
   "nexus/guide-desktop": [
+    1440,
+    900
+  ],
+  "nexus/import-desktop": [
     1440,
     900
   ],
@@ -363,11 +375,31 @@
     1440,
     900
   ],
+  "nexus/milestones-desktop": [
+    1440,
+    900
+  ],
+  "nexus/notifications-desktop": [
+    1440,
+    900
+  ],
   "nexus/pfe-detail-desktop": [
     1440,
     900
   ],
   "nexus/pfes-desktop": [
+    1440,
+    900
+  ],
+  "nexus/plagiarism-desktop": [
+    1440,
+    900
+  ],
+  "nexus/proposals-desktop": [
+    1440,
+    900
+  ],
+  "nexus/rollover-desktop": [
     1440,
     900
   ],

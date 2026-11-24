@@ -6,18 +6,18 @@ At the faculty this project was designed for, final-year projects (PFE, projet d
 
 <Section number="02" title="What I built">
 
-I built Nexus as a solo project between 2025 and 2026, from a project deck that defined the actors, the use cases and three sprints, then a requirements document that added institutions, messaging, notifications and an AI module.
+I built Nexus as a solo project between 2025 and 2026, from a project deck that defined the actors, the use cases and three sprints, then a requirements document that added institutions, messaging, notifications and an AI module. A second round then covered what comes around the project: proposals, milestones, defenses and the change of year.
 
 The core covers every use case of the first three sprints:
 
 - Admin: create and delete students and supervisors, create, edit and delete PFE subjects, assign a PFE to a student and a supervisor, see all PFEs, and see the students of each supervisor.
-- Supervisor: see the PFEs they supervise, follow their progress and move them forward.
+- Supervisor: see the PFEs they supervise, follow their progress and move them forward, up to Submitted.
 - Student: see their own PFE, update its status and progress, and upload a PDF deliverable.
 - Everyone: a dashboard with statistics for their role, a searchable archive and history (by year, supervisor and theme), a profile page, and an English and French interface with a toggle.
 
-A PFE moves through six statuses: Proposed, Assigned, In progress, Submitted, Finished, Archived. Two rules are enforced on the server and shown in the interface: a student can have only one active PFE, and a person assigned to an active PFE cannot be deleted.
+A PFE moves through six statuses: Proposed, Assigned, In progress, Submitted, Finished, Archived. Three rules are enforced on the server and shown in the interface: a student can have only one active PFE, a person assigned to an active PFE cannot be deleted, and a PFE is Finished only once its defense has been held and its final grade recorded.
 
-The November 2026 update added the rest of the requirements:
+The first November 2026 update added the rest of the requirements:
 
 - Institutions and plans: each school has its own data and settings, and one of three plans (Essentiel, Standard, Étendu) that caps the PFEs created per academic year at 300, 600 or 1,200. The admin sets a report deadline.
 - Supervisor profiles: expertise keywords and a capacity. A full supervisor can't take another PFE, and the list shows active projects against capacity.
@@ -25,6 +25,17 @@ The November 2026 update added the rest of the requirements:
 - Email notifications on assignment, report upload and every status change, in English and French.
 - Follow-up alerts: a To watch list flags PFEs due within 7 days, late, or with no progress or upload for 14 days.
 - A public landing page with a one-click demo per role, and a user guide that explains each role's tasks.
+
+The second one covers the year from the first subject to the final grade:
+
+- Subject proposals: students (one at a time) and supervisors propose subjects. The admin accepts, which creates the PFE in the same transaction, or declines with a note.
+- Milestones: up to 30 dated steps per PFE, created from the institution's template when the PFE is assigned. Progress is computed from them, and a late step raises an alert and a reminder.
+- Defenses: date, room and jury, refused if the room or a juror is already taken. An agenda and a table list them all, and a calendar feed (.ics) puts them in anyone's calendar.
+- Grading: a supervisor evaluation the student never sees, a final grade with its mention, and the official record (PV) as a PDF, ready to sign.
+- Plagiarism check: each report is compared with the institution's past reports and flagged from 15% overlap, and with the web through Copyleaks when a key is set. Students never see the result.
+- Follow-up: an activity trail on each PFE, a notification bell and page, and a digest of PFEs to watch for supervisors every Monday.
+- New academic year: a wizard archives finished PFEs and opens the next year. Students, supervisors and subjects are imported from CSV with a check before anything is written, and the lists export to CSV.
+- Accounts: a forgotten password is reset with a one-time link valid for 30 minutes, and supervisors edit their own profile.
 
 </Section>
 
@@ -48,11 +59,15 @@ The AI suggests, and a person decides. It is on for the Standard and Étendu pla
 
 A pnpm monorepo with `apps/api` (NestJS 11, Prisma 6, PostgreSQL) and `apps/web` (Next.js 16, React 19, Tailwind CSS 4, next-intl). The interface is built from a design system I followed token by token, with a light and a dark theme.
 
-The choice I would defend: the one-active-PFE rule lives in the database as well as in the code. A partial unique index stops a student from holding two active PFEs even if two requests arrive at once. The delete rule locks the user row, so deleting someone and assigning them at the same moment cannot leave a PFE active without its person. Both have race tests.
+The choice I would defend: the one-active-PFE rule lives in the database as well as in the code. A partial unique index stops a student from holding two active PFEs even if two requests arrive at once. The delete rule locks the user row, so deleting someone and assigning them at the same moment cannot leave a PFE active without its person. Both have race tests. Scheduling follows the same idea: an advisory lock makes two defenses booked at the same moment wait for each other, so a room or a juror is never taken twice.
 
 Sign-in sets an httpOnly cookie from Next route handlers, and a proxy adds the bearer token on the way to the API, so the browser never holds it. The web proxy blocks sign-in and password paths in any letter case. Logging out revokes the token on the server.
 
-Emails and AI jobs go through queues in Postgres rather than being sent inside the request. The email worker runs every 15 seconds, retries with a back-off and never sends a message twice. Every query is scoped to the user's institution, so a school only sees its own users, PFEs, messages and statistics.
+Emails and AI jobs go through queues in Postgres rather than being sent inside the request. The email worker runs every 15 seconds, retries with a back-off and never sends a message twice.
+
+The plagiarism check needs no outside service to be useful. Each report becomes a set of hashes, one per run of five words, and two reports are compared by the share they have in common. The web search is a separate provider, and without a key it runs in a labelled mock mode.
+
+Every query is scoped to the user's institution, so a school only sees its own users, PFEs, messages and statistics.
 
 <Architecture />
 
@@ -60,18 +75,18 @@ Emails and AI jobs go through queues in Postgres rather than being sent inside t
 
 <Section number="06" title="API and backend">
 
-Modules cover health, auth (login, demo login, logout), the current user (profile, password), users (students, supervisors), PFEs (CRUD, assignment, status, progress, archive and restore, deliverables), messages, institution settings, AI (summaries, supervisor suggestions, usage), and stats per role. Global guards handle rate limiting per client IP, JWT (the user is loaded on every request, with a token version and a forced password change for new accounts) and roles. Errors have stable codes. The migration adds raw SQL for the partial unique index and for checks on progress (0 to 100), deliverable size (2 MB at most), ID number format and lower-case email.
+Modules cover health, auth (login, demo login, logout), the current user (profile, password), password reset, users (students, supervisors), PFEs (CRUD, assignment, status, progress, milestones, activity, archive and restore, deliverables), proposals, defenses and grading, plagiarism, notifications and reminders, messages, CSV import, the change of academic year, institution settings, AI (summaries, supervisor suggestions, usage), and stats per role. Global guards handle rate limiting per client IP, JWT (the user is loaded on every request, with a token version and a forced password change for new accounts) and roles. Errors have stable codes. The migrations add raw SQL for the partial unique indexes and for checks on progress (0 to 100), deliverable size (2 MB at most), ID number format and lower-case email.
 
 Without an Anthropic API key, the AI module runs in a mock mode that returns fixed output at no cost, so the whole flow works locally.
 
-Tests: 6 unit tests for the status transition table, 45 end-to-end API tests (both rules including a concurrent race, assignment, every role and transition returning the right 403 or 409, ownership, deliverables, revoked tokens, the temporary-password flow, and the 429 and 413 limits). CI runs lint, typecheck, unit, end-to-end and build on every push, and the API is deployed to Render only when CI passes.
+Tests: 43 unit tests (among them the status transition table, the text fingerprints and the weekly digest) and 114 end-to-end API tests (the rules including concurrent races, assignment, every role and transition returning the right 403 or 409, ownership, defense conflicts, grading, proposals, imports, deliverables, revoked tokens, password reset, and the 429 and 413 limits). CI runs lint, typecheck, unit, end-to-end and build on every push.
 
 </Section>
 
 <Section number="07" title="Result">
 
-Every requirement is covered, the AI module included, and all of it runs in the live demo.
+Every requirement is covered, and Nexus now follows a project from the proposed subject to the graded defense. All of it runs in the live demo, with the AI module and the web plagiarism search in mock mode there.
 
-**What I would improve.** Send real emails through an SMTP server (the demo only logs them), use batch processing to lower the cost of report summaries, add an automatic quality check of the summaries, and write end-to-end tests for the features added in November.
+**What I would improve.** Send real emails (the app supports SMTP, but the demo only logs them), use batch processing to lower the cost of report summaries, and add an automatic quality check of the summaries.
 
 </Section>
