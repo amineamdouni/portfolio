@@ -2,7 +2,7 @@
 
 The portfolio site of Amine Amdouni, full-stack developer: mobile apps, full-stack products, e-commerce projects and client sites, each with an interactive demo, a live demo, screenshots or a link to the live site. English and French, light and dark.
 
-Status: content in place. All 18 write-ups (EN/FR), demo and live URLs and screenshots are set, except Sift's screenshots (`shots: shotsFor("sift", [])`), whose gallery shows marked placeholder images until they exist.
+Status: content in place. All 18 write-ups (EN/FR), demo and live URLs and screenshots are set.
 
 ## Stack
 
@@ -42,6 +42,10 @@ Environment variables (all optional, none secret):
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Absolute URL for sitemap, canonical and Open Graph links. Default `https://amine-amdouni.vercel.app`. |
+
+## CV
+
+The home and about pages offer one CV per language: `public/Amine_Amdouni_CV_EN.pdf` and `public/Amine_Amdouni_CV_FR.pdf` (paths in `src/lib/site.ts`). The HTML sources are kept outside this repo.
 
 ## Structure
 
@@ -97,10 +101,10 @@ pnpm screenshots                  # every target
 pnpm screenshots smilescan sift   # some slugs
 ```
 
-Targets and routes live in `scripts/screenshots.config.ts`. For each route and viewport it writes `public/shots/<slug>/<route>-<viewport>.png` and `.webp`. Desktop is 1440 × 900; mobile is 390 × 844 at 2x. Cookie banners are declined, never accepted (`declineCookieBanner`); if no decline button exists the run warns so the shot can be checked. Then run `pnpm shots:manifest` (writes `content/projects/shot-sizes.json`) and add `[name, altEn, altFr]` lines to that project's `shotsFor(...)` in `meta.ts`. A listed name without a file fails the build.
+Targets and routes live in `scripts/screenshots.config.ts`. For each route and viewport it writes `public/shots/<slug>/<route>-<viewport>.webp`. Desktop is 1440 × 900; mobile is 390 × 844 at 2x. Cookie banners are declined, never accepted (`declineCookieBanner`); if no decline button exists the run warns so the shot can be checked. Then run `pnpm shots:manifest` (writes `content/projects/shot-sizes.json`) and add `[name, altEn, altFr]` lines to that project's `shotsFor(...)` in `meta.ts`. A listed name without a file fails the build.
 
 ## Demo behaviour
 
 - **PhoneFrame**: from 768px wide, the demo runs in an iframe at 390 × 844 scaled into a fixed-ratio box (no layout shift). Under 768px there is no iframe, only an "Open demo full screen" button. If the embed does not load within 20 s it falls back to a screenshot and the gallery.
-- **LiveDemoButton**: fetches the project's `/health` (no-cors) on page load and on hover or focus, shows "Waking the demo server (up to N min)" (`wakeMinutes`, default 1) until it answers, then becomes the link; it keeps retrying for one minute past N. With no `demoUrl` the button is hidden. It never wakes other projects' backends.
+- **LiveDemoButton**: checks the project's `/health` on page load and shows how long the first load can take (`wakeMinutes`, default 1) until it answers. The link works the whole time: the check only informs. It retries every 3 s, and every 15 s after 3 minutes, when it says the check could not confirm. With no `demoUrl` the button is hidden. It never wakes other projects' backends.
 - **DemoNotice**: "This is a demo with sample data. Anything you add is visible to other visitors and is deleted every night. Please don't enter real personal information." (French version in `messages/fr.json`.)
