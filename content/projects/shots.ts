@@ -12,7 +12,7 @@ const known = sizes as unknown as Record<string, [number, number] | undefined>;
  * fails the build. Portrait images are "mobile", the rest "desktop".
  * The first entry is the project card's cover.
  *
- * To add screenshots: drop <name>.webp (+ .png) in public/shots/<slug>/,
+ * To add screenshots: drop <name>.webp in public/shots/<slug>/,
  * run `pnpm shots:manifest`, then add a line here in that project's meta.ts.
  */
 export function shotsFor(slug: string, entries: readonly ShotEntry[]): Shot[] {

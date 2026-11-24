@@ -1,6 +1,6 @@
 /**
- * Takes project screenshots with Playwright and writes PNG + WebP to
- * public/shots/<slug>/<route>-<viewport>.{png,webp}.
+ * Takes project screenshots with Playwright and writes WebP files to
+ * public/shots/<slug>/<route>-<viewport>.webp.
  *
  *   pnpm screenshots                 # every target in screenshots.config.ts
  *   pnpm screenshots delivair sift   # only these slugs
@@ -85,9 +85,8 @@ async function shoot(target: Target) {
 
         const stem = path.join(dir, `${route.name}-${vpName}`);
         const png = await page.screenshot({ fullPage: !!route.fullPage, animations: "disabled" });
-        await sharp(png).png({ compressionLevel: 9 }).toFile(`${stem}.png`);
         await sharp(png).webp({ quality: 82 }).toFile(`${stem}.webp`);
-        console.log(`  ✓ ${path.relative(process.cwd(), stem)}.{png,webp}`);
+        console.log(`  ✓ ${path.relative(process.cwd(), stem)}.webp`);
         await context.close();
       }
     }

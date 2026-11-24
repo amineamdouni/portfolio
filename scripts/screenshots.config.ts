@@ -1,6 +1,6 @@
 /**
  * What scripts/screenshots.ts captures. One entry per project slug.
- * Output: public/shots/<slug>/<route-name>-<viewport>.{png,webp}
+ * Output: public/shots/<slug>/<route-name>-<viewport>.webp
  *
  * TODO (Wave 4): replace the demo base URLs with the deployed Vercel URLs and
  * add the routes picked for each demo (and the local runs: AKA, MangaDana,
